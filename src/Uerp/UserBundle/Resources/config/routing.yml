@@ -1,0 +1,8 @@
+uerp_user_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: UerpUserBundle:Default:index }
+
+
+uerp_user_principal:
+    path: /admin/
+    defaults: { _controller: UerpUserBundle:Principal:novo }

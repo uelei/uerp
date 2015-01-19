@@ -1,0 +1,53 @@
+{% extends "UerpUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+ {% block stylesheets %}
+
+
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+     <link rel="stylesheet" href="{{ asset('bundles/uerpuser/css/login.css') }}"  />
+
+ {% endblock %}
+
+{% block fos_user_content %}
+
+
+
+
+    {% if error %}
+
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+
+    {% endif %}
+
+
+    <form  class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+        <h1 class="form-signin-heading text-muted">Sign In</h1>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+
+        <label for="username">{{ 'security.login.username'|trans }}</label>
+        <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" />
+
+        <label for="password">{{ 'security.login.password'|trans }}</label>
+        <input type="password" class="form-control" id="password" name="_password" required="required" />
+
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+        <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+        <input type="submit" class="btn btn-lg btn-primary btn-block" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+    </form>
+
+
+
+{% endblock fos_user_content %}
