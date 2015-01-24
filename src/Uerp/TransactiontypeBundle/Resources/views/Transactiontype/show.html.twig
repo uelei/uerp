@@ -1,0 +1,32 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+
+{% block body -%}
+    <h1>Transactiontype</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Transactiondesc</th>
+                <td>{{ entity.transactiondesc }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('transactiontype') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('transactiontype_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

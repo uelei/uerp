@@ -1,0 +1,3 @@
+uerp_bank_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: UerpBankBundle:Default:index }

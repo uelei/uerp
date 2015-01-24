@@ -1,0 +1,43 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+
+{% block body -%}
+    <h1>Categories list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descriptioncategories</th>
+                <th>Varcategories</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('categories_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.descriptioncategories }}</td>
+                <td>{{ entity.varcategories }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('categories_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('categories_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('categories_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

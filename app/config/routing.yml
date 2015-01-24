@@ -1,3 +1,63 @@
+uerp_main:
+    resource: "@UerpMainBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_product:
+    resource: "@UerpProductBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_supplier:
+    resource: "@UerpSupplierBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_incomes:
+    resource: "@UerpIncomesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_bills:
+    resource: "@UerpBillsBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_sale:
+    resource: "@UerpSaleBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_customer:
+    resource: "@UerpCustomerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_seller:
+    resource: "@UerpSellerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_transactiontype:
+    resource: "@UerpTransactiontypeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_categories:
+    resource: "@UerpCategoriesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_status:
+    resource: "@UerpStatusBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+uerp_bank:
+    resource: "@UerpBankBundle/Controller/"
+    type: annotation
+    prefix: /
+
 uerp_user:
     resource: "@UerpUserBundle/Resources/config/routing.yml"
     prefix:   /

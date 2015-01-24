@@ -1,0 +1,48 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+
+{% block body -%}
+    <h1>Sale</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Totalcost</th>
+                <td>{{ entity.totalcost }}</td>
+            </tr>
+            <tr>
+                <th>Totalsale</th>
+                <td>{{ entity.totalsale }}</td>
+            </tr>
+            <tr>
+                <th>Discount</th>
+                <td>{{ entity.discount }}</td>
+            </tr>
+            <tr>
+                <th>Saleobs</th>
+                <td>{{ entity.saleobs }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('sale') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('sale_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,80 @@
+<?php
+
+namespace Uerp\SaleBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Saleitems
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Saleitems
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $prod_id;
+
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $qtd;
+
+
+
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    protected $prodcost;
+
+
+
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    protected $prodprice;
+
+
+
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    protected $subtotalcost;
+
+
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    protected $subtotalsale;
+
+
+    /**
+     * @ORM\Column(type="string",length=250)
+     */
+    protected $itenaux;
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

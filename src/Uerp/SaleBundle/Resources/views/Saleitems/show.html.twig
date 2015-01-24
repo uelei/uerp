@@ -1,0 +1,56 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+
+{% block body -%}
+    <h1>Saleitems</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Prod_id</th>
+                <td>{{ entity.prodid }}</td>
+            </tr>
+            <tr>
+                <th>Qtd</th>
+                <td>{{ entity.qtd }}</td>
+            </tr>
+            <tr>
+                <th>Prodcost</th>
+                <td>{{ entity.prodcost }}</td>
+            </tr>
+            <tr>
+                <th>Prodprice</th>
+                <td>{{ entity.prodprice }}</td>
+            </tr>
+            <tr>
+                <th>Subtotalcost</th>
+                <td>{{ entity.subtotalcost }}</td>
+            </tr>
+            <tr>
+                <th>Subtotalsale</th>
+                <td>{{ entity.subtotalsale }}</td>
+            </tr>
+            <tr>
+                <th>Itenaux</th>
+                <td>{{ entity.itenaux }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('saleitems') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('saleitems_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

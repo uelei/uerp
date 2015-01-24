@@ -18,6 +18,18 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Uerp\UserBundle\UerpUserBundle(),
+            new Uerp\BankBundle\UerpBankBundle(),
+            new Uerp\StatusBundle\UerpStatusBundle(),
+            new Uerp\CategoriesBundle\UerpCategoriesBundle(),
+            new Uerp\TransactiontypeBundle\UerpTransactiontypeBundle(),
+            new Uerp\SellerBundle\UerpSellerBundle(),
+            new Uerp\CustomerBundle\UerpCustomerBundle(),
+            new Uerp\SaleBundle\UerpSaleBundle(),
+            new Uerp\BillsBundle\UerpBillsBundle(),
+            new Uerp\IncomesBundle\UerpIncomesBundle(),
+            new Uerp\SupplierBundle\UerpSupplierBundle(),
+            new Uerp\ProductBundle\UerpProductBundle(),
+            new Uerp\MainBundle\UerpMainBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
