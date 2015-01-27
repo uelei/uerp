@@ -1,47 +1,80 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
 
+{% block title %}Bills{% endblock %}
+
 {% block body -%}
-    <h1>Bills list</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Value</th>
-                <th>Docorigin</th>
-                <th>Dataaux</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('bills_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.value }}</td>
-                <td>{{ entity.docorigin }}</td>
-                <td>{{ entity.dataaux }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('bills_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('bills_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<div class="row" style="padding 10px;">
+    &nbsp;
+</div>
 
-        <ul>
-        <li>
-            <a href="{{ path('bills_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+<div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
+                            <a  class="btn btn-success btn-lg" href="{{ path('bills_new') }}"><i class="fa fa-plus"></i> New</a>
+                </div>
+  
+                {{ form_start(formfilter) }}
+                {% form_theme formfilter 'bootstrap_3_horizontal_layout.html.twig' %}
+                {{ form_errors(formfilter) }}
+                {# {{ form(formfilter) }} #}
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                    
+                </div>
+                    <div  class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="inline">
+                        {{ form_errors(formfilter.datai) }}
+                        {{ form_widget(formfilter.datai) }}
+                   </div>
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="inline">
+                        {{ form_errors(formfilter.dataf) }}
+                        {{ form_widget(formfilter.dataf) }}
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        
+                    </div>
+                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
+                        {{ form_end(formfilter) }} 
+                    </div>
+                </div>
+            </div>
+   
+            <table class="table table-striped table-advance table-hover ">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Type and Categories</th>
+                        <th>Docorigin</th>
+                        <th>Dataaux</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr>
+                        <td><a href="{{ path('bills_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                        <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ entity.transactiontype }}  {{ entity.categories }}</td>
+
+                        <td>R$ {{ entity.value|number_format(2, ',', '.') }}</td>
+                        
+                        <td>{{ entity.dataaux }}</td>
+                        <td>
+                                <a  class="btn btn-primary btn-xs" href="{{ path('bills_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> show</a>
+                                <a  class="btn btn-danger btn-xs" href="{{ path('bills_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i> edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div> 
+    </div> 
+</div> 
+
+
+
+{% endblock %}

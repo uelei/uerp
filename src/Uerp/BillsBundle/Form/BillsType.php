@@ -15,7 +15,11 @@ class BillsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date')
+            ->add('date','date',array(
+    'widget' => 'single_text',
+    // this is actually the default format for single_text
+    'format' => 'yyyy-MM-dd',
+))
             ->add('value')
             ->add('docorigin')
             ->add('dataaux')

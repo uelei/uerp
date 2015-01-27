@@ -6,28 +6,14 @@
         
         <title>{% block title %}Welcome!{% endblock %}</title>
 
-        <!-- Bootstrap core CSS -->
-    	<link href="/erp/public/css/bootstrap.min.css" rel="stylesheet">
 
-    	<link href="/erp/public/css/style.css" rel="stylesheet">
+{% stylesheets  '@UerpMainBundle/Resources/public/css/bootstrap.min.css' 
+                '@UerpMainBundle/Resources/public/css/style.css'
+                '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
+filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
 
-
-		
-    <!--external css-->
-    <link href="/erp/public/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    {# <link rel="stylesheet" type="text/css" href="/erp/public/css/zabuto_calendar.css"> #}
-    <link rel="stylesheet" type="text/css" href="/erp/public/js/gritter/css/jquery.gritter.css" />
-    <link rel="stylesheet" type="text/css" href="/erp/public/lineicons/style.css">    
-    
-    <!-- Custom styles for this template -->
-    <link href="/erp/public/css/style.css" rel="stylesheet">
-    {# <link href="/erp/public/css/style-responsive.css" rel="stylesheet"> #}
-
-    {# // <script src="/erp/public/js/chart-master/Chart.js"></script> #}
-
-
-
-        
         {% block stylesheets %}{% endblock %}
         
       
@@ -44,7 +30,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="" class="logo"><b>Uerp</b></a>
+            <a href="{{ path('homepage') }}" class="logo"><b>Uerp</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -83,7 +69,7 @@
               </h5>
               	  	
                   <li class="mt">
-                      <a class="active" href="index.html">
+                      <a class="active" href="{{ path('homepage') }}">
                           <i class="fa fa-dashboard"></i>
                           <span>Dashboard</span>
                       </a>
@@ -91,67 +77,59 @@
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class="fa fa-desktop"></i>
-                          <span>Sales</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="{{ path('sale') }}">Sales</a></li>
-                          <li><a  href="{{ path('sale_new') }}">New</a></li>
-                          <li><a  href="panels.html">Panels</a></li>
-                      </ul>
-                  </li>
-
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-cogs"></i>
-                          <span>Components</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="calendar.html">Calendar</a></li>
-                          <li><a  href="gallery.html">Gallery</a></li>
-                          <li><a  href="todo_list.html">Todo List</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-book"></i>
-                          <span>Extra Pages</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="blank.html">Blank Page</a></li>
-                          <li><a  href="login.html">Login</a></li>
-                          <li><a  href="lock_screen.html">Lock Screen</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-tasks"></i>
-                          <span>Forms</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="form_component.html">Form Components</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class="fa fa-th"></i>
-                          <span>Data Tables</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="basic_table.html">Basic Table</a></li>
-                          <li><a  href="responsive_table.html">Responsive Table</a></li>
-                      </ul>
-                  </li>
-                  <li class="sub-menu">
-                      <a href="javascript:;" >
-                          <i class=" fa fa-bar-chart-o"></i>
-                          <span>Charts</span>
+                          <i class=" fa fa-tags"></i>
+                          <span>Stok</span>
                       </a>
                       <ul class="sub">
                           <li><a  href="morris.html">Morris</a></li>
                           <li><a  href="chartjs.html">Chartjs</a></li>
                       </ul>
                   </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-barcode "></i>
+                          <span>Sales</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="{{ path('sale') }}">Sales</a></li>
+                          <li><a  href="{{ path('sale_new') }}">New</a></li>
+                         
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-money"></i>
+                          <span>Bills</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="{{ path('bills') }}">List</a></li>
+                          <li><a  href="{{ path('bills_new') }}">New</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
+                          <span>Config</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="form_component.html">Form Components</a></li>
+                      </ul>
+                  </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-users"></i>
+                          <span>Users</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="{{ path('fos_user_profile_show') }}">Show</a></li>
+                          <li><a  href="{{ path('fos_user_registration_register') }}">New</a></li>
+                      </ul>
+                  </li>
+                  
 
               </ul>
               <!-- sidebar menu end-->
@@ -167,100 +145,27 @@
           <section class="wrapper">
 
               <div class="row">
-            
-                  
-
-                      
-
-                    
-                    				
-			
-					
-
-  
 		{% endblock %}	
         {% block body %}{% endblock %}
 
-
 {% block footer %}
-
-                </div><!-- /col-lg-9 END SECTION MIDDLE -->
-                  
-                  
-     
+                </div>
       <!--main content end-->
-      <!--footer start-->
-{#       <footer class="site-footer">
-          <div class="text-center">
-              2014 - Uerp
-              <a href="#" class="go-top">
-                  <i class="fa fa-angle-up"></i>
-              </a>
-          </div>
-      </footer>
-      <!--footer end--> #}
   </section>
-
-
-
 {% endblock %}
 		<!-- javascript --> 	
-	    <script src="/erp/public/js/jquery-1.11.2.min.js"></script>
-    	<script src="/erp/public/js/bootstrap.min.js"></script>
-    	<script class="include" type="text/javascript" src="/erp/public/js/jquery.dcjqaccordion.2.7.js"></script>
-    <!-- js placed at the end of the document so the pages load faster -->
-
-    <script src="/erp/public/js/jquery.scrollTo.min.js"></script>
-    <script src="/erp/public/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="/erp/public/js/jquery.sparkline.js"></script>
-
-
-    <!--common script for all pages-->
-    <script src="/erp/public/js/common-scripts.js"></script>
-    
-    <script type="text/javascript" src="/erp/public/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="/erp/public/js/gritter-conf.js"></script>
-
-    <!--script for this page-->
-    <script src="/erp/public/js/sparkline-chart.js"></script>    
-	<script src="/erp/public/js/zabuto_calendar.js"></script>	
+{% javascripts  '@UerpMainBundle/Resources/public/js/jquery-1.11.2.min.js'
+                '@UerpMainBundle/Resources/public/js/bootstrap.min.js' 
+                '@UerpMainBundle/Resources/public/js/common-scripts.js'
+                '@UerpMainBundle/Resources/public/js/jquery.dcjqaccordion.2.7.js'
+                '@UerpMainBundle/Resources/public/js/jquery.scrollTo.min.js'
+                '@UerpMainBundle/Resources/public/js/jquery.nicescroll.js'
+               %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
 	
-
 	
-	<script type="application/javascript">
-        $(document).ready(function () {
-
-
-
-myvar = setInterval(function () {delay();}, 3000);
-
-
-function delay (){ 
-
-     $('#sidebar > ul').hide();
-      $('#main-content').css({
-                'margin-left': '0px'
-            });
-            $('#sidebar').css({
-                'margin-left': '-210px'
-            });
-            $('#sidebar > ul').hide();
-            $("#container").addClass("sidebar-closed");
-             $('#sidebar > ul').hide();
-
-clearInterval(myvar);
-
-
-}
-
-      
-        });
-        
-        
-   
-    </script>
-
-        {% block javascripts %}{% endblock %}
+{% block javascripts %}{% endblock %}
     
 
 

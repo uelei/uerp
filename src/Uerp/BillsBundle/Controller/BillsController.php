@@ -25,7 +25,135 @@ class BillsController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
+    {
+// {'attr': {'class': 'task_field'}}
+         // $filter = New filter();
+
+         // $filter->setdatai(new \DateTime('now'));
+         // $filter->setdataf(new \DateTime('now'));
+
+        $form = $this->createFormBuilder()
+                ->setMethod('GET')
+                ->setAction($this->generateUrl('bills'))
+                ->add('datai','date', array(
+                    'input'  => 'datetime',
+                    'widget' => 'single_text',
+                    // 'format' => 'dd/M/yyyy',
+                    'data' => new \DateTime("now")
+                    ))
+                ->add('dataf','date', array(    
+                    'input'  => 'datetime',
+                   'widget' => 'single_text',
+                    // 'widget' => 'choice',
+                    // 'format' => 'dd/M/yyyy',
+                    'data' => new \DateTime("now")
+                  
+                    ))
+                ->add('Filter','submit')
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+
+            // print_r($form["datai"]->getData()->format("Y-m-d")); die();
+            // perform some action, such as saving the task to the database
+                 return $this->redirect($this->generateUrl('filter', array(
+                    'datai'  => $form["datai"]->getData()->format("Y-m-d"),
+                    'dataf' => $form["dataf"]->getData()->format("Y-m-d"),
+
+
+                    )));
+            // return $this->redirect($this->generateUrl('filter/',array('datai' => $form->getdatai(),'dataf' => $form->getdataf()  )  ));
+            // return $this->forward('UerpBillsBundle:Bills:filter', array(
+            //     'datai'  => $form["datai"]->getData(),
+            //     'dataf' => $form["dataf"]->getData(),
+            // ));
+        }
+
+
+        $datai = new \Datetime('now');
+
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date > ?1 AND b.date < ?1  OR b.date = ?1 ')->setParameters( array(1=> $datai))->setMaxResults(10);
+        $entities = $query->getResult();
+
+        // return array(
+        //     'entities' => $entities,
+   
+        // );
+        return $this->render('UerpBillsBundle:Bills:index.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
+   //          $datef = date('Y-m-d');
+   // $response = $this->forward('UerpBillsBundle:Bills:filter', array(
+   //      'datai'  => $datef,
+   //      'dataf' => $datef,
+   //  ));
+   //  return $response;
+
+    }
+
+
+
+  /**
+     * Lists all Bills entities.
+     *
+     * @Route("/filter/{datai}/{dataf}", name="filter")
+     * @Method("GET")
+     * @Template("UerpBillsBundle:Bills:index.html.twig")
+     */
+    public function filterAction($datai,$dataf,Request $request)
+    {
+        
+   $form = $this->createFormBuilder()
+                ->setMethod('GET')
+                ->setAction($this->generateUrl('bills'))
+                ->add('datai','date', array(
+                    'input'  => 'datetime',
+                    'widget' => 'single_text',
+                    // 'format' => 'yyyy-M-dd',
+                    'data' => new \DateTime($datai)
+                    ))
+                ->add('dataf','date', array(
+                    'input'  => 'datetime',
+                    'widget' => 'single_text',
+                    // 'format' => 'yyyy-M-dd',
+                    'data' => new \DateTime($dataf)
+                    ))
+                ->add('Filter','submit')
+                ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // perform some action, such as saving the task to the database
+
+            // return $this->redirect($this->generateUrl('filter/',array('datai' => $form->getdatai(),'dataf' => $form->getdataf()  )  ));
+            return $this->forward('UerpBillsBundle:Bills:filter', array(
+                'datai'  => $form["datai"]->getData(),
+                'dataf' => $form["dataf"]->getData(),
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date > ?1 AND b.date < ?2  OR b.date = ?3 ')->setParameters( array(1=> $datai,2=>$dataf,3=>$datai))->setMaxResults(10);
+        $entities = $query->getResult();
+
+  return $this->render('UerpBillsBundle:Bills:index.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
+  
+    }
+
+
+
+    /**
+     * Lists all Bills entities.
+     *
+     * @Route("/all", name="all_bills")
+     * @Method("GET")
+     * @Template()
+     */
+    public function allAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -35,6 +163,22 @@ class BillsController extends Controller
             'entities' => $entities,
         );
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Creates a new Bills entity.
      *

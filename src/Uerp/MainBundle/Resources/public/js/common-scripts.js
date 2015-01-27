@@ -119,3 +119,21 @@ var Script = function () {
 
 
 }();
+
+function delay (){ 
+
+     $('#sidebar > ul').hide();
+      $('#main-content').css({
+                'margin-left': '0px'
+            });
+            $('#sidebar').css({
+                'margin-left': '-210px'
+            });
+            $('#sidebar > ul').hide();
+            $("#container").addClass("sidebar-closed");
+             $('#sidebar > ul').hide();
+
+clearInterval(myvar);
+
+
+}
