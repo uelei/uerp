@@ -47,9 +47,10 @@
                     <tr>
                         <th>Id</th>
                         <th>Date</th>
-                        <th>Type and Categories</th>
-                        <th>Docorigin</th>
-                        <th>Dataaux</th>
+                        <th>Type</th>
+                        <th>Reference or Supplier</th>
+                        <th>Value</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -58,11 +59,10 @@
                     <tr>
                         <td><a href="{{ path('bills_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                         <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
-                        <td>{{ entity.transactiontype }}  {{ entity.categories }}</td>
-
+                        <td>{{ entity.transactiontype }} </td>
+                        <td>{{ entity.categories }} {{ entity.supplier }}</td>
                         <td>R$ {{ entity.value|number_format(2, ',', '.') }}</td>
-                        
-                        <td>{{ entity.dataaux }}</td>
+                        <td> {{ entity.status }} </td>
                         <td>
                                 <a  class="btn btn-primary btn-xs" href="{{ path('bills_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> show</a>
                                 <a  class="btn btn-danger btn-xs" href="{{ path('bills_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i> edit</a>

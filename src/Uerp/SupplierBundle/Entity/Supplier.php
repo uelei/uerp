@@ -39,6 +39,10 @@ class Supplier
 
 
 
+    public function __toString()
+    {
+        return $this->suppliername;
+    }
 
 
 

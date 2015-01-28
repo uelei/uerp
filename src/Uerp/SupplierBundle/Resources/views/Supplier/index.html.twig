@@ -1,30 +1,30 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>BankAccount list</h1>
+    <h1>Supplier list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Accountname</th>
-                <th>Balance</th>
+                <th>Suppliername</th>
+                <th>Aux</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('bankaccount_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.accountname }}</td>
-                <td>{{ entity.balance }}</td>
+                <td><a href="{{ path('supplier_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.suppliername }}</td>
+                <td>{{ entity.aux }}</td>
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('bankaccount_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('supplier_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('bankaccount_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('supplier_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -35,7 +35,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('bankaccount_new') }}">
+            <a href="{{ path('supplier_new') }}">
                 Create a new entry
             </a>
         </li>

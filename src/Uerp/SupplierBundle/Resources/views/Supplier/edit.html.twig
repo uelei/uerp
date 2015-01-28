@@ -1,15 +1,16 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Product creation</h1>
+    <h1>Supplier edit</h1>
 
-    {{ form(form) }}
+    {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('product') }}">
+        <a href="{{ path('supplier') }}">
             Back to the list
         </a>
     </li>
+    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

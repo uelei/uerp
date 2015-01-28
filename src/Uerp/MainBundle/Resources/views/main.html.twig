@@ -58,8 +58,14 @@ filter='cssrewrite' %}
           <div id="sidebar"  class="nav-collapse" >
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
-              
-              	  <p class="centered"><a href="profile.html"><img src="/erp/public/images/ui-danro.jpg" class="img-circle" width="60"></a></p>
+
+            	  <p class="centered"><a href="{{ path('fos_user_profile_show') }}">
+
+                    {% image '@UerpMainBundle/Resources/public/images/ui-danro.jpg' %}
+                      <img src="{{ asset_url }}" class="img-circle" width="60" />
+                    {% endimage %}
+                  
+                  </a></p>
               	  <h5 class="centered">
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
    {{ app.user.username }}

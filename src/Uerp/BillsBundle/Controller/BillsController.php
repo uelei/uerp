@@ -32,6 +32,7 @@ class BillsController extends Controller
 
          // $filter->setdatai(new \DateTime('now'));
          // $filter->setdataf(new \DateTime('now'));
+                $datea = new \Datetime('now');
 
         $form = $this->createFormBuilder()
                 ->setMethod('GET')
@@ -40,14 +41,14 @@ class BillsController extends Controller
                     'input'  => 'datetime',
                     'widget' => 'single_text',
                     // 'format' => 'dd/M/yyyy',
-                    'data' => new \DateTime("now")
+                    'data' => $datea
                     ))
                 ->add('dataf','date', array(    
                     'input'  => 'datetime',
                    'widget' => 'single_text',
                     // 'widget' => 'choice',
                     // 'format' => 'dd/M/yyyy',
-                    'data' => new \DateTime("now")
+                    'data' => $datea
                   
                     ))
                 ->add('Filter','submit')
@@ -77,7 +78,7 @@ class BillsController extends Controller
         $datai = new \Datetime('now');
 
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date > ?1 AND b.date < ?1  OR b.date = ?1 ')->setParameters( array(1=> $datai))->setMaxResults(10);
+        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b ')->setMaxResults(10);
         $entities = $query->getResult();
 
         // return array(
@@ -163,21 +164,6 @@ class BillsController extends Controller
             'entities' => $entities,
         );
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Creates a new Bills entity.
@@ -295,6 +281,109 @@ class BillsController extends Controller
         );
     }
 
+
+    /**
+     * Displays a form to edit an existing Bills entity.
+     *
+     * @Route("/{id}/pay", name="bills_pay")
+     * @Method("PUT")
+     * @Template("UerpMainBundle::main.html.twig")
+     */
+    public function payAction(Request $request,$id)
+    {
+
+
+// $f["datai"]->getData()->format("Y-m-d");
+
+
+
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('UerpBillsBundle:Bills')->find($id);
+
+
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+       
+
+
+        // $content = $request->getContent();
+        // $F->handleRequest($request);
+
+
+// $f["datai"]->getData()->format("Y-m-d");
+
+    // print_r($x); die();  
+
+
+
+
+
+        
+
+if($entity->getAccount() == NULL ){
+echo "erro ";
+
+}
+
+
+        $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
+
+
+// print_r($entity->getValue()); die();
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Bills entity.');
+        }
+        if (!$entitya) {
+            throw $this->createNotFoundException('Unable to find account entity.');
+        }
+
+
+
+        $deleteForm = $this->createDeleteForm($id);
+        $editForm = $this->createEditForm($entity);
+        $editForm->handleRequest($request);
+        $payForm = $this->createpayForm($id);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('bills_edit', array('id' => $id)));
+        }
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+
+
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('UerpBillsBundle:Bills')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Bills entity.');
+        }
+
+        $editForm = $this->createEditForm($entity);
+        $deleteForm = $this->createDeleteForm($id);
+        $payForm = $this->createpayForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+    }
+
+
+
+
+
     /**
     * Creates a form to edit a Bills entity.
     *
@@ -323,18 +412,56 @@ class BillsController extends Controller
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('UerpBillsBundle:Bills')->find($id);
+
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Bills entity.');
         }
+
+        // if (!$entitya) {
+        //     throw $this->createNotFoundException('Unable to find account entity.');
+        // }
+
 
         $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            if($editForm->get('pay')->isClicked()){
+                
+                if($editForm['account']->getData() == NULL){
+                    
+                    $editForm->get('account')->addError(new FormError('Não Selecionado !! '));
+                    return array(
+                        'entity'      => $entity,
+                        'edit_form'   => $editForm->createView(),
+                        'delete_form' => $deleteForm->createView(),
+                    );
+
+                }else{
+
+                    echo $entity->getAccount()->getId(); 
+                    echo "<br>";
+                    echo $editForm['Account']->getData()->getId();
+
+                     // $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
+
+
+                    echo " contiua ";
+                   
+                }
+            
+            }
+            echo "nao ";
+
+
+
+
+            die();
+
             $em->flush();
 
             return $this->redirect($this->generateUrl('bills_edit', array('id' => $id)));
@@ -346,6 +473,7 @@ class BillsController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
      * Deletes a Bills entity.
      *
