@@ -1,152 +1,93 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
-
+{% block title %} Bills New {% endblock %}  
 {% block body -%}
-
-<div class="row" style="padding 10px;">
-    &nbsp;
-</div>
-<div class="row">
-
-    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-<div class="panel panel-default">
-    <div class="panel-heading">
- <a class="btn btn-default btn-lg" href="{{ path('bills') }}"><i class="fa fa-arrow-left"></i> Back</a>
-{# 
-   <a  class="btn btn-success btn-lg" href="{{ path('bills_new') }}"><i class="fa fa-plus"></i> New</a> #}
-    </div>
- 
-<div class="container form-horizontal">
-	
-
-	
-<div class="row" style="padding 10px;">
-    &nbsp;
-</div>
-
-<div class="row">
-    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-        <div class="danger">
-        
-
-
-  {{ form_errors(form.categories) }}
-  {{ form_errors(form.account) }}
-{{ form_errors(form.transactiontype) }}
- {{ form_errors(form.status) }}
-{{ form_errors(form.supplier) }}
-{{ form_errors(form.value) }}
-
+   
+<div class="panel panel-info" style="margin: 20px">
+  <div class="panel-heading">
+    <h3>Bills New</h3>
+  </div>
+  <div class="panel-body form-horizontal"">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div class="row form-group form-group-lg" >
+      {{ form_label(form.date,'Data : ',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.date) }}
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+            {{ form_widget(form.date,{'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-
-{{ form_start(form) }}
-    {{ form_errors(form) }}
+    <div class="row form-group form-group-lg">
+      {{ form_label(form.transactiontype,'Type :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.transactiontype) }}
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            {{ form_widget(form.transactiontype,{'attr': {'class': 'form-control'}}) }}
+          </div>
+    </div>
+    <div class="row form-group form-group-lg">
+      {{ form_label(form.categories,'Reference :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.categories) }}
+          
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            {{ form_widget(form.categories,{'attr': {'class': 'form-control' }}) }}
+          </div>    
+    </div>
+    <div class="row form-group form-group-lg">
+      {{ form_label(form.supplier,'Supplier :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.supplier) }}
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            {{ form_widget(form.supplier,{'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row form-group form-group-lg">
+      {{ form_label(form.docorigin,'Doc :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.docorigin) }}
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            {{ form_widget(form.docorigin,{'attr': {'class': 'form-control'}}) }}
+          </div>    
+    </div>
+    <div class="row form-group form-group-lg">
+      {{ form_label(form.value,'Valor :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.value) }}
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            {{ form_widget(form.value,{'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row form-group form-group-lg">
+      {{ form_label(form.dataaux,'Aux :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.dataaux) }}
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            {{ form_widget(form.dataaux,{'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row form-group form-group-lg">
+      {{ form_label(form.account,'Account :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.account) }}
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            {{ form_widget(form.account,{'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row form-group form-group-lg">
+      {{ form_label(form.status,'Status :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.status) }}
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        {{ form_widget(form.status,{'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="row btn-group" style="padding-left: 10px">
+        {{ form_widget(form.submit) }} 
+    </div>
+    {{ form_row(form._token) }}
+    {{ form_end(form) }} 
+  </div>
+</div>
     {# {{ form(form) }} #}
 
-  <div class="form-group">
-    <label  class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">{{ form_label(form.date) }}</label>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    	{{ form_errors(form.date) }}
-    	     {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
-    </div>
-  </div>
-
-
-  <div class="form-group">
-    <label  class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">{{ form_label(form.value) }}</label>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    	     {{ form_widget(form.value, {'attr': {'class': 'form-control'}}) }}
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label  class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">{{ form_label(form.docorigin) }}</label>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> {{ form_errors(form.docorigin) }}
-    	     {{ form_widget(form.docorigin, {'attr': {'class': 'form-control'}}) }}
-    </div>
-  </div>
-
-
-  <div class="form-group">
-    <label  class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">{{ form_label(form.dataaux) }}</label>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">{{ form_errors(form.dataaux) }}
-    	     {{ form_widget(form.dataaux, {'attr': {'class': 'form-control'}}) }}
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label  class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">{{ form_label(form.categories) }}</label>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    	     {{ form_widget(form.categories, {'attr': {'class': 'form-control'}}) }}
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label  class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">{{ form_label(form.account) }}</label>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    	     {{ form_widget(form.account, {'attr': {'class': 'form-control'}}) }}
-    </div>
-  </div>
-
-
-
-  <div class="form-group">
-    <label  class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">{{ form_label(form.transactiontype) }}</label>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    	     {{ form_widget(form.transactiontype, {'attr': {'class': 'form-control'}}) }}
-    </div>
-  </div>
-
-
-  <div class="form-group">
-    <label  class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">{{ form_label(form.status) }}</label>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    	     {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
-    </div>
-  </div>
-
-
-
-  <div class="form-group">
-    <label  class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">{{ form_label(form.supplier) }}</label>
-    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-    	     {{ form_widget(form.supplier, {'attr': {'class': 'form-control'}}) }}
-    </div>
-  </div>
-  <div>
-  	{# {{ form_widget(form.save, { 'attr': {'class': 'form-control'}}) }} #}
-
-
-  
-
-
-  </div>
-<input class="btn btn-default" type="submit" value="Create"> 
-
-<br>
-<div class="row" style="padding 10px;">
-    &nbsp;
-</div>
-{{ form_row(form._token) }}
-</form>
-
-
-</div>
-</div>
-</div> 
-</div> 
-
-</div> 
+        <ul class="record_actions">
+    <li>
+        <a class="btn btn-lg btn-warning" href="{{ path('bills') }}"><i class="fa fa-arrow-left"></i>
+            Back 
+        </a>
+    </li>
+    <li></li>
+</ul>
 {% endblock %}
-
-
-
-{# {{ form_widget(form.task, {'attr': {'class': 'task_field'}}) }} #}
-
-
-  {#   <div>
-        {{ form_label(form.task) }}
-        {{ form_errors(form.task) }}
-        {{ form_widget(form.task) }}
-    </div> #}

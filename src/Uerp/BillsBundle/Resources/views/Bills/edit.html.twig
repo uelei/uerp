@@ -1,16 +1,100 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
-
+{% block title %} Bills Edit{% endblock %}	
 {% block body -%}
-    <h1>Bills edit</h1>
-
-    {{ form(edit_form) }}
+   
+<div class="panel panel-info" style="margin: 20px">
+	<div class="panel-heading">
+		<h3>Bills edit</h3>
+	</div>
+	<div class="panel-body form-horizontal"">
+		{{ form_start(edit_form) }}
+		{{ form_errors(edit_form) }}
+		<div class="row form-group form-group-lg" >
+			{{ form_label(edit_form.date,'Data : ',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.date) }}
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+	        	{{ form_widget(edit_form.date,{'attr': {'class': 'form-control'}}) }}
+	    	</div>
+		</div>
+		<div class="row form-group form-group-lg">
+			{{ form_label(edit_form.transactiontype,'Type :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.transactiontype) }}
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+	        	{{ form_widget(edit_form.transactiontype,{'attr': {'class': 'form-control'}}) }}
+	        </div>
+		</div>
+		<div class="row form-group form-group-lg">
+			{{ form_label(edit_form.categories,'Reference :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.categories) }}
+	        
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+	        	{{ form_widget(edit_form.categories,{'attr': {'class': 'form-control' }}) }}
+	        </div>    
+		</div>
+		<div class="row form-group form-group-lg">
+			{{ form_label(edit_form.supplier,'Supplier :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.supplier) }}
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+	        	{{ form_widget(edit_form.supplier,{'attr': {'class': 'form-control'}}) }}
+	    	</div>
+		</div>
+		<div class="row form-group form-group-lg">
+			{{ form_label(edit_form.docorigin,'Doc :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.docorigin) }}
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+	        	{{ form_widget(edit_form.docorigin,{'attr': {'class': 'form-control'}}) }}
+	        </div>    
+		</div>
+		<div class="row form-group form-group-lg">
+			{{ form_label(edit_form.value,'Valor :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.value) }}
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+	        	{{ form_widget(edit_form.value,{'attr': {'class': 'form-control'}}) }}
+	    	</div>
+		</div>
+		<div class="row form-group form-group-lg">
+			{{ form_label(edit_form.dataaux,'Aux :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.dataaux) }}
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+	        	{{ form_widget(edit_form.dataaux,{'attr': {'class': 'form-control'}}) }}
+	    	</div>
+		</div>
+		<div class="row form-group form-group-lg">
+			{{ form_label(edit_form.account,'Account :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.account) }}
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+	        	{{ form_widget(edit_form.account,{'attr': {'class': 'form-control'}}) }}
+	    	</div>
+		</div>
+		<div class="row form-group form-group-lg">
+			{{ form_label(edit_form.status,'Status :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.status) }}
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+				{{ form_widget(edit_form.status,{'attr': {'class': 'form-control'}}) }}
+	    	</div>
+		</div>
+		<div class="row btn-group" style="padding-left: 10px">
+			
+			{% if edit_form.status.vars.value == 4 %}
+				{{ form_widget(edit_form.Pay,{'attr': {'disabled': 'disabled'}}) }}	
+			{% else %}
+				{{ form_widget(edit_form.Pay) }}	
+			{% endif %}
+				{{ form_widget(edit_form.Delete) }}	
+				{{ form_widget(edit_form.submit) }}	
+		</div>
+		{{ form_row(edit_form._token) }}
+		{{ form_end(edit_form) }}	
+	</div>
+</div>
+    {# {{ form(edit_form) }} #}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('bills') }}">
-            Back to the list
+        <a class="btn btn-lg btn-warning" href="{{ path('bills') }}"><i class="fa fa-arrow-left"></i>
+            Back 
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
+    <li></li>
 </ul>
 {% endblock %}

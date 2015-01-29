@@ -206,7 +206,7 @@ class BillsController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Create','attr' => array('class'=>'btn btn-lg btn-primary')));
 
         return $form;
     }
@@ -272,12 +272,12 @@ class BillsController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            
         );
     }
 
@@ -341,10 +341,10 @@ echo "erro ";
 
 
 
-        $deleteForm = $this->createDeleteForm($id);
+       
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-        $payForm = $this->createpayForm($id);
+    
 
         if ($editForm->isValid()) {
             $em->flush();
@@ -355,7 +355,7 @@ echo "erro ";
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+           
         );
 
 
@@ -370,13 +370,11 @@ echo "erro ";
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-        $payForm = $this->createpayForm($id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            
         );
     }
 
@@ -398,10 +396,12 @@ echo "erro ";
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
+        $form->add('submit', 'submit', array('label' => 'Update','attr' => array('class'=>'btn btn-lg btn-success')))->add('Pay','submit',array('attr' => array('class'=>'btn btn-lg btn-primary')))
+            ->add('Delete','submit',array('attr' => array('class'=>'btn btn-lg btn-danger')));
         return $form;
     }
+
+
     /**
      * Edits an existing Bills entity.
      *
@@ -411,6 +411,9 @@ echo "erro ";
      */
     public function updateAction(Request $request, $id)
     {
+        //set defaul value for status
+        $pgcod = 4; 
+
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UerpBillsBundle:Bills')->find($id);
 
@@ -419,18 +422,13 @@ echo "erro ";
             throw $this->createNotFoundException('Unable to find Bills entity.');
         }
 
-        // if (!$entitya) {
-        //     throw $this->createNotFoundException('Unable to find account entity.');
-        // }
 
-
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
 
-            if($editForm->get('pay')->isClicked()){
+            if($editForm->get('Pay')->isClicked()){//pay
                 
                 if($editForm['account']->getData() == NULL){
                     
@@ -438,41 +436,98 @@ echo "erro ";
                     return array(
                         'entity'      => $entity,
                         'edit_form'   => $editForm->createView(),
-                        'delete_form' => $deleteForm->createView(),
+                
                     );
 
                 }else{
+                    
+                    $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
 
-                    echo $entity->getAccount()->getId(); 
-                    echo "<br>";
-                    echo $editForm['Account']->getData()->getId();
+                    if (!$entitya) {
+                        throw $this->createNotFoundException('Unable to find account entity.');
+                    }
 
-                     // $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
+                    $duppg = $entity->getValue() * -1;
+                    $balance = $entitya->getBalance() + $duppg;
+                    $status = $em->getReference('UerpStatusBundle:Status', $pgcod);
+                    $entity->setStatus($status);
+                    $entity->setValue($duppg);
+                    $entitya->setBalance($balance);
+                    
+                    $em->flush();
+                    return $this->redirect($this->generateUrl('bills_edit', array('id' => $id)));
 
-
-                    echo " contiua ";
-                   
                 }
             
-            }
-            echo "nao ";
+            }//pay-end 
+            if($editForm->get('Delete')->isClicked()){//delete
+                // echo "detete";
+                
+                if($editForm['status']->getData()->getId() == 4 ){
 
+                    $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
 
+                    if (!$entitya) {
+                        throw $this->createNotFoundException('Unable to find account entity.');
+                    }
 
+                    $duppg = $entity->getValue() * -1;
+                    $balance = $entitya->getBalance() + $duppg;
+                    $entitya->setBalance($balance);
+                    
+                }
+                
+                $em->remove($entity);
+                $em->flush();
 
-            die();
+                return $this->redirect($this->generateUrl('bills'));
 
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('bills_edit', array('id' => $id)));
+            }//delete
         }
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            
         );
     }
+
+    /**
+     * Deletes a Bills entity.
+     *
+     * @Route("/delete/{id}", name="bills_del")
+     * @Method("GET")
+     */
+    public function delAction($id)
+    {
+
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('UerpBillsBundle:Bills')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Bills entity.');
+            }
+
+                if($entity->getStatus()->getId() == 4 ){
+
+                    $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
+
+                    if (!$entitya) {
+                        throw $this->createNotFoundException('Unable to find account entity.');
+                    }
+
+                    $duppg = $entity->getValue() * -1;
+                    $balance = $entitya->getBalance() + $duppg;
+                    $entitya->setBalance($balance);   
+                }
+            $em->remove($entity);
+            $em->flush();
+        
+
+        return $this->redirect($this->generateUrl('bills'));
+    }
+
+
 
     /**
      * Deletes a Bills entity.
@@ -493,6 +548,18 @@ echo "erro ";
                 throw $this->createNotFoundException('Unable to find Bills entity.');
             }
 
+                if($entity->getStatus()->getId() == 4 ){
+
+                    $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
+
+                    if (!$entitya) {
+                        throw $this->createNotFoundException('Unable to find account entity.');
+                    }
+
+                    $duppg = $entity->getValue() * -1;
+                    $balance = $entitya->getBalance() + $duppg;
+                    $entitya->setBalance($balance);   
+                }
             $em->remove($entity);
             $em->flush();
         }

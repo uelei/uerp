@@ -28,7 +28,6 @@ class BillsType extends AbstractType
             ->add('transactiontype')
             ->add('status')
             ->add('supplier')
-            ->add('pay','submit')
         ;
     }
     

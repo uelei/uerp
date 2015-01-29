@@ -1,44 +1,108 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
-
+{% block title %} Bills Show {% endblock %}  
 {% block body -%}
-    <h1>Bills</h1>
+   
+<div class="panel panel-info" style="margin: 20px">
+    <div class="panel-heading">
+        <h3>Bills Show</h3>
+    </div>
+    <div class="panel-body form-horizontal">
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                Id :
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {{ entity.id }}
+            </div>
+        </div>
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                Date :
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}
+            </div>
+        </div>
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+               Type :
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {{ entity.transactiontype }}
+            </div>
+        </div>
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                Categories : 
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {{ entity.categories }}
+            </div>
+        </div>
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                Supplier :
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {{ entity.supplier }}
+            </div>
+        </div>
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                Doc :
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {{ entity.docorigin }}
+            </div>
+        </div>
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                Value :
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {% if entity.value < 0  %}
+                                <span style="color:red">
+                                    R$ {{ entity.value|number_format(2, ',', '.') }} 
+                                </span>
+                            {% else %}
+                                R$ {{ entity.value|number_format(2, ',', '.') }}
+                            {% endif %}
+            </div>
+        </div>
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                Aux :
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {{ entity.dataaux }}
+            </div>
+        </div>
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                Bank :
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {{ entity.account }}
+            </div>
+        </div>
+        <div class="row form-group form-group-lg" >
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                Status :
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+               {{ entity.status }}
+            </div>
+        </div>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ entity.id }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
-            </tr>
-            <tr>
-                <th>Value</th>
-                <td>{{ entity.value }}</td>
-            </tr>
-            <tr>
-                <th>Docorigin</th>
-                <td>{{ entity.docorigin }}</td>
-            </tr>
-            <tr>
-                <th>Dataaux</th>
-                <td>{{ entity.dataaux }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('bills') }}">
-            Back to the list
+        <div class="row btn-group" style="padding-left: 10px">
+            
+          <a class="btn btn-lg btn-warning" href="{{ path('bills') }}"><i class="fa fa-arrow-left"></i>
+            Back 
         </a>
-    </li>
-    <li>
-        <a href="{{ path('bills_edit', { 'id': entity.id }) }}">
+          <a class="btn btn-lg btn-default" href="{{ path('bills') }}"><i class="fa fa-pencil"></i>
             Edit
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+        </div>
+    </div>
+</div>   
 {% endblock %}

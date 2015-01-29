@@ -9,6 +9,8 @@ Premium: http://www.gridgum.com
 /* Import fonts */
 @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
 
+.btn-group { display: inline-block; }
+/*.row{ padding: px;}*/
 /* BASIC THEME CONFIGURATION */
 body {
     color: #797979;
