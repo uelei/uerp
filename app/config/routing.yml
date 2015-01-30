@@ -1,3 +1,8 @@
+uerp_subcategories:
+    resource: "@UerpSubcategoriesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 uerp_main:
     resource: "@UerpMainBundle/Controller/"
     type:     annotation
@@ -35,11 +40,6 @@ uerp_customer:
 
 uerp_seller:
     resource: "@UerpSellerBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-uerp_transactiontype:
-    resource: "@UerpTransactiontypeBundle/Controller/"
     type:     annotation
     prefix:   /
 

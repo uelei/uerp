@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new Uerp\BankBundle\UerpBankBundle(),
             new Uerp\StatusBundle\UerpStatusBundle(),
             new Uerp\CategoriesBundle\UerpCategoriesBundle(),
-            new Uerp\TransactiontypeBundle\UerpTransactiontypeBundle(),
             new Uerp\SellerBundle\UerpSellerBundle(),
             new Uerp\CustomerBundle\UerpCustomerBundle(),
             new Uerp\SaleBundle\UerpSaleBundle(),
@@ -30,6 +29,7 @@ class AppKernel extends Kernel
             new Uerp\SupplierBundle\UerpSupplierBundle(),
             new Uerp\ProductBundle\UerpProductBundle(),
             new Uerp\MainBundle\UerpMainBundle(),
+            new Uerp\SubcategoriesBundle\UerpSubcategoriesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -39,6 +39,11 @@ class Bills {
      */
     protected $categories;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Uerp\SubcategoriesBundle\Entity\Subcategories")
+     * @ORM\JoinColumn(name="subcategory_id", referencedColumnName="id")
+     */
+    protected $subcategories;
 
     /**
      * @ORM\ManyToOne(targetEntity="Uerp\BankBundle\Entity\BankAccount")
@@ -48,19 +53,12 @@ class Bills {
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Uerp\TransactiontypeBundle\Entity\Transactiontype")
-     * @ORM\JoinColumn(name="transactiontype_id", referencedColumnName="id")
-     */
-    protected $transactiontype;
-
-
-    /**
-     * @ORM\Column(type="string",length=50)
+     * @ORM\Column(type="string",length=50,nullable=true)
      */
     protected $docorigin;
 
     /**
-     * @ORM\Column(type="string",length=20)
+     * @ORM\Column(type="string",length=20,nullable=true)
      */
     protected $dataaux;
 
@@ -79,6 +77,11 @@ class Bills {
     protected $supplier;
 
 
+
+
+public function __construct() {
+    $this->date = new \DateTime('now');
+}
     /**
      * Get id
      *
@@ -179,5 +182,97 @@ class Bills {
     public function getAccount()
     {
         return $this->account;
+    }
+
+    /**
+     * Set docorigin
+     *
+     * @param string $docorigin
+     * @return Bills
+     */
+    public function setDocorigin($docorigin)
+    {
+        $this->docorigin = $docorigin;
+
+        return $this;
+    }
+
+    /**
+     * Get docorigin
+     *
+     * @return string 
+     */
+    public function getDocorigin()
+    {
+        return $this->docorigin;
+    }
+
+    /**
+     * Set dataaux
+     *
+     * @param string $dataaux
+     * @return Bills
+     */
+    public function setDataaux($dataaux)
+    {
+        $this->dataaux = $dataaux;
+
+        return $this;
+    }
+
+    /**
+     * Get dataaux
+     *
+     * @return string 
+     */
+    public function getDataaux()
+    {
+        return $this->dataaux;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \Uerp\StatusBundle\Entity\Status $status
+     * @return Bills
+     */
+    public function setStatus(\Uerp\StatusBundle\Entity\Status $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \Uerp\StatusBundle\Entity\Status 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set supplier
+     *
+     * @param \Uerp\SupplierBundle\Entity\Supplier $supplier
+     * @return Bills
+     */
+    public function setSupplier(\Uerp\SupplierBundle\Entity\Supplier $supplier = null)
+    {
+        $this->supplier = $supplier;
+
+        return $this;
+    }
+
+    /**
+     * Get supplier
+     *
+     * @return \Uerp\SupplierBundle\Entity\Supplier 
+     */
+    public function getSupplier()
+    {
+        return $this->supplier;
     }
 }

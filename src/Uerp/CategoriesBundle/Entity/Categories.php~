@@ -36,6 +36,11 @@ class Categories {
      */
     protected $varcategories;
 
+    /**
+     * Inverse Side
+     * @ORM\OneToMany(targetEntity="Uerp\SubcategoriesBundle\Entity\Subcategories",mappedBy="categories")
+     */
+    protected $subcategories;
 
     /**
      * Get id

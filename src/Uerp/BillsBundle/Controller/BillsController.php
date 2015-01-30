@@ -3,12 +3,14 @@
 namespace Uerp\BillsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Uerp\BillsBundle\Entity\Bills;
 use Uerp\BillsBundle\Form\BillsType;
+use Uerp\SubcategoriesBundle\Entity\Subcategories;
 
 /**
  * Bills controller.
@@ -94,6 +96,31 @@ class BillsController extends Controller
    //  return $response;
 
     }
+/**
+ * @Route("/listsubcategories", name="_listsubcategories")
+ * @Method("GET")
+ */
+public function getbycategoriesAction()
+{
+
+    // print_r($data); die();
+
+    $this->em = $this->getDoctrine()->getEntityManager();
+    $this->repository = $this->em->getRepository('UerpSubcategoriesBundle:Subcategories');
+ 
+    $categories = $this->get('request')->query->get('data');
+ 
+    $subcategories = $this->repository->findByCategories($categories);
+ 
+    $html = '';
+    $html = $html . sprintf("<option value=\"%d\">%s</option>",Null, 'Selecione');
+    foreach($subcategories as $locality)
+    {
+        $html = $html . sprintf("<option value=\"%d\">%s</option>",$locality->getId(), $locality->getName());
+    }
+ 
+    return new Response($html);
+}
 
 
 
@@ -427,7 +454,8 @@ echo "erro ";
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-
+           // print_r($editForm['categories']->getData()->getId()); die();
+           
             if($editForm->get('Pay')->isClicked()){//pay
                 
                 if($editForm['account']->getData() == NULL){
@@ -455,6 +483,7 @@ echo "erro ";
                     $entitya->setBalance($balance);
                     
                     $em->flush();
+                    
                     return $this->redirect($this->generateUrl('bills_edit', array('id' => $id)));
 
                 }
@@ -526,7 +555,6 @@ echo "erro ";
 
         return $this->redirect($this->generateUrl('bills'));
     }
-
 
 
     /**

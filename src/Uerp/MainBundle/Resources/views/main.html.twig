@@ -112,6 +112,7 @@ filter='cssrewrite' %}
                       <ul class="sub">
                           <li><a  href="{{ path('bills') }}">List</a></li>
                           <li><a  href="{{ path('bills_new') }}">New</a></li>
+                           <li><a  href="{{ path('bankaccount') }}">Bank Balance</a></li>
                       </ul>
                   </li>
 
@@ -160,7 +161,7 @@ filter='cssrewrite' %}
   </section>
 {% endblock %}
 		<!-- javascript --> 	
-{% javascripts  '@UerpMainBundle/Resources/public/js/jquery-1.11.2.min.js'
+{% javascripts  '@UerpMainBundle/Resources/public/js/jquery.js'
                 '@UerpMainBundle/Resources/public/js/bootstrap.min.js' 
                 '@UerpMainBundle/Resources/public/js/common-scripts.js'
                 '@UerpMainBundle/Resources/public/js/jquery.dcjqaccordion.2.7.js'
@@ -168,6 +169,28 @@ filter='cssrewrite' %}
                 '@UerpMainBundle/Resources/public/js/jquery.nicescroll.js'
                %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
+    <script>
+$(document).ready(function() {
+ 
+        $('#total').on('change', '.submitOnChange', function(event) {
+   
+    $.ajax({
+        type: "GET",
+        data: "data=" + $(this).val(),
+        url:"{{ path('_listsubcategories') }}",
+        success: function(msg){
+            if (msg != ''){
+               $('.ssubcategories').html(msg).show();
+               }
+               else
+               {
+                   $('.ssubcategories').html('<em>No item result</em>');
+               }
+           }
+       });
+  });
+});
+</script>
 {% endjavascripts %}
 	
 	

@@ -36,6 +36,11 @@ class Categories {
      */
     protected $varcategories;
 
+    /**
+     * Inverse Side
+     * @ORM\OneToMany(targetEntity="Uerp\SubcategoriesBundle\Entity\Subcategories",mappedBy="categories")
+     */
+    protected $subcategories;
 
     /**
      * Get id
@@ -59,6 +64,17 @@ class Categories {
 
         return $this;
     }
+
+   /**
+     * Get descriptioncategories
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->descriptioncategories;
+    }
+
 
     /**
      * Get descriptioncategories
@@ -103,4 +119,44 @@ class Categories {
 
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->subcategories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add subcategories
+     *
+     * @param \Uerp\SubcategoriesBundle\Entity\Subcategories $subcategories
+     * @return Categories
+     */
+    public function addSubcategory(\Uerp\SubcategoriesBundle\Entity\Subcategories $subcategories)
+    {
+        $this->subcategories[] = $subcategories;
+
+        return $this;
+    }
+
+    /**
+     * Remove subcategories
+     *
+     * @param \Uerp\SubcategoriesBundle\Entity\Subcategories $subcategories
+     */
+    public function removeSubcategory(\Uerp\SubcategoriesBundle\Entity\Subcategories $subcategories)
+    {
+        $this->subcategories->removeElement($subcategories);
+    }
+
+    /**
+     * Get subcategories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSubcategories()
+    {
+        return $this->subcategories;
+    }
 }

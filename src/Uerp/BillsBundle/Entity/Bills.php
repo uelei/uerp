@@ -39,19 +39,18 @@ class Bills {
      */
     protected $categories;
 
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Uerp\SubcategoriesBundle\Entity\Subcategories")
+     * @ORM\JoinColumn(name="subcategories_id", referencedColumnName="id")
+     */
+    protected $subcategories;
 
     /**
      * @ORM\ManyToOne(targetEntity="Uerp\BankBundle\Entity\BankAccount")
      * @ORM\JoinColumn(name="account_id", referencedColumnName="id")
      */
     protected $account;
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Uerp\TransactiontypeBundle\Entity\Transactiontype")
-     * @ORM\JoinColumn(name="transactiontype_id", referencedColumnName="id")
-     */
-    protected $transactiontype;
 
 
     /**
@@ -233,29 +232,6 @@ public function __construct() {
     }
 
     /**
-     * Set transactiontype
-     *
-     * @param \Uerp\TransactiontypeBundle\Entity\Transactiontype $transactiontype
-     * @return Bills
-     */
-    public function setTransactiontype(\Uerp\TransactiontypeBundle\Entity\Transactiontype $transactiontype = null)
-    {
-        $this->transactiontype = $transactiontype;
-
-        return $this;
-    }
-
-    /**
-     * Get transactiontype
-     *
-     * @return \Uerp\TransactiontypeBundle\Entity\Transactiontype 
-     */
-    public function getTransactiontype()
-    {
-        return $this->transactiontype;
-    }
-
-    /**
      * Set status
      *
      * @param \Uerp\StatusBundle\Entity\Status $status
@@ -299,5 +275,28 @@ public function __construct() {
     public function getSupplier()
     {
         return $this->supplier;
+    }
+
+    /**
+     * Set subcategories
+     *
+     * @param \Uerp\SubcategoriesBundle\Entity\Subcategories $subcategories
+     * @return Bills
+     */
+    public function setSubcategories(\Uerp\SubcategoriesBundle\Entity\Subcategories $subcategories = null)
+    {
+        $this->subcategories = $subcategories;
+
+        return $this;
+    }
+
+    /**
+     * Get subcategories
+     *
+     * @return \Uerp\SubcategoriesBundle\Entity\Subcategories 
+     */
+    public function getSubcategories()
+    {
+        return $this->subcategories;
     }
 }

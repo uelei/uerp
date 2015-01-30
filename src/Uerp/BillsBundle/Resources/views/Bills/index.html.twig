@@ -55,7 +55,7 @@
                     <tr>
                         <td><a href="{{ path('bills_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                         <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
-                        <td>{{ entity.transactiontype }} </td>
+                        <td>{# {{ entity.transactiontype }} #} </td>
                         <td>{{ entity.categories }} {{ entity.supplier }}</td>
                         <td>{% if entity.value < 0  %}
                                 <span style="color:red">

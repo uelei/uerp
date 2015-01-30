@@ -2,7 +2,7 @@
 {% block title %} Bills Edit{% endblock %}	
 {% block body -%}
    
-<div class="panel panel-info" style="margin: 20px">
+<div class="panel panel-info" style="margin: 20px" id="total">
 	<div class="panel-heading">
 		<h3>Bills edit</h3>
 	</div>
@@ -16,20 +16,20 @@
 	        	{{ form_widget(edit_form.date,{'attr': {'class': 'form-control'}}) }}
 	    	</div>
 		</div>
-		<div class="row form-group form-group-lg">
-			{{ form_label(edit_form.transactiontype,'Type :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
-	        {{ form_errors(edit_form.transactiontype) }}
-	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-	        	{{ form_widget(edit_form.transactiontype,{'attr': {'class': 'form-control'}}) }}
-	        </div>
-		</div>
-		<div class="row form-group form-group-lg">
-			{{ form_label(edit_form.categories,'Reference :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+		<div class="row form-group form-group-lg" >
+			{{ form_label(edit_form.categories,'Categories :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
 	        {{ form_errors(edit_form.categories) }}
 	        
 	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-	        	{{ form_widget(edit_form.categories,{'attr': {'class': 'form-control' }}) }}
+	        	{{ form_widget(edit_form.categories,{'attr': {'class': 'submitOnChange form-control' }}) }}
 	        </div>    
+		</div>
+		<div class="row form-group form-group-lg"> 
+			{{ form_label(edit_form.subcategories,'Sub Categories :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+	        {{ form_errors(edit_form.subcategories) }}
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+	        	{{ form_widget(edit_form.subcategories,{'attr': {'class': 'ssubcategories form-control'}}) }}
+	        </div>
 		</div>
 		<div class="row form-group form-group-lg">
 			{{ form_label(edit_form.supplier,'Supplier :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
