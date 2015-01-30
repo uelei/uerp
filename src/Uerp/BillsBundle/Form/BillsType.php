@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\ORM\EntityRepository;
+use Uerp\CategoriesBundle\Entity\Categories;
 
 class BillsType extends AbstractType
 {
@@ -22,25 +23,17 @@ class BillsType extends AbstractType
 
          $builder
             ->add('date','date',array(
-    'widget' => 'single_text',
-    // this is actually the default format for single_text
-    'format' => 'yyyy-MM-dd',
-))
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',))
             ->add('value')
             ->add('docorigin')
             ->add('dataaux')
             ->add('categories','entity',array(
                 'class' => 'Uerp\CategoriesBundle\Entity\Categories',
-                'property' => 'name',
-                'mapped' => false,
-                'empty_value'=> 'chosse a categories',
-                'attr' => array('class' => 'submitOnChange',)
-                ))
-
+                'property' => 'name',))
             ->add('account')
             ->add('status')
-            ->add('supplier')
-        ;
+            ->add('supplier');
 
 $refreshSubcategories = function ($form, $categories ) use( $factory)
 {            if (!empty($categories)) {
@@ -60,21 +53,15 @@ $refreshSubcategories = function ($form, $categories ) use( $factory)
                                 ->where('categories.id = :id')
                                 ->setParameter('id', $categories);
                         }  else {
-                            $qb = $qb->where('subcategories.id = 1 ');
+                            $qb = $qb->where('subcategories.categories = 1 ');
                         }
- 
-                        return $qb;
+                        return $qb; 
                     },
-                    'empty_value' => 'Choose Subcategories',
-                    // 'position' => array(    // requires egeloen/ordered-form-bundle
-                    //     'after' => 'categories'
-                    // ),
+                    // 'empty_value' => 'Choose Subcategories',
                     'property' => 'name',
-                    'validation_groups' => false,
                     'attr' => array(
-                        'class' => 'clearOnChange'
-                    )
-                ));
+                        'class' => 'clearOnChange')
+                    ));
             }
 };
 
@@ -115,7 +102,6 @@ $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event)
  
         });
  
-        // Below is used to load the car selectbox when brand is submitted
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($refreshSubcategories) {
             $form = $event->getForm();
             $data = $event->getData();

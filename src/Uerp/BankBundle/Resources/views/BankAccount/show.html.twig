@@ -1,7 +1,13 @@
-{% extends '::base.html.twig' %}
+{% extends 'UerpMainBundle::main.html.twig' %}
 
 {% block body -%}
-    <h1>BankAccount</h1>
+   <div class="panel panel-info" style="margin: 20px">
+  <div class="panel-heading">
+       <h1>BankAccount</h1>
+  </div>
+  <div class="panel-body form-horizontal">
+
+
 
     <table class="record_properties">
         <tbody>
@@ -19,18 +25,16 @@
             </tr>
         </tbody>
     </table>
+<div class="btn-group">
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('bankaccount') }}">
-            Back to the list
+        <a class="btn btn-lg btn-default" href="{{ path('bankaccount') }}"><i class="fa fa-arrow-left"></i>
+           Back 
         </a>
-    </li>
-    <li>
-        <a href="{{ path('bankaccount_edit', { 'id': entity.id }) }}">
-            Edit
+                <a class="btn btn-lg btn-default" href="{{ path('bankaccount_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i>
+            Edit 
         </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
+        {{ form(delete_form) }}
+
 </ul>
+</div>
 {% endblock %}

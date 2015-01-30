@@ -172,8 +172,7 @@ filter='cssrewrite' %}
     <script>
 $(document).ready(function() {
  
-        $('#total').on('change', '.submitOnChange', function(event) {
-   
+        $('.submitOnChange').change( function(event) {
     $.ajax({
         type: "GET",
         data: "data=" + $(this).val(),

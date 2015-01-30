@@ -6,7 +6,7 @@
   <div class="panel-heading">
     <h3>Bills New</h3>
   </div>
-  <div class="panel-body form-horizontal"">
+  <div class="panel-body form-horizontal">
     {{ form_start(form) }}
     {{ form_errors(form) }}
    <div class="row form-group form-group-lg" >
@@ -25,12 +25,11 @@
           </div>    
     </div>
     <div class="row form-group form-group-lg"> 
-      {{ form_label(form.subcategories,'Sub Categories :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
-          {{ form_errors(form.subcategories) }}
+<label class="col-md-2 control-label required" for="uerp_billsbundle_bills_subcategories">Sub Categories :</label>
           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-            {{ form_widget(form.subcategories,{'attr': {'class': 'ssubcategories form-control'}}) }}
-
-            
+       <select id="uerp_billsbundle_bills_subcategories" name="uerp_billsbundle_bills[subcategories]" required="required" class="ssubcategories form-control">
+<option value="1" selected="selected">padaria café</option><option value="8">galão</option><option value="9">almoço</option><option value="10">snack</option><option value="11">lanche sabado</option>
+       </select>
           </div>
     </div>
     <div class="row form-group form-group-lg">
