@@ -9,6 +9,33 @@ Premium: http://www.gridgum.com
 /* Import fonts */
 @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
 
+
+#totaldavenda {
+
+color: red;
+text-align: center;
+border: 3px;
+border-color: #32D334;
+border-style: solid;
+border-radius: 10px;
+width: 200px;
+height: 50px;
+font: bold 40px sans-serif;
+padding-top: 5px;
+
+}
+
+.select2-container .select2-choice, .select2-result-label {
+  font-size: 1.5em;
+  height: 41px; 
+  overflow: auto;
+}
+
+.select2-arrow, .select2-chosen {
+  padding-top: 6px;
+}
+
+
 .btn-group { display: inline-block; }
 /*.row{ padding: px;}*/
 /* BASIC THEME CONFIGURATION */

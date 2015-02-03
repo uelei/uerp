@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>{% block title %}Welcome!{% endblock %}</title>
+      {% stylesheets  '@UerpMainBundle/Resources/public/css/select2.min.css'
+        '@UerpMainBundle/Resources/public/css/bootstrap.min.css' 
+        '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
+        filter='cssrewrite' %}
+      <link rel="stylesheet" href="{{ asset_url }}" />
+      {% endstylesheets %}
+      <style type="text/css">
+        .black-bg {
+        /*background: ;*/
+        border-bottom: 1px solid #9191C3;}
+        a.logo {
+            font-size: 20px;
+            color: #9191C3;
+            float: left;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+        a.logo:hover, a.logo:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+#totaldavenda {
+
+color: red;
+text-align: center;
+border: 3px;
+border-color: #32D334;
+border-style: solid;
+border-radius: 10px;
+
+font: bold 40px sans-serif;
+padding-top: 10px;
+
+}
+
+ul li {
+    list-style: none;
+}
+      </style>
+      {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+		{% block menu %}
+			<section  id="container" >
+        <header class="header black-bg" style="height:70px;">        
+          <div class="row">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+              <a href="{{ path('homepage') }}" class="logo"><b>Uerp</b></a>
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+              {% block supmenu %}{% endblock %}
+            </div>
+            <div style="padding-left: 0px;" class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+              <a style="margin-top: 10px; margin-right: 10px;"  class="logout btn btn-lg btn-danger " href="{{ path('fos_user_security_logout') }}">Logout</a>
+            </div>
+          </div>
+        </header>
+      </section>
+    {% endblock %}	
+    {% block body %}{% endblock %}
+    <!-- javascript --> 	
+    {% javascripts  '@UerpMainBundle/Resources/public/js/jquery.js'
+                '@UerpMainBundle/Resources/public/js/bootstrap.min.js' 
+                '@UerpMainBundle/Resources/public/js/select2.min.js'%}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+
+    <script type="text/javascript">
+    $( document ).ready(function() {
+    $(".combobox").select2();    });
+    </script>
+    {% endjavascripts %}
+    {% block javascripts %}{% endblock %}
+      {% block actions %}{% endblock %}
+  </body>
+</html>

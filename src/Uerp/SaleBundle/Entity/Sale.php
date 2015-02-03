@@ -52,29 +52,33 @@ class Sale
 
 
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="decimal", scale=2, options={"default":0})
      */
     protected $totalcost;
 
 
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="decimal", scale=2, options={"default":0})
      */
     protected $totalsale;
 
 
     /**
-     * @ORM\Column(type="decimal", scale=2)
+     * @ORM\Column(type="decimal", scale=2, options={"default":0})
      */
     protected $discount;
 
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $saleobs;
 
-
+    /**
+     *@ORM\Column(type="decimal", scale=2, options={"default":0}) 
+     * 
+     */
+     protected $nitems;
 
 
 
@@ -270,5 +274,28 @@ class Sale
     public function getCustomer()
     {
         return $this->customer;
+    }
+
+    /**
+     * Set nitems
+     *
+     * @param integer $nitems
+     * @return Sale
+     */
+    public function setNitems($nitems)
+    {
+        $this->nitems = $nitems;
+
+        return $this;
+    }
+
+    /**
+     * Get nitems
+     *
+     * @return integer 
+     */
+    public function getNitems()
+    {
+        return $this->nitems;
     }
 }

@@ -25,7 +25,20 @@ class Saleitems
     /**
      * @ORM\Column(type="integer")
      */
-    protected $prod_id;
+    protected $saleid;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Uerp\ProductBundle\Entity\Product")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+    protected $product;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $productid;
+
 
 
     /**
@@ -237,5 +250,28 @@ class Saleitems
     public function getItenaux()
     {
         return $this->itenaux;
+    }
+
+    /**
+     * Set saleid
+     *
+     * @param integer $saleid
+     * @return Saleitems
+     */
+    public function setSaleid($saleid)
+    {
+        $this->saleid = $saleid;
+
+        return $this;
+    }
+
+    /**
+     * Get saleid
+     *
+     * @return integer 
+     */
+    public function getSaleid()
+    {
+        return $this->saleid;
     }
 }

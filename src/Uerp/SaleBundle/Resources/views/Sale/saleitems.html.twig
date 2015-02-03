@@ -1,0 +1,25 @@
+<table class="table" style="margin : 10px;" >
+    <thead>
+        <tr>
+            <th  colspan="5">Itens Vendidos</th>
+        </tr>
+        <tr>
+            <td>Cod</td>
+            <td>desc</td>
+            <td>qtd</td>
+            <td>price</td>
+            <td>sub</td>
+        </tr>
+    </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td>{{ entity.productid }} </td>
+                    <td>{{ entity.product }} </td>
+                    <td>{{ entity.qtd }} </td>
+                    <td>{{ entity.prodprice }} </td>
+                    <td>{{ entity.subtotalsale }} </td>
+                </tr>
+            {% endfor %}
+    </tbody>
+</table>

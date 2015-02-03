@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Uerp\SaleBundle\Entity\Saleitems;
+use Symfony\Component\HttpFoundation\Response;
 use Uerp\SaleBundle\Form\SaleitemsType;
 
 /**
@@ -17,6 +18,93 @@ use Uerp\SaleBundle\Form\SaleitemsType;
  */
 class SaleitemsController extends Controller
 {
+
+    /**
+     * Creates a new Saleitems entity.
+     *
+     * @Route("/additem", name="saleitems_additem")
+     * @Method("POST")
+     * 
+     */
+    public function additemAction(Request $request)
+    {
+
+        $saleitems = New Saleitems();
+        $em = $this->getDoctrine()->getManager();
+
+        $saleid = $this->get('request')->request->get('saleid');
+        $cod = $this->get('request')->request->get('cod');
+        $price = $this->get('request')->request->get('price');
+        $cprice = $this->get('request')->request->get('cprice');
+        $qtd = $this->get('request')->request->get('qtd');
+
+        $product  = $em->getRepository('UerpProductBundle:Product')->find($cod);
+
+        $saleitems->setSaleId($saleid);
+        $saleitems->setProductId($cod);
+        $saleitems->setProduct($product);
+        $saleitems->setQtd($qtd);
+        $saleitems->setProdcost($cprice);
+        $saleitems->setProdprice($price);
+        $sc = $qtd * $cprice;
+        $sv = $qtd * $price;
+        $saleitems->setSubtotalcost($sc);
+        $saleitems->setSubtotalsale($sv);
+        $saleitems->setItenaux('aux');        
+
+        $em->persist($saleitems);
+        // $em->flush();
+        $entity = $em->getRepository('UerpSaleBundle:Sale')->find($saleid);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
+
+        $tc = $entity->getTotalcost() + $sc;
+        $tv = $entity->getTotalsale() + $sv;
+        $ti = $entity->getNitems() + $qtd;
+
+        $entity->setTotalcost($tc);
+        $entity->setTotalsale($tv);
+        $entity->setNitems($ti);
+
+        $em->flush();
+        // $entity->setMyField(++$valueToIncrement); // $deleteForm = $this->createDeleteForm($id);
+ 
+
+$response = new Response();
+$response->setContent(json_encode(array(
+    'id' => $saleitems->getId(),
+)));
+$response->headers->set('Content-Type', 'application/json');
+
+
+
+ // $html = '';
+ //    $html = $html . sprintf("<option value=\"%d\">%s</option>",Null, 'Selecione');
+ //    foreach($subcategories as $locality)
+ //    {
+ //        $html = $html . sprintf("<option value=\"%d\">%s</option>",$locality->getId(), $locality->getName());
+ //    }
+ 
+ //    return new Response($html);
+
+
+
+ //        return array(
+ //            'entity'      => $entity,
+ //            'dado' => 's',
+ //            // 'delete_form' => $deleteForm->createView(),
+ //        );
+ //        
+ return $response;
+
+
+
+
+
+    }
+
 
     /**
      * Lists all Saleitems entities.
@@ -35,6 +123,62 @@ class SaleitemsController extends Controller
             'entities' => $entities,
         );
     }
+
+    /**
+     * Lists all Saleitems from the sale id entities.
+     *
+     * @Route("/listitems", name="listsaleitems")
+     * @Method("POST")
+     * 
+     */
+    public function listsaleitemsAction(Request $request)
+    {
+        $id = $this->get('request')->request->get('id');
+        $em = $this->getDoctrine()->getManager();
+
+
+        $entity = $em->getRepository('UerpSaleBundle:Saleitems')->findBySaleid($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Sale entity.');
+        }
+        // dump($entity); die();
+        return $this->render(
+            'UerpSaleBundle:Sale:saleitems.html.twig',
+            array( 'entities'      => $entity,)
+        );
+
+
+
+//         return array(
+//             'entities' => $entities,
+//         );
+
+
+//         $id = $this->get('request')->request->get('id');
+
+//         $em = $this->getDoctrine()->getManager();
+
+//         $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
+//         // /@Template("UerpSaleBundle:Sale:selling.html.twig")
+
+
+//         $editForm = $this->createEditForm($entity);
+//         // $deleteForm = $this->createDeleteForm($id);
+// return $this->render(
+//             'UerpSaleBundle:Sale:menusale.html.twig',
+//             array( 'entity'      => $entity,
+//             'form'   => $editForm->createView(),)
+//         );
+
+
+    }
+
+
+
+
+
+
     /**
      * Creates a new Saleitems entity.
      *

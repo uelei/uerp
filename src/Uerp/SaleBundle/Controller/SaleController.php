@@ -35,6 +35,39 @@ class SaleController extends Controller
             'entities' => $entities,
         );
     }
+
+
+    /**
+     * Displays a form to edit an existing Sale entity.
+     *
+     * @Route("/reloadmenu", name="sale_reloadmenu")
+     * @Method("POST")
+     * 
+     */
+    public function reloadmenuAction(Request $request)
+    {
+        $id = $this->get('request')->request->get('id');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
+        // /@Template("UerpSaleBundle:Sale:selling.html.twig")
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Sale entity.');
+        }
+
+        $editForm = $this->createEditForm($entity);
+        // $deleteForm = $this->createDeleteForm($id);
+return $this->render(
+            'UerpSaleBundle:Sale:menusale.html.twig',
+            array( 'entity'      => $entity,
+            'form'   => $editForm->createView(),)
+        );
+
+}
+
+
+
     /**
      * Creates a new Sale entity.
      *
@@ -62,6 +95,79 @@ class SaleController extends Controller
         );
     }
 
+
+
+    /**
+     * Creates a new Sale entity.
+     *
+     * @Route("/newinline", name="sale_newinline")
+     * @Method("POST")
+     * @Template("UerpSaleBundle:Sale:new.html.twig")
+     */
+    public function createinlineAction(Request $request)
+    {
+        $entity = new Sale();
+        $form = $this->createCreateForm($entity);
+        $form->handleRequest($request);
+
+        $entity->settotalcost('0');
+        $entity->settotalsale('0');
+        $entity->setdiscount('0');
+        $entity->setnitems('0');
+
+
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('sale_selling', array('id' => $entity->getId())));
+        }
+
+        return array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        );
+    }
+
+    /**
+     * Displays a form to edit an existing Sale entity.
+     *
+     * @Route("/{id}/selling", name="sale_selling")
+     * @Method("GET")
+     * @Template("UerpSaleBundle:Sale:selling.html.twig")
+     */
+    public function editsellingAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Sale entity.');
+        }
+
+        $editForm = $this->createEditForm($entity);
+        // $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'form'   => $editForm->createView(),
+            // 'delete_form' => $deleteForm->createView(),
+        );
+
+
+
+
+    }
+
+
+
+
+
+
+
     /**
      * Creates a form to create a Sale entity.
      *
@@ -72,7 +178,7 @@ class SaleController extends Controller
     private function createCreateForm(Sale $entity)
     {
         $form = $this->createForm(new SaleType(), $entity, array(
-            'action' => $this->generateUrl('sale_create'),
+            'action' => $this->generateUrl('sale_newinline'),
             'method' => 'POST',
         ));
 
@@ -193,7 +299,7 @@ class SaleController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('sale_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('sale_selling', array('id' => $id)));
         }
 
         return array(

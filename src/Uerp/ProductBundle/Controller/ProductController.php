@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
 use Uerp\ProductBundle\Entity\Product;
 use Uerp\ProductBundle\Form\ProductType;
 
@@ -17,6 +18,77 @@ use Uerp\ProductBundle\Form\ProductType;
  */
 class ProductController extends Controller
 {
+
+
+
+    /**
+     * Finds and displays a Product entity.
+     *
+     * @Route("/findproduct", name="findproduct")
+     * @Method("POST")
+     * 
+     */
+    public function findproductAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $this->get('request')->request->get('cod');
+
+
+
+        $entity = $em->getRepository('UerpProductBundle:Product')->find($post);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
+
+        // $deleteForm = $this->createDeleteForm($id);
+ 
+
+$response = new Response();
+$response->setContent(json_encode(array(
+    'cod' => $entity->getId(),
+    'desc' => $entity->getName(),
+    'cprice' => $entity->getCost(),
+    'price' => $entity->getPrice(),
+)));
+$response->headers->set('Content-Type', 'application/json');
+
+
+
+ // $html = '';
+ //    $html = $html . sprintf("<option value=\"%d\">%s</option>",Null, 'Selecione');
+ //    foreach($subcategories as $locality)
+ //    {
+ //        $html = $html . sprintf("<option value=\"%d\">%s</option>",$locality->getId(), $locality->getName());
+ //    }
+ 
+ //    return new Response($html);
+
+
+
+ //        return array(
+ //            'entity'      => $entity,
+ //            'dado' => 's',
+ //            // 'delete_form' => $deleteForm->createView(),
+ //        );
+ //        
+ return $response;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Lists all Product entities.

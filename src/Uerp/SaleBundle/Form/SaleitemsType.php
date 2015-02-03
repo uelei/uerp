@@ -15,7 +15,8 @@ class SaleitemsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('prod_id')
+            ->add('productid')
+            ->add('product')
             ->add('qtd')
             ->add('prodcost')
             ->add('prodprice')

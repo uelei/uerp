@@ -1,3 +1,45 @@
+function hidebar () {
+
+        if ($('#sidebar > ul').is(":visible") === true) {
+hidebarinit();
+        } else {
+            $('#main-content').css({
+                'margin-left': '210px'
+            });
+            $('#sidebar > ul').show();
+            $('#sidebar').css({
+                'margin-left': '0'
+            });
+            $("#container").removeClass("sidebar-closed");
+            $("#sidebar").removeClass("hidden");
+        }
+
+}
+function doOnClick() {
+        $('#uerp_salebundle_sale_seller').click();
+    }
+
+function hidebarinit () {
+
+            $('#main-content').css({
+                'margin-left': '0px'
+            });
+            $('#sidebar').css({
+                'margin-left': '-250px'
+            });
+            $('#sidebar > ul').hide();
+            $("#container").addClass("sidebar-closed");
+            $("#sidebar").addClass("hidden");
+}
+
+
+
+
+
+
+
+
+
 /*---LEFT BAR ACCORDION----*/
 $(function() {
     $('#nav-accordion').dcAccordion({
@@ -50,26 +92,8 @@ var Script = function () {
     });
 
     $('.fa-bars').click(function () {
-        if ($('#sidebar > ul').is(":visible") === true) {
-            $('#main-content').css({
-                'margin-left': '0px'
-            });
-            $('#sidebar').css({
-                'margin-left': '-250px'
-            });
-            $('#sidebar > ul').hide();
-            $("#container").addClass("sidebar-closed");
-        } else {
-            $('#main-content').css({
-                'margin-left': '210px'
-            });
-            $('#sidebar > ul').show();
-            $('#sidebar').css({
-                'margin-left': '0'
-            });
-            $("#container").removeClass("sidebar-closed");
-            $("#sidebar").removeClass("hidden");
-        }
+
+hidebar();
     });
 
 // custom scrollbar

@@ -14,15 +14,20 @@ class SaleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+         $datea = new \Datetime('now');
         $builder
-            ->add('date')
-            ->add('totalcost')
-            ->add('totalsale')
-            ->add('discount')
-            ->add('saleobs')
+            ->add('date','date',array(
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+                'data' => $datea))
+            ->add('totalcost','hidden')
+            ->add('totalsale', 'hidden')
+            ->add('discount','hidden')
+            ->add('saleobs','hidden')
             ->add('seller')
             ->add('status')
             ->add('customer')
+            ->add('nitems','hidden')
         ;
     }
     

@@ -38,14 +38,14 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="cost", type="decimal")
+     * @ORM\Column(name="cost", type="decimal", precision=8, scale=2)
      */
     private $cost;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", precision=8, scale=2)
      */
     private $price;
 
@@ -74,7 +74,11 @@ class Product
 
 
 
-
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
 
 
     /**
