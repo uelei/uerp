@@ -53,7 +53,6 @@ class SaleitemsController extends Controller
         $saleitems->setItenaux('aux');        
 
         $em->persist($saleitems);
-        // $em->flush();
         $entity = $em->getRepository('UerpSaleBundle:Sale')->find($saleid);
 
         if (!$entity) {
@@ -68,42 +67,69 @@ class SaleitemsController extends Controller
         $entity->setTotalsale($tv);
         $entity->setNitems($ti);
 
+        $em->flush(); 
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'id' => $saleitems->getId(),
+        )));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+}
+
+    /**
+     * Creates a new Saleitems entity.
+     *
+     * @Route("/removeitem", name="saleitems_remove")
+     * @Method("POST")
+     * 
+     */
+    public function removeAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $itemid = $this->get('request')->request->get('itemid');
+
+        $item  = $em->getRepository('UerpSaleBundle:Saleitems')->find($itemid);
+
+        $saleid= $item->getSaleid();
+        $qtd = $item->getQtd();
+        $sc = $item->getSubtotalcost();
+        $sv = $item->getSubtotalsale();
+        
+        $em->remove($item);
         $em->flush();
-        // $entity->setMyField(++$valueToIncrement); // $deleteForm = $this->createDeleteForm($id);
- 
 
-$response = new Response();
-$response->setContent(json_encode(array(
-    'id' => $saleitems->getId(),
-)));
-$response->headers->set('Content-Type', 'application/json');
+        $entity = $em->getRepository('UerpSaleBundle:Sale')->find($saleid);
 
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Product entity.');
+        }
 
+        $tc = $entity->getTotalcost() - $sc;
+        $tv = $entity->getTotalsale() - $sv;
+        $ti = $entity->getNitems() - $qtd;
 
- // $html = '';
- //    $html = $html . sprintf("<option value=\"%d\">%s</option>",Null, 'Selecione');
- //    foreach($subcategories as $locality)
- //    {
- //        $html = $html . sprintf("<option value=\"%d\">%s</option>",$locality->getId(), $locality->getName());
- //    }
- 
- //    return new Response($html);
+        $entity->setTotalcost($tc);
+        $entity->setTotalsale($tv);
+        $entity->setNitems($ti);
 
+        $em->flush(); 
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'id' => 'produto apagado',
+        )));
+        $response->headers->set('Content-Type', 'application/json');
 
-
- //        return array(
- //            'entity'      => $entity,
- //            'dado' => 's',
- //            // 'delete_form' => $deleteForm->createView(),
- //        );
- //        
- return $response;
+        return $response;
+}
 
 
 
 
 
-    }
+
 
 
     /**
@@ -139,37 +165,14 @@ $response->headers->set('Content-Type', 'application/json');
 
         $entity = $em->getRepository('UerpSaleBundle:Saleitems')->findBySaleid($id);
 
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Sale entity.');
-        }
+        // if (!$entity) {
+        //     throw $this->createNotFoundException('Unable to find Sale entity.');
+        // }
         // dump($entity); die();
         return $this->render(
             'UerpSaleBundle:Sale:saleitems.html.twig',
             array( 'entities'      => $entity,)
         );
-
-
-
-//         return array(
-//             'entities' => $entities,
-//         );
-
-
-//         $id = $this->get('request')->request->get('id');
-
-//         $em = $this->getDoctrine()->getManager();
-
-//         $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
-//         // /@Template("UerpSaleBundle:Sale:selling.html.twig")
-
-
-//         $editForm = $this->createEditForm($entity);
-//         // $deleteForm = $this->createDeleteForm($id);
-// return $this->render(
-//             'UerpSaleBundle:Sale:menusale.html.twig',
-//             array( 'entity'      => $entity,
-//             'form'   => $editForm->createView(),)
-//         );
 
 
     }

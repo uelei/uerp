@@ -1,61 +1,55 @@
-{% extends 'UerpSaleBundle:Sale:salebase.html.twig' %}
-
-
+{% extends 'UerpSaleBundle:Sale:sellingbase.html.twig' %}
 
 {% block supmenu %}
- {# {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}  #}
-
-
-<div class="form-inline" style="margin-left: 10%;">
 {{ form_start(form) }}
 {{ form_errors(form) }}
 
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-top: 10px;">
 
-
-
- <div class="form-group" style="padding: 0px 8px 0px;">
-{{ form_label(form.date) }}
-{{ form_errors(form.date) }}
-{{ form_widget(form.date,{'attr': {'class': 'form-control'}}) }}
 </div>
- <div class="form-group" style="padding: 0px 8px 0px;">
-{{ form_label(form.seller) }}
-{{ form_errors(form.seller) }}
-{{ form_widget(form.seller,{'attr': {'class': 'form-control combobox'}}) }}
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-left: 8px;
+padding-right: 8px;">
+	{{ form_label(form.date) }}
+	{{ form_errors(form.date) }}
+	{{ form_widget(form.date,{'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+	{{ form_label(form.seller) }}
+	{{ form_errors(form.seller) }}
+	{{ form_widget(form.seller,{'attr': {'class': 'form-control combobox'}}) }}
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="font-size: 11px;
+font-weight: bold;">
+	<ul>
+		<li>
+			Status
+			{{ form_errors(form.status) }}
+			{{ form_widget(form.status,{ value :  '1' ,'attr': {'class': ' form-group-sm' }}) }}
+		</li><li>
+			Cliente
+			{{ form_errors(form.customer) }}
+			{{ form_widget(form.customer,{value :  '1' ,'attr': {'class': 'form-group-sm'}}) }}
+		</li>
+	</ul>
 </div>
 
-
-<div class="form-group" style="padding: 0px 8px 0px;"><ul style="margin-top: 7px; padding-left: 0px"><li>
-{{ form_label(form.status) }}
-{{ form_errors(form.status) }}
-{{ form_widget(form.status,{'value': '1','attr': {'class': ' form-group-sm'}}) }}
-</li><li>
-{# </div>
-
- <div class="form-group"> #}
-{{ form_label(form.customer) }}
-{{ form_errors(form.customer) }}
-{{ form_widget(form.customer,{'value': '1','attr': {'class': 'form-group-sm'}}) }}
-</li></ul>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-top: 15px;">
+	{{	form_widget(form.submit,{'attr': {'class': 'btn btn-success'}}) }}
 </div>
- <div class="form-group" style="padding: 0px 8px 0px;" >
- {{	form_widget(form.submit,{'attr': {'class': 'btn btn-lg btn-success'}}) }}
+<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+
 </div>
-<div id="totaldavenda" class="form-group" >
-		R$ {{ form.totalsale.vars.value|number_format(2, ',', '.') }}
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+
+</div>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+
 </div>
 {{ form_end(form) }}
-
- <div>
-	
- <a class="logout btn btn-lg btn-danger " href="{{ path('fos_user_security_logout') }}">Logout</a>
-
-</div>
-</div>
 {% endblock %}
 
-
 {% block body -%}
+
     <h1>Sale creation</h1>
 
         <ul class="record_actions">
@@ -65,4 +59,23 @@
         </a>
     </li>
 </ul>
+{% endblock %}
+
+{% block actions %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".combobox").select2(); 
+    $('#uerp_salebundle_sale_seller').select2('open');
+
+    $('.select2-container').on('keyup', function(e){
+      key = e.keyCode || e.which;
+      if (key==13) {
+        $('#uerp_salebundle_sale_submit').focus();
+        $('#uerp_salebundle_sale_submit').click();
+      };
+    });
+
+
+  });
+</script>
 {% endblock %}

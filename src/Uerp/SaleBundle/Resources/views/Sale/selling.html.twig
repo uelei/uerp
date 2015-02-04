@@ -1,7 +1,5 @@
 {% extends 'UerpSaleBundle:Sale:sellingbase.html.twig' %}
 
-
-
 {% block supmenu %}
 <div id="supmenu">
 	{{ form_start(form) }}
@@ -46,13 +44,10 @@ font-weight: bold;">
 <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ><div id="totaldavenda">
 	R$ {{ form.totalsale.vars.value|number_format(2, ',', '.') }}
 </div></div>
-<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="
-    padding-right: 0px;
-    padding-left: 0px;
-">n. de itens<br>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-right: 0px;padding-left: 0px;">n. de itens<br>
 	{{ form.nitems.vars.value }}
 </div>
-<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-right: 0px;padding-left: 0px;">
 <div id="saleld">
 	
 </div>
@@ -73,23 +68,25 @@ font-weight: bold;">
 				
 				</div>
 			</div>
-			<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="width:300px;" id="codd">
-				<input type="text" name="cod" id="inputCod" class="form-control" value="" placeholder="Codigo :" required="required" pattern="" title="" >
+			<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" id="codd">
+				<div class="input-group input-group-lg">
+<input type="text" name="inputcod" id="inputCod"  class="form-control"  required="required" aria-describedby="labelqtd" title=""> <span class="input-group-addon" id="labelqtd">Codigo:</span>
 			</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 input-group">
-				<input type="number" name="qtd" id="inputQtd" placeholder="Qtd" class="form-control" value="1" min="{5"} max="" step="0.25" required="required" aria-describedby="labelqtd" title=""> <span class="input-group-addon" id="labelqtd">Qtd</span>
+		</div>
+			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 input-group input-group-lg">
+				<input type="text" name="qtd" id="inputQtd" placeholder="Qtd" class="form-control" value="1" min="{5"} max="" step="0.25" required="required" aria-describedby="labelqtd" title=""> <span class="input-group-addon" id="labelqtd">Qtd</span>
 			</div>
 		</div>
 		<div class="row" style="margin: 8px;">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-				<input type="text" name="setcod" id="inputsetcod" class="form-control" value="" required="required" pattern="" title="">
+				<input type="text" name="setcod" id="inputsetcod"  value="" required="required" pattern="" title="">
 			</div>
-			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 input-group">
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 input-group input-group-lg">
 				<span class="input-group-addon">R$</span>
-				<input type="number" name="price" id="inputPrice" class="form-control" value="" min="{5"} max="" step="" required="required" title="">
+				<input type="text" name="price" id="inputPrice" class="form-control" value="" min="{5"} max="" step="" required="required" title="">
 			</div>
 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-				<input type="text" name="setpc" id="inputSetpc" class="form-control" value="" required="required" pattern="" title="">
+				<input type="text" name="setpc" id="inputSetpc"  value="" required="required" pattern="" title="">
 			</div>
 		</div>
 		<div class="row" style="margin:8px;">
@@ -134,144 +131,69 @@ font-weight: bold;">
 {% endblock %}
 
 
-
-
-
-
 {% block actions %}
-
-
-
-
-
 <script type="text/javascript">
-function findproduct(){
 
-	var cod = $("#inputCod").val();
+var  findproducturl =  "{{ path('findproduct')}}";
+var listsaleitemsurl = "{{ path('listsaleitems') }}";
+var saleitems_removeurl =  "{{ path('saleitems_remove') }}";
+var saleitems_additemurl=  "{{ path('saleitems_additem')}}";
+var  sale_reloadmenuurl =  "{{ path('sale_reloadmenu') }}";
+
+	$(document).ready(function() {
+		refreshsaleitems();
 	
-	if(cod.replace(/\s/g,"") != ""){
+	$(document).on( "click", ".deleteproduto", function() {
+	    var id = $( this ).attr('id')  ; 
+    	deleteproduto(id);
+    });
 
-		var crandon = Math.floor((Math.random() * 100) + 1);
-		$('#loading-indicator').append('<img  id="'+crandon+ '" src="http://www.ajaxload.info/images/exemples/21.gif">');
-		$("#codd").removeClass("has-error");
-		$("#inputsetcod").val("");
-		
-		var jqxhr = $.post( "{{ path('findproduct')}}",{ cod: cod } , function(cod) { })
-	  		.done(function(dados) {
-				$("#descp").html(dados.desc);
-				$("#inputSetpc").val(dados.cprice);
-				$("#inputsetcod").val(dados.cod);
-				$("#inputPrice").val(dados.price);})
-	  		.fail(function() {
-				$("#codd").addClass("has-error");
-				alert( "error" );})
-	  		.always(function() {
-				var element = document.getElementById(crandon);
-				$( "#"+crandon).remove();
-				delete element;});
-	}
-}
-function additem () {
-	var cod = $("#inputsetcod").val();
-  	
-  	
-        cod = cod.replace(/\s/g,'');
-		var saleid = $("#inputSaleid").val();
-	  	var qtd = parseFloat($('#inputQtd').val().replace(",","."));
-	  	var price = parseFloat($('#inputPrice').val().replace(",","."));
-	  	var cprice =parseFloat($('#inputSetpc').val().replace(",","."));
-		var crandon = Math.floor((Math.random() * 100) + 1);
-		$('#addingitem').append('<img  id="'+crandon+ '" src="http://www.ajaxload.info/images/exemples/21.gif">');
-		var jqxhr = $.post( "{{ path('saleitems_additem')}}",{ cod: cod, saleid : saleid , qtd : qtd, price : price, cprice : cprice } , function(cod) { })
-  			.done(function(dados) {
-		  		console.log("adicionado item id =>"+dados.id);
-		  		// console.log(dados.id);	
-		  		 refreshsaledata();
-		  		 refreshsaleitems();
-		  		 $("#inputsetcod").val(" ");
-		  		 $("#inputQtd").val("1");
-		  		 $("#inputPrice").val(" ");
-		  		 $("#inputcod").val(" ");
-		  		 $("#inputSetpc").val(" ");})
-	  		.fail(function() {
-				// $("#codd").addClass("has-error");
-				})
-	  		.always(function() {
-				var element = document.getElementById(crandon);
-				$( "#"+crandon).remove();
-				delete element;});
-	
-       
-}
-function refreshsaledata () {
+	//inputCod
+	$(document).on('keyup','#inputCod',function  (e) {
+		key = e.keyCode || e.which;
+    		if (key==13) {
+    			//enter pressed
+				var cod = $("#inputsetcod").val();
 
-	var crandon = Math.floor((Math.random() * 100) + 1);
-	$('#saleld').append('<img  id="'+crandon+ '" src="http://www.ajaxload.info/images/exemples/21.gif">');
+				if(cod.replace(/\s/g,"") != ""){
+					additem();
+				}
+			}else{
+				delay(function(){
+    				findproduct();
+    			}, 500 );
+			}
+	});
 
-				  var saleid = $("#inputSaleid").val(); 
-	$.post( "{{ path('sale_reloadmenu') }}",  { id : saleid }, function( data ) {
-$( "#supmenu" ).html( data );
-// alert( "Load was performed." );
-}).always(function(){
-			var element = document.getElementById(crandon);
-			$( "#"+crandon).remove();
-			delete element;});
+	//inputQtd
+	$(document).on('keyup','#inputQtd',function(e){
+		key = e.keyCode || e.which;
+    		if (key==13) {
+    			$("#inputPrice").focus();
+    			$("#inputPrice").select();
+    		 }
+	});
 
-}
-
-
-function refreshsaleitems(){
-//listsaleitems
-
-var crandon = Math.floor((Math.random() * 100) + 1);
-	$('#saleitemsld').append('<img  id="'+crandon+ '" src="http://www.ajaxload.info/images/exemples/21.gif">');
-
-				  var saleid = $("#inputSaleid").val(); 
-	$.post( "{{ path('listsaleitems') }}",  { id : saleid }, function( data ) {
-$( "#tableitems" ).html( data );
-// alert( "Load was performed." );
-}).always(function(){
-			var element = document.getElementById(crandon);
-			$( "#"+crandon).remove();
-			delete element;});
-
-
-
-}
-
-
-	
-$( document ).ready(function() {
-	refreshsaleitems();
-
-
-	$(document).on('keyup','#inputCod',function  (argument) {
-		findproduct();
+	//inputPrice
+	$(document).on('keyup','#inputPrice',function(e){
+		key = e.keyCode || e.which;
+    		if (key==13) {
+    			$("#btnok").focus();
+    		 }		 
 	});
 
 
+	//btnok action
 	$(document).on('click','#btnok',function  (argument) {
 		additem();
-
-		
 	});
+
+	$("#inputCod").focus();
+
 
 
 
 });
 
-// $(document).ajaxSend(function(event, request, settings) {
-//   $('#loading-indicator').show();
-// });
-
-// $(document).ajaxComplete(function(event, request, settings) {
-//   $('#loading-indicator').hide();
-// });
 </script>
-
-
-
-
-
-
 {% endblock %}

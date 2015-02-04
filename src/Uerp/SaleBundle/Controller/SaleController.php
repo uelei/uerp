@@ -37,6 +37,50 @@ class SaleController extends Controller
     }
 
 
+
+/**
+     * Displays a form to edit an existing Sale entity.
+     *
+     * @Route("/{id}/close", name="sale_close")
+     * @Method("GET")
+     * @Template("UerpSaleBundle:Sale:saleclose.html.twig")
+     */
+    public function salecloseAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Sale entity.');
+        }
+
+        $editForm = $this->createEditForm($entity);
+        // $deleteForm = $this->createDeleteForm($id);
+
+        return array(
+            'entity'      => $entity,
+            'form'   => $editForm->createView(),
+            // 'delete_form' => $deleteForm->createView(),
+        );
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Displays a form to edit an existing Sale entity.
      *

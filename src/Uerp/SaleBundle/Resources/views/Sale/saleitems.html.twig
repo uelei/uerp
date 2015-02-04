@@ -3,7 +3,7 @@
         <tr>
             <th  colspan="5">Itens Vendidos</th>
         </tr>
-        <tr>
+        <tr><td></td>
             <td>Cod</td>
             <td>desc</td>
             <td>qtd</td>
@@ -13,7 +13,7 @@
     </thead>
         <tbody>
             {% for entity in entities %}
-                <tr>
+                <tr><td> <button id="{{ entity.id }}" class="deleteproduto btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button> </td>
                     <td>{{ entity.productid }} </td>
                     <td>{{ entity.product }} </td>
                     <td>{{ entity.qtd }} </td>
@@ -23,3 +23,5 @@
             {% endfor %}
     </tbody>
 </table>
+
+
