@@ -274,4 +274,50 @@ class Saleitems
     {
         return $this->saleid;
     }
+
+    /**
+     * Set productid
+     *
+     * @param integer $productid
+     * @return Saleitems
+     */
+    public function setProductid($productid)
+    {
+        $this->productid = $productid;
+
+        return $this;
+    }
+
+    /**
+     * Get productid
+     *
+     * @return integer 
+     */
+    public function getProductid()
+    {
+        return $this->productid;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \Uerp\ProductBundle\Entity\Product $product
+     * @return Saleitems
+     */
+    public function setProduct(\Uerp\ProductBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \Uerp\ProductBundle\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
 }

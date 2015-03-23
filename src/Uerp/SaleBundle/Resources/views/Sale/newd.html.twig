@@ -1,5 +1,8 @@
 {% extends 'UerpSaleBundle:Sale:sellingbase.html.twig' %}
 
+{% block title %}New Sale{% endblock %}
+
+
 {% block supmenu %}
 {{ form_start(form) }}
 {{ form_errors(form) }}
@@ -44,10 +47,24 @@ font-weight: bold;">
 </div>
 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 
-</div>
+	</div><div style="display: none ">
+		{{ form_widget(form.totalcost,{value: '0'}) }}
+		{{ form_widget(form.totalsale,{value: '0'}) }}
+		{{ form_widget(form.nitems,{value: '0'}) }}
+		{{ form_widget(form.discount,{value: '0'}) }}
+		{{ form_widget(form.saleobs,{value: '0'}) }}
+		{{ form_widget(form.tax,{value: '0'}) }}
+
+
+
+	{{ form_rest(form) }} 
+		
+	</div>
 {{ form_end(form) }}
 {% endblock %}
+{% block btnclose %}
 
+{% endblock %}
 {% block body -%}
 
     <h1>Sale creation</h1>

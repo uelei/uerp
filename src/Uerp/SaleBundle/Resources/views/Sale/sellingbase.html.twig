@@ -3,7 +3,7 @@
     <head>
       <meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>{% block title %}Welcome!{% endblock %}</title>
+      <title>Uerp {% block title %}Welcome!{% endblock %}</title>
       {% stylesheets  '@UerpMainBundle/Resources/public/css/select2.min.css'
         '@UerpMainBundle/Resources/public/css/bootstrap.min.css' 
         '@UerpMainBundle/Resources/public/css/uerpsale.css' 
@@ -26,7 +26,9 @@
               {% block supmenu %}{% endblock %}
             </div>
             <div style="padding-left: 0px;" class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+              {% block btnclose %}
               <a style="margin-top: 10px; margin-right: 10px;"  class="logout btn btn-lg btn-danger " href="{{ path('sale_close', { 'id': entity.id }) }}">Close</a>
+              {% endblock %}
             </div>
           </div>
         </header>

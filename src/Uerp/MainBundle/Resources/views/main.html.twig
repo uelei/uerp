@@ -87,8 +87,7 @@ filter='cssrewrite' %}
                           <span>Stok</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="morris.html">Morris</a></li>
-                          <li><a  href="chartjs.html">Chartjs</a></li>
+                          <li><a  href="{{ path('product') }}">list</a></li>
                       </ul>
                   </li>
 
@@ -122,7 +121,12 @@ filter='cssrewrite' %}
                           <span>Config</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="form_component.html">Form Components</a></li>
+                          <li><a  href="{{path('categories')}}">Categorias</a></li>
+                          <li><a  href="{{path('subcategories')}}">Sub Categorias</a></li>
+                          <li><a  href="{{path('seller')}}">vendedor</a></li>
+                          <li><a  href="{{path('supplier')}}">fornecedor</a></li>
+                          <li><a  href="{{path('tpayment')}}">pagamentos</a></li>
+                          <li><a  href="{{path('customer')}}">clientes</a></li>
                       </ul>
                   </li>
 

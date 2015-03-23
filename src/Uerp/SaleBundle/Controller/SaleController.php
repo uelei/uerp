@@ -8,7 +8,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Uerp\SaleBundle\Entity\Sale;
+use Uerp\tpaymentBundle\Entity\tpayment;
 use Uerp\SaleBundle\Form\SaleType;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Constraints\DateTime;
+
 
 /**
  * Sale controller.
@@ -38,6 +42,50 @@ class SaleController extends Controller
 
 
 
+  /**
+     * Lists all Saleitems from the sale id entities.
+     *
+     * @Route("/closeendsale", name="closeendsale")
+     * @Method("POST")
+     * 
+     */
+    public function closeendsaleAction(Request $request)
+    {
+        $saleclose = $this->container->getParameter('cod.saleclose');//3
+        $id = $this->get('request')->request->get('saleid');
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
+        // $entity = $em->getRepository('UerpIncomesBundle:incomes')->findBySaleid($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Sale entity.');
+        }
+        $entitystatus = $em->getRepository('UerpStatusBundle:Status')->find($saleclose);
+
+        $entity->setStatus($entitystatus);
+
+        $em->flush();
+
+        // dump($entity); die();
+            $response = new Response();
+        $response->setContent(json_encode(array(
+            'id' => $entity->getId(),
+        )));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+
+
+    }
+
+
+
+
+
+
+
+
 /**
      * Displays a form to edit an existing Sale entity.
      *
@@ -47,6 +95,34 @@ class SaleController extends Controller
      */
     public function salecloseAction($id)
     {
+
+
+
+
+
+
+
+
+        $datea = new \Datetime('now');
+
+        $form = $this->createFormBuilder()
+                ->setMethod('GET')
+                ->setAction($this->generateUrl('sale'))
+                ->add('datai','date', array(
+                    'input'  => 'datetime',
+                    'widget' => 'single_text',
+                    'data' => $datea
+                    ))
+                ->add('tpay','entity',array(
+                        'class' => 'UerptpaymentBundle:tpayment',
+                        'property' => 'name',
+                    )                 )
+                ->add('value','number')
+                ->add('parc','text')
+                ->add('Add','button',array( 'attr' => array('id' => 'addpay')) )
+                ->getForm();
+
+
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
@@ -55,12 +131,12 @@ class SaleController extends Controller
             throw $this->createNotFoundException('Unable to find Sale entity.');
         }
 
-        $editForm = $this->createEditForm($entity);
-        // $deleteForm = $this->createDeleteForm($id);
-
+        $editForm = $this->createCloseForm($entity);
+ 
         return array(
             'entity'      => $entity,
-            'form'   => $editForm->createView(),
+            'formsale'   => $editForm->createView(),
+            'form' => $form->createView(),
             // 'delete_form' => $deleteForm->createView(),
         );
 
@@ -70,7 +146,34 @@ class SaleController extends Controller
     }
 
 
+    /**
+     * Displays a form to edit an existing Sale entity.
+     *
+     * @Route("/reloadcloseinfo", name="sale_reloadcloseinfo")
+     * @Method("POST")
+     * 
+     */
+    public function reloadcloseinfoAction(Request $request)
+    {
+        $id = $this->get('request')->request->get('id');
 
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
+        // /@Template("UerpSaleBundle:Sale:selling.html.twig")
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Sale entity.');
+        }
+
+        $editForm = $this->createEditForm($entity);
+        // $deleteForm = $this->createDeleteForm($id);
+return $this->render(
+            'UerpSaleBundle:Sale:menusale.html.twig',
+            array( 'entity'      => $entity,
+            'form'   => $editForm->createView(),)
+        );
+
+}
 
 
 
@@ -158,8 +261,7 @@ return $this->render(
         $entity->settotalsale('0');
         $entity->setdiscount('0');
         $entity->setnitems('0');
-
-
+        $entity->settax('0');
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -233,14 +335,57 @@ return $this->render(
 
     /**
      * Displays a form to create a new Sale entity.
-     *
      * @Route("/new", name="sale_new")
      * @Method("GET")
      * @Template()
      */
     public function newAction()
     {
+      
+        $dat = date('Y-m-d');
+        
+        return $this->redirect($this->generateUrl('sale_newd', array('date' => $dat)));
+        
+    }
+
+
+
+    /**
+     * Lists all Saleitems from the sale id entities.
+     *
+     * @Route("/closs", name="closs")
+     * @Method("POST")
+     * 
+     */
+    public function clossAction(Request $request)
+    {
+        $date = $this->get('request')->request->get('date');
+  
+
+        
+        return $this->redirect($this->generateUrl('sale_newd', array('date' => $date)));
+
+
+
+    }
+
+
+
+    /**
+     * Displays a form to create a new Sale entity.
+     * @Route("/newd/{date}", name="sale_newd")
+     * @Method("GET")
+     * @Template()
+     */
+    public function newdAction($date)
+    {
+
+        $dat = new \DateTime($date);
+
+
         $entity = new Sale();
+        $entity->setDate($dat);
+
         $form   = $this->createCreateForm($entity);
 
         return array(
@@ -319,6 +464,26 @@ return $this->render(
 
         return $form;
     }
+
+    /**
+    * Creates a form to edit a Sale entity.
+    *
+    * @param Sale $entity The entity
+    *
+    * @return \Symfony\Component\Form\Form The form
+    */
+    private function createCloseForm(Sale $entity)
+    {
+        $form = $this->createForm(new SaleType(), $entity, array(
+            'action' => $this->generateUrl('sale_closeup', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array('label' => 'Update'));
+
+        return $form;
+    }
+
     /**
      * Edits an existing Sale entity.
      *
@@ -351,6 +516,40 @@ return $this->render(
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
+    }
+
+    /**
+     * Edits an existing Sale entity.
+     *
+     * @Route("/closeup/{id}", name="sale_closeup")
+     * @Method("PUT")
+     * @Template("UerpSaleBundle:Sale:edit.html.twig")
+     */
+    public function sale_closeupAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
+        dump($entity);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Sale entity.');
+        }
+
+        $editForm = $this->createCloseForm($entity);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isValid()) {
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('sale_close', array('id' => $id)));
+        }
+            return $this->redirect($this->generateUrl('sale_close', array('id' => $id)));
+        // return array(
+        //     'entity'      => $entity,
+        //     'edit_form'   => $editForm->createView(),
+            
+        // );
     }
     /**
      * Deletes a Sale entity.

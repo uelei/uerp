@@ -64,15 +64,16 @@ function additem () {
 		  		 $("#inputPrice").val(" ");
 		  		 $("#inputCod").val("");
 		  		 $("#inputSetpc").val(" ");
-		  		 $("#descp").html("");})
+		  		 $("#descp").html("");
+		  		 $("#inputCod").focus();})
 	  		.fail(function() {
 				// $("#codd").addClass("has-error");
 				})
 	  		.always(function() {
 				var element = document.getElementById(crandon);
 				$( "#"+crandon).remove();
-				delete element;})
-	  		 $("#inputCod").val(" ");;
+				delete element;
+	  		    $("#inputCod").val(" ");});
 	}
        
 }

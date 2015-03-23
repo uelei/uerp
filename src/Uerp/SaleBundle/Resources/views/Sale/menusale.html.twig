@@ -48,5 +48,14 @@ font-weight: bold;">
 <div id="saleld">
 	
 </div>
-</div>
+</div>	
+	<div style="display: none ">
+		{{ form_widget(form.totalcost) }}
+		{{ form_widget(form.totalsale) }}
+		{{ form_widget(form.nitems) }}
+		{{ form_widget(form.discount) }}
+		{{ form_widget(form.tax) }}
+		{{ form_widget(form.saleobs) }}
+		{{ form_rest(form) }} 
+	</div>
 {{ form_end(form) }}

@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Uerp\ProductBundle\UerpProductBundle(),
             new Uerp\MainBundle\UerpMainBundle(),
             new Uerp\SubcategoriesBundle\UerpSubcategoriesBundle(),
+            new Uerp\tpaymentBundle\UerptpaymentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

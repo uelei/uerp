@@ -1,12 +1,12 @@
 <?php
 
-namespace Uerp\SaleBundle\Form;
+namespace Uerp\IncomesBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SaleType extends AbstractType
+class incomesType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -14,23 +14,14 @@ class SaleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-         // $datea = new \Datetime('now');
         $builder
-            ->add('date','date',array(
-                'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd',
-                // 'data' => $datea
-
-                ))
-            ->add('totalcost')
-            ->add('totalsale')
-            ->add('discount')
-            ->add('saleobs')
-            ->add('seller')
-            ->add('status')
-            ->add('customer')
-            ->add('nitems')
+            ->add('saleid')
+            ->add('valueb')
+            ->add('valuel')
             ->add('tax')
+            ->add('date')
+            ->add('status')
+            ->add('tpayment')
         ;
     }
     
@@ -40,7 +31,7 @@ class SaleType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Uerp\SaleBundle\Entity\Sale'
+            'data_class' => 'Uerp\IncomesBundle\Entity\incomes'
         ));
     }
 
@@ -49,6 +40,6 @@ class SaleType extends AbstractType
      */
     public function getName()
     {
-        return 'uerp_salebundle_sale';
+        return 'uerp_incomesbundle_incomes';
     }
 }

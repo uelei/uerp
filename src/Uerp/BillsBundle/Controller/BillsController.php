@@ -29,11 +29,6 @@ class BillsController extends Controller
      */
     public function indexAction(Request $request)
     {
-// {'attr': {'class': 'task_field'}}
-         // $filter = New filter();
-
-         // $filter->setdatai(new \DateTime('now'));
-         // $filter->setdataf(new \DateTime('now'));
                 $datea = new \Datetime('now');
 
         $form = $this->createFormBuilder()
@@ -42,14 +37,11 @@ class BillsController extends Controller
                 ->add('datai','date', array(
                     'input'  => 'datetime',
                     'widget' => 'single_text',
-                    // 'format' => 'dd/M/yyyy',
                     'data' => $datea
                     ))
                 ->add('dataf','date', array(    
                     'input'  => 'datetime',
                    'widget' => 'single_text',
-                    // 'widget' => 'choice',
-                    // 'format' => 'dd/M/yyyy',
                     'data' => $datea
                   
                     ))
@@ -60,20 +52,12 @@ class BillsController extends Controller
 
         if ($form->isValid()) {
 
-
-            // print_r($form["datai"]->getData()->format("Y-m-d")); die();
-            // perform some action, such as saving the task to the database
                  return $this->redirect($this->generateUrl('filter', array(
                     'datai'  => $form["datai"]->getData()->format("Y-m-d"),
                     'dataf' => $form["dataf"]->getData()->format("Y-m-d"),
 
 
                     )));
-            // return $this->redirect($this->generateUrl('filter/',array('datai' => $form->getdatai(),'dataf' => $form->getdataf()  )  ));
-            // return $this->forward('UerpBillsBundle:Bills:filter', array(
-            //     'datai'  => $form["datai"]->getData(),
-            //     'dataf' => $form["dataf"]->getData(),
-            // ));
         }
 
 
@@ -83,19 +67,10 @@ class BillsController extends Controller
         $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b ')->setMaxResults(10);
         $entities = $query->getResult();
 
-        // return array(
-        //     'entities' => $entities,
-   
-        // );
         return $this->render('UerpBillsBundle:Bills:index.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
-   //          $datef = date('Y-m-d');
-   // $response = $this->forward('UerpBillsBundle:Bills:filter', array(
-   //      'datai'  => $datef,
-   //      'dataf' => $datef,
-   //  ));
-   //  return $response;
 
     }
+    
 /**
  * @Route("/listsubcategories", name="_listsubcategories")
  * @Method("GET")
@@ -439,7 +414,8 @@ echo "erro ";
     public function updateAction(Request $request, $id)
     {
         //set defaul value for status
-        $pgcod = 4; 
+        $pgcod = $this->container->getParameter('cod.billpg');
+        // $pgcod = 4; 
 
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UerpBillsBundle:Bills')->find($id);
@@ -491,8 +467,8 @@ echo "erro ";
             }//pay-end 
             if($editForm->get('Delete')->isClicked()){//delete
                 // echo "detete";
-                
-                if($editForm['status']->getData()->getId() == 4 ){
+                 $pgcod = $this->container->getParameter('cod.billpg');//4
+                if($editForm['status']->getData()->getId() == $pgcod ){
 
                     $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
 
@@ -536,8 +512,8 @@ echo "erro ";
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Bills entity.');
             }
-
-                if($entity->getStatus()->getId() == 4 ){
+                $pgcod = $this->container->getParameter('cod.billpg');//4
+                if($entity->getStatus()->getId() == $pgcod ){
 
                     $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
 
@@ -575,8 +551,8 @@ echo "erro ";
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Bills entity.');
             }
-
-                if($entity->getStatus()->getId() == 4 ){
+                 $pgcod = $this->container->getParameter('cod.billpg');//4
+                if($entity->getStatus()->getId() == $pgcod ){
 
                     $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
 

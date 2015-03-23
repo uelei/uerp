@@ -1,5 +1,5 @@
 {% extends 'UerpSaleBundle:Sale:sellingbase.html.twig' %}
-
+{% block title %}Uerp Venda numero : {{ entity.id }}{% endblock %}
 {% block supmenu %}
 <div id="supmenu">
 	{{ form_start(form) }}
@@ -52,6 +52,14 @@ font-weight: bold;">
 	
 </div>
 </div>
+	<div style="display: none ">
+		{{ form_widget(form.totalcost,{value: '0'}) }}
+		{{ form_widget(form.totalsale,{value: '0'}) }}
+		{{ form_widget(form.nitems,{value: '0'}) }}
+		{{ form_widget(form.discount,{value: '0'}) }}
+		{{ form_widget(form.saleobs,{value: '0'}) }}
+		{{ form_rest(form) }} 
+	</div>
 {{ form_end(form) }}
 
 </div>
@@ -142,7 +150,8 @@ var  sale_reloadmenuurl =  "{{ path('sale_reloadmenu') }}";
 
 	$(document).ready(function() {
 		refreshsaleitems();
-	
+		$(".combobox").select2();
+		
 	$(document).on( "click", ".deleteproduto", function() {
 	    var id = $( this ).attr('id')  ; 
     	deleteproduto(id);
@@ -161,7 +170,7 @@ var  sale_reloadmenuurl =  "{{ path('sale_reloadmenu') }}";
 			}else{
 				delay(function(){
     				findproduct();
-    			}, 500 );
+    			}, 300 );
 			}
 	});
 

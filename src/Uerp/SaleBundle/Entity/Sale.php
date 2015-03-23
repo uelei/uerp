@@ -68,6 +68,10 @@ class Sale
      */
     protected $discount;
 
+     /**
+     * @ORM\Column(type="decimal", scale=2, options={"default":0})
+     */
+    protected $tax;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -297,5 +301,28 @@ class Sale
     public function getNitems()
     {
         return $this->nitems;
+    }
+
+    /**
+     * Set tax
+     *
+     * @param string $tax
+     * @return Sale
+     */
+    public function setTax($tax)
+    {
+        $this->tax = $tax;
+
+        return $this;
+    }
+
+    /**
+     * Get tax
+     *
+     * @return string 
+     */
+    public function getTax()
+    {
+        return $this->tax;
     }
 }

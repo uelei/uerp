@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Saleitems
  *
  * @ORM\Table(name="saleitems")
- * @ORM\Entity(repositoryClass="Uerp\SaleBundle\Repository\SaleitemsRepository")
+ * @ORM\Entity
  */
 class Saleitems
 {
@@ -27,10 +27,18 @@ class Saleitems
      */
     protected $saleid;
 
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Uerp\ProductBundle\Entity\Product")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+    protected $product;
+
     /**
      * @ORM\Column(type="integer")
      */
-    protected $prod_id;
+    protected $productid;
+
 
 
     /**

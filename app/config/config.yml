@@ -78,3 +78,7 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Uerp\UserBundle\Entity\User
+
+parameters:
+    cod.billpg: 4
+    cod.saleclose: 3
