@@ -1,5 +1,6 @@
 Uerp
 ========================
+Projeto em fase : alpha
 
 Projeto de erp em php usando o framework [Symfony2](http://symfony.com/)
 
