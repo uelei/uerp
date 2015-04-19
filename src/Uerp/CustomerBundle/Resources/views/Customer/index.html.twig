@@ -1,0 +1,54 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+
+{% block body -%}
+<div class="panel panel-info" style="margin: 20px">
+<div class="panel-heading">
+    <h3>Lista de Clientes</h3>
+</div>
+<div class="panel-body">
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Street</th>
+                <th>Number</th>
+                <th>City</th>
+                <th>Obs</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('customer_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.name }}</td>
+                <td>{{ entity.street }}</td>
+                <td>{{ entity.number }}</td>
+                <td>{{ entity.city }}</td>
+                <td>{{ entity.obs }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('customer_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('customer_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('customer_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    </div>
+    {% endblock %}

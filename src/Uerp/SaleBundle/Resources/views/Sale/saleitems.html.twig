@@ -1,0 +1,27 @@
+<table class="table" style="margin : 10px;" >
+    <thead>
+        <tr>
+            <th  colspan="5">Itens Vendidos</th>
+        </tr>
+        <tr><td></td>
+            <td>Cod</td>
+            <td>desc</td>
+            <td>qtd</td>
+            <td>price</td>
+            <td>sub</td>
+        </tr>
+    </thead>
+        <tbody>
+            {% for entity in entities %}
+                <tr><td> <button id="{{ entity.id }}" class="deleteproduto btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button> </td>
+                    <td>{{ entity.productid }} </td>
+                    <td>{{ entity.product }} </td>
+                    <td>{{ entity.qtd }} </td>
+                    <td>{{ entity.prodprice }} </td>
+                    <td>{{ entity.subtotalsale }} </td>
+                </tr>
+            {% endfor %}
+    </tbody>
+</table>
+
+

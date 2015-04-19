@@ -1,0 +1,21 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+{% block title %}New Bank Account{% endblock %}
+{% block body -%}
+
+<div class="panel panel-info" style="margin: 20px">
+  <div class="panel-heading">
+    <h3>New Bank Account</h3>
+  </div>
+  <div class="panel-body form-horizontal">
+	{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %} 
+    {{ form(form) }}
+</div>
+</div>
+        <ul class="record_actions">
+    <li>
+ <a class="btn btn-lg btn-warning" href="{{ path('bankaccount') }}"><i class="fa fa-arrow-left"></i>
+            Back 
+        </a>
+    </li>
+</ul>
+{% endblock %}

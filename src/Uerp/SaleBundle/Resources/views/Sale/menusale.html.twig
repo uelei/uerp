@@ -1,0 +1,61 @@
+{{ form_start(form) }}
+{{ form_errors(form) }}
+
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-top: 10px;">
+	Number: <br>
+	<span>
+	{{ entity.id }}
+	</span>	
+	<input type="hidden" name="saleid" id="inputSaleid" class="form-control" value="{{ entity.id }}">
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-left: 8px;
+padding-right: 8px;">
+	{{ form_label(form.date) }}
+	{{ form_errors(form.date) }}
+	{{ form_widget(form.date,{'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+	{{ form_label(form.seller) }}
+	{{ form_errors(form.seller) }}
+	{{ form_widget(form.seller,{'attr': {'class': 'form-control combobox'}}) }}
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="font-size: 11px;
+font-weight: bold;">
+	<ul>
+		<li>
+			Status
+			{{ form_errors(form.status) }}
+			{{ form_widget(form.status,{'attr': {'class': ' form-group-sm'}}) }}
+		</li><li>
+			Cliente
+			{{ form_errors(form.customer) }}
+			{{ form_widget(form.customer,{'attr': {'class': 'form-group-sm'}}) }}
+		</li>
+	</ul>
+</div>
+
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-top: 15px;">
+	{{	form_widget(form.submit,{'attr': {'class': 'btn btn-success'}}) }}
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" ><div id="totaldavenda">
+	R$ {{ form.totalsale.vars.value|number_format(2, ',', '.') }}
+</div></div>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-right: 0px;padding-left: 0px;">
+	n. de itens<br>
+	{{ form.nitems.vars.value }}
+</div>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-right: 0px;padding-left: 0px;">
+<div id="saleld">
+	
+</div>
+</div>	
+	<div style="display: none ">
+		{{ form_widget(form.totalcost) }}
+		{{ form_widget(form.totalsale) }}
+		{{ form_widget(form.nitems) }}
+		{{ form_widget(form.discount) }}
+		{{ form_widget(form.tax) }}
+		{{ form_widget(form.saleobs) }}
+		{{ form_rest(form) }} 
+	</div>
+{{ form_end(form) }}

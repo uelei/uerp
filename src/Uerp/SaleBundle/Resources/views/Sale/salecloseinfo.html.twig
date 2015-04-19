@@ -1,0 +1,85 @@
+		<div id="info">
+			{{ form_start(formsale) }}
+			{{ form_errors(formsale) }}
+			<div class="row">
+
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<label for="inputId" >Venda Numero : </label>
+					<input type="text" name="id" id="inputId" class="di" value="{{ entity.id }}" required="required" pattern="" title="" disabled >
+				</div>
+				
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<label for="inputdate">Data: </label>
+					{{ form_widget(formsale.date,{'attr': {'class': 'base '}}) }}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<label for="input-id" >Vendedor :</label><br>
+					{{ form_widget(formsale.seller,{'attr': {'class': 'combobox form-control'} }) }}
+				</div>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<label for="ind" >Cliente :</label><br>
+					{{ form_widget(formsale.customer,{'attr': {'class': 'combobox form-control'}}) }}
+				</div>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<label for="sdsa" >Numero de items :</label>
+					<input type="text" name="nitems" id="inputNitems" class="di" value="{{ formsale.nitems.vars.value }}" required="required" pattern="" style="width: 100px;" title="" disabled >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<label for="obs" >Obs.: </label>
+					{{ form_widget(formsale.saleobs,{'attr': {'class': 'base'}}) }}
+				</div>
+					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						<div class="row">
+							<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+								<label for="total">Total :</label>
+								<input type="text" name="total" id="inputtotal" class="clear" value="{{ formsale.totalsale.vars.value|number_format(2, ',', '.') }}" required="required" pattern="" title="" disabled >
+								{# {{ form_widget(formsale.totalsale,{'attr': {'class': 'clear'}}) }} #}
+							</div>
+							<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+								{{ formsale.totalcost.vars.value }}
+							</div>
+
+							
+						</div>
+						<div class="row">
+
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<label for="s">Disconto :</label>
+								<input type="text" name="discount" id="inputdiscount" class="clear" value="{{ formsale.discount.vars.value }}" required="required" style="width: 100px;" pattern="" title="" disabled >
+								{# {{ form_widget(formsale.discount,{'attr': {'class': 'clear'}}) }} #}
+							</div>
+							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+								<label for="swe">Taxas cartao</label>
+								<input type="text" name="tax" id="inputtax" class="clear" value="{{ formsale.tax.vars.value }}" required="required" pattern="" style="width: 100px;"  title="" disabled >
+								{# 	{{ form_widget(formsale.tax,{'attr': {'class': 'clear'}}) }} #}
+							</div>
+							
+							
+						</div>
+					
+					</div>
+
+			</div>
+		<div class="row">
+			{{ form_widget(formsale.submit,{'attr': {'class': 'clear'}}) }}
+		</div>
+
+		<div style="display: none">
+			{{ form_widget(formsale.status) }}
+
+		{{ form_widget(formsale.totalcost) }}
+		{{ form_widget(formsale.totalsale) }}
+		{{ form_widget(formsale.nitems) }}
+		{{ form_widget(formsale.discount) }}
+		{{ form_widget(formsale.tax) }}
+		{{ form_rest(formsale) }} 
+	
+		</div>
+		{{ form_end(formsale) }}
+	</div>
+

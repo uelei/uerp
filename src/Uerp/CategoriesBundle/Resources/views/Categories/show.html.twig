@@ -1,0 +1,41 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+
+{% block body -%}
+<div class="panel panel-info" style="margin: 20px">
+<div class="panel-heading">
+    <h3>Categories</h3>
+</div>
+<div class="panel-body">
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Descriptioncategories</th>
+                <td>{{ entity.descriptioncategories }}</td>
+            </tr>
+            <tr>
+                <th>Varcategories</th>
+                <td>{{ entity.varcategories }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('categories') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('categories_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+</div>
+{% endblock %}

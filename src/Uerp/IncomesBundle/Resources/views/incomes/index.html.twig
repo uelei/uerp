@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>incomes list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Saleid</th>
+                <th>Valueb</th>
+                <th>Valuel</th>
+                <th>Tax</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('incomes_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.saleid }}</td>
+                <td>{{ entity.valueb }}</td>
+                <td>{{ entity.valuel }}</td>
+                <td>{{ entity.tax }}</td>
+                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('incomes_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('incomes_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('incomes_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

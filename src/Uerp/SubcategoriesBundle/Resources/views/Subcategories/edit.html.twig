@@ -1,0 +1,21 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+
+{% block body -%}
+<div class="panel panel-info" style="margin: 20px">
+<div class="panel-heading">
+    <h3>Sub Categorias edit </h3>
+</div>
+<div class="panel-body">
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('subcategories') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+</div>
+{% endblock %}

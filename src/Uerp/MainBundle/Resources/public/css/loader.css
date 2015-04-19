@@ -1,0 +1,85 @@
+.modal{
+  
+   
+
+    content: ""; 
+    display: none;
+    background: rgba(0,0,0,.6);
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0; 
+    z-index: 10; 
+}
+#modal{    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    }
+
+
+
+
+.loader {
+  font-size: 8px;
+  margin: 5em auto;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation: load4 1.3s infinite linear;
+  animation: load4 1.3s infinite linear;
+}
+@-webkit-keyframes load4 {
+  0%,
+  100% {
+    box-shadow: 0em -3em 0em 0.2em #000000, 2em -2em 0 0em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 -0.5em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 0em #000000;
+  }
+  12.5% {
+    box-shadow: 0em -3em 0em 0em #000000, 2em -2em 0 0.2em #000000, 3em 0em 0 0em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 -0.5em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  25% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 0em #000000, 3em 0em 0 0.2em #000000, 2em 2em 0 0em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 -0.5em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  37.5% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 0em #000000, 2em 2em 0 0.2em #000000, 0em 3em 0 0em #000000, -2em 2em 0 -0.5em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  50% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 0em #000000, 0em 3em 0 0.2em #000000, -2em 2em 0 0em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  62.5% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 0em #000000, -2em 2em 0 0.2em #000000, -3em 0em 0 0em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  75% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 0em #000000, -3em 0em 0 0.2em #000000, -2em -2em 0 0em #000000;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0em 0em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 0em #000000, -3em 0em 0 0em #000000, -2em -2em 0 0.2em #000000;
+  }
+}
+@keyframes load4 {
+  0%,
+  100% {
+    box-shadow: 0em -3em 0em 0.2em #000000, 2em -2em 0 0em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 -0.5em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 0em #000000;
+  }
+  12.5% {
+    box-shadow: 0em -3em 0em 0em #000000, 2em -2em 0 0.2em #000000, 3em 0em 0 0em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 -0.5em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  25% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 0em #000000, 3em 0em 0 0.2em #000000, 2em 2em 0 0em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 -0.5em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  37.5% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 0em #000000, 2em 2em 0 0.2em #000000, 0em 3em 0 0em #000000, -2em 2em 0 -0.5em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  50% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 0em #000000, 0em 3em 0 0.2em #000000, -2em 2em 0 0em #000000, -3em 0em 0 -0.5em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  62.5% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 0em #000000, -2em 2em 0 0.2em #000000, -3em 0em 0 0em #000000, -2em -2em 0 -0.5em #000000;
+  }
+  75% {
+    box-shadow: 0em -3em 0em -0.5em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 0em #000000, -3em 0em 0 0.2em #000000, -2em -2em 0 0em #000000;
+  }
+  87.5% {
+    box-shadow: 0em -3em 0em 0em #000000, 2em -2em 0 -0.5em #000000, 3em 0em 0 -0.5em #000000, 2em 2em 0 -0.5em #000000, 0em 3em 0 -0.5em #000000, -2em 2em 0 0em #000000, -3em 0em 0 0em #000000, -2em -2em 0 0.2em #000000;
+  }
+}

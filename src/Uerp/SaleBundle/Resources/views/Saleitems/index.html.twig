@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Saleitems list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prod_id</th>
+                <th>Qtd</th>
+                <th>Prodcost</th>
+                <th>Prodprice</th>
+                <th>Subtotalcost</th>
+                <th>Subtotalsale</th>
+                <th>Itenaux</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('saleitems_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.prodid }}</td>
+                <td>{{ entity.qtd }}</td>
+                <td>{{ entity.prodcost }}</td>
+                <td>{{ entity.prodprice }}</td>
+                <td>{{ entity.subtotalcost }}</td>
+                <td>{{ entity.subtotalsale }}</td>
+                <td>{{ entity.itenaux }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('saleitems_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('saleitems_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('saleitems_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

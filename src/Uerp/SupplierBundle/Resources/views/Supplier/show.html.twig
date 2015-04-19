@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Supplier</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Suppliername</th>
+                <td>{{ entity.suppliername }}</td>
+            </tr>
+            <tr>
+                <th>Aux</th>
+                <td>{{ entity.aux }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('supplier') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('supplier_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>incomes</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Saleid</th>
+                <td>{{ entity.saleid }}</td>
+            </tr>
+            <tr>
+                <th>Valueb</th>
+                <td>{{ entity.valueb }}</td>
+            </tr>
+            <tr>
+                <th>Valuel</th>
+                <td>{{ entity.valuel }}</td>
+            </tr>
+            <tr>
+                <th>Tax</th>
+                <td>{{ entity.tax }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ entity.date|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('incomes') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('incomes_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

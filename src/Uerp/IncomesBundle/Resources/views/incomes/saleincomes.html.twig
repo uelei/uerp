@@ -1,0 +1,25 @@
+<table class="table" style="margin : 10px;" >
+    <thead>
+        <tr>
+            <th  colspan="5">Pagamentos</th>
+        </tr>
+        <tr><td></td>
+            <td>valor</td>
+            <td>tipo</td>
+            <td>parc</td>
+        </tr>
+    </thead>
+        <tbody>
+            {% set sum = 0 %}    
+            {% for entity in entities %}
+                <tr><td> <button id="{{ entity.id }}" class="deletepg btn btn-sm btn-danger"><i class="fa fa-trash-o"></i></button> </td>
+                     {% set sum = sum + entity.valueb %} 
+                    <td>{{ entity.valueb }} </td>
+                    <td>{{ entity.tpayment }} </td>
+                    
+                    <td>{{ entity.parc }} </td>
+                </tr>
+            {% endfor %}
+    </tbody>
+</table>
+<input type="hidden" id="pago" value="{{ sum  }}">

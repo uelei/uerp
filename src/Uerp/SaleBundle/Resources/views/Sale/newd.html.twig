@@ -1,0 +1,98 @@
+{% extends 'UerpSaleBundle:Sale:sellingbase.html.twig' %}
+
+{% block title %}New Sale{% endblock %}
+
+
+{% block supmenu %}
+{{ form_start(form) }}
+{{ form_errors(form) }}
+
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-top: 10px;">
+
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-left: 8px;
+padding-right: 8px;">
+	{{ form_label(form.date) }}
+	{{ form_errors(form.date) }}
+	{{ form_widget(form.date,{'attr': {'class': 'form-control'}}) }}
+</div>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+	{{ form_label(form.seller) }}
+	{{ form_errors(form.seller) }}
+	{{ form_widget(form.seller,{'attr': {'class': 'form-control combobox'}}) }}
+</div>
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="font-size: 11px;
+font-weight: bold;">
+	<ul>
+		<li>
+			Status
+			{{ form_errors(form.status) }}
+			{{ form_widget(form.status,{ value :  '1' ,'attr': {'class': ' form-group-sm' }}) }}
+		</li><li>
+			Cliente
+			{{ form_errors(form.customer) }}
+			{{ form_widget(form.customer,{value :  '1' ,'attr': {'class': 'form-group-sm'}}) }}
+		</li>
+	</ul>
+</div>
+
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-top: 15px;">
+	{{	form_widget(form.submit,{'attr': {'class': 'btn btn-success'}}) }}
+</div>
+<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+
+</div>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+
+</div>
+<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+
+	</div><div style="display: none ">
+		{{ form_widget(form.totalcost,{value: '0'}) }}
+		{{ form_widget(form.totalsale,{value: '0'}) }}
+		{{ form_widget(form.nitems,{value: '0'}) }}
+		{{ form_widget(form.discount,{value: '0'}) }}
+		{{ form_widget(form.saleobs,{value: '0'}) }}
+		{{ form_widget(form.tax,{value: '0'}) }}
+
+
+
+	{{ form_rest(form) }} 
+		
+	</div>
+{{ form_end(form) }}
+{% endblock %}
+{% block btnclose %}
+
+{% endblock %}
+{% block body -%}
+
+    <h1>Sale creation</h1>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('sale') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block actions %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".combobox").select2(); 
+    $('#uerp_salebundle_sale_seller').select2('open');
+
+    $('.select2-container').on('keyup', function(e){
+      key = e.keyCode || e.which;
+      if (key==13) {
+        $('#uerp_salebundle_sale_submit').focus();
+        $('#uerp_salebundle_sale_submit').click();
+      };
+    });
+
+
+  });
+</script>
+{% endblock %}
