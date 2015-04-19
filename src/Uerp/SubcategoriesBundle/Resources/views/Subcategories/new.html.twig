@@ -1,9 +1,13 @@
-{% extends '::base.html.twig' %}
+{% extends 'UerpMainBundle::main.html.twig' %}
 
 {% block body -%}
-    <h1>Subcategories creation</h1>
+<div class="panel panel-info" style="margin: 20px">
+<div class="panel-heading">
+    <h3>Sub Categorias Novo </h3>
+</div>
+<div class="panel-body">
 
-    {{ form(form) }}
+  {{ form(form) }}
 
         <ul class="record_actions">
     <li>
@@ -12,4 +16,5 @@
         </a>
     </li>
 </ul>
+</div>
 {% endblock %}

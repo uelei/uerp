@@ -1,49 +1,52 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
-
+{% block title %} Lista das Vendas {% endblock %}
 {% block body -%}
-    <h1>Sale list</h1>
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Totalcost</th>
-                <th>Totalsale</th>
-                <th>Discount</th>
-                <th>Saleobs</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('sale_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.totalcost }}</td>
-                <td>{{ entity.totalsale }}</td>
-                <td>{{ entity.discount }}</td>
-                <td>{{ entity.saleobs }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('sale_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('sale_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-        <ul>
-        <li>
-            <a href="{{ path('sale_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+<div class="panel panel-info" style="margin: 20px">
+<div class="panel-heading">
+    <h3>Lista de Vendas</h3>
+</div>
+<div class="panel-body">
+    <table class="table table-striped table-advance table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Data</th>
+                    <th>Total custo</th>
+                    <th>Total venda</th>
+                    <th>OBS</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+
+                <tr>
+                    <td><a href="{{ path('sale_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                    <td>{% if entity.date %}{{ entity.date|date('Y-m-d') }}{% endif %}</td>
+                    <td>{{ entity.totalcost }}</td>
+                    <td>{{ entity.totalsale }}</td>
+                    <td>{{ entity.discount }}</td>
+                    <td>{{ entity.saleobs }}</td>
+                    <td>
+
+                    <a  class="btn btn-info btn-xs" href="{{  path('sale_show', { 'id': entity.id })  }}"><i class="fa fa-eye"></i> Detales</a>
+                    <a  class="btn btn-warning btn-xs" href="{{ path('sale_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i> editar</a>
+
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+</div>
+
+    <ul>
+    <li>
+          <a  class="btn btn-success" href="{{ path('sale_new') }}"><i class="fa fa-plus"></i> Nova Venda</a>
+    </li>
+</ul>
+{% endblock %}
