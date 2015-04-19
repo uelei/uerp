@@ -2,6 +2,9 @@ Uerp
 ========================
 Projeto em fase : alpha  
 
+![](https://raw.githubusercontent.com/uelei/uerp/master/screenshot.png)
+
+
 Projeto de erp em php usando o framework [Symfony2](http://symfony.com/)
 
 para instalar é nescessario ja esteja instalado o lamp ( apache + php + mysql )
