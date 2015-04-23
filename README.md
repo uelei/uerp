@@ -7,6 +7,18 @@ Projeto em fase : alpha
 
 Projeto de erp em php usando o framework [Symfony2](http://symfony.com/)
 
+* 1 método
+
+  baixar boot2docker
+
+  iniciar o boot2docker
+
+  fz o pull da imagem
+
+  **docker run -t -i -p 80:80 uelei/uerp**
+
+* 2 método
+
 para instalar é nescessario ja esteja instalado o lamp ( apache + php + mysql )
 
 primeiro clone esse git
@@ -24,15 +36,15 @@ execute o composer
 
 comandos criar o banco de dados
 
-app/console doctrine:database:create
+**app/console doctrine:database:create**
 
 criar as tableas
 
-app/console doctrine:schema:update
+**app/console doctrine:schema:update**
 
 para criar um usuario
 
-fos:user:cretate
+**fos:user:cretate**
 
 pronto tudo deve funcionar.
 
