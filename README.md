@@ -5,46 +5,50 @@ Projeto em fase : alpha
 ![](https://raw.githubusercontent.com/uelei/uerp/master/screenshot.png)
 
 
-Projeto de erp em php usando o framework [Symfony2](http://symfony.com/)
+Projeto Opensource de ERP em php usando o framework [Symfony2](http://symfony.com/).
 
-* 1 método
 
-  baixar boot2docker
+Modo de teste sem desenvolvimento (windows)
+----------------------------------------
 
-  iniciar o boot2docker
+  * baixar [boot2docker](http://boot2docker.io)
+  * iniciar o boot2docker
+  * fz o pull da imagem pelo comando
+  > **docker run -t -i -p 80:80 uelei/uerp**
 
-  fz o pull da imagem
 
-  **docker run -t -i -p 80:80 uelei/uerp**
-
-* 2 método
+Modo de desenvolvimento
+---------------------------------------------
 
 para instalar é nescessario ja esteja instalado o lamp ( apache + php + mysql )
 
-primeiro clone esse git
+* primeiro clone esse git
 
-**git clone https://github.com/uelei/uerp.git **
+  > **git clone https://github.com/uelei/uerp.git **
 
-depois baixe o composer para instalar as depencencias
+* baixe o composer para instalar as depencencias
 
-**curl -sS https://getcomposer.org/installer | php**
+  > **curl -sS https://getcomposer.org/installer | php**
 
-execute o composer
+* execute o composer
 
-**php composer.phar update**
+  > **php composer.phar update**
 
 
-comandos criar o banco de dados
+Outros commandos
+---------------------------------------------
 
-**app/console doctrine:database:create**
+Comandos criar o banco de dados
+
+  > **app/console doctrine:database:create**
 
 criar as tableas
 
-**app/console doctrine:schema:update**
+> **app/console doctrine:schema:update**
 
 para criar um usuario
 
-**fos:user:cretate**
+> **fos:user:cretate**
 
 pronto tudo deve funcionar.
 
