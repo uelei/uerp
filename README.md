@@ -14,7 +14,7 @@ Modo de teste sem desenvolvimento (windows)
   * baixar [boot2docker](http://boot2docker.io)
   * iniciar o boot2docker
   * fz o pull da imagem pelo comando
-  > **docker run -t -i -p 80:80 uelei/uerp**
+   > **docker run -t -i -p 80:80 uelei/uerp**
 
 
 Modo de desenvolvimento
