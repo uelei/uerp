@@ -1,0 +1,22 @@
+# messages.br.yml
+bills: Bills
+dashboard: Dashboard
+stock: Stock
+list_stock: Stock List
+sales: Sales
+last_sales: Last Sales
+pos: POS
+last_bills : Last Bills
+new_bill : New Bill
+bank_balance : Bank Balance
+settings: Settings
+user: User
+edit_user: Edit user
+new_user: New user
+categories: Categories
+sub_categories: Sub Categories
+seller: Seller
+supplier: Supplier
+pay_types: Pay types
+customer: Customers
+logout: Logout

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Uerp !{% endblock %}</title>
 
 
 {% stylesheets  '@UerpMainBundle/Resources/public/css/bootstrap.min.css'
@@ -43,7 +43,7 @@ filter='cssrewrite' %}
             	<ul class="nav pull-right top-menu">
                     <li>
 
-						 <a class="logout" href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+						 <a class="logout" href="{{ path('fos_user_security_logout') }}">{% trans %}logout{% endtrans%}</a></li>
 
             	</ul>
             </div>
@@ -77,28 +77,28 @@ filter='cssrewrite' %}
                   <li class="mt">
                       <a class="active" href="{{ path('homepage') }}">
                           <i class="fa fa-dashboard"></i>
-                          <span>Dashboard</span>
+                          <span>{% trans %}dashboard{% endtrans%}</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class=" fa fa-tags"></i>
-                          <span>Estoque</span>
+                          <span>{% trans %}stock{% endtrans%}</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="{{ path('product') }}">lista</a></li>
+                          <li><a  href="{{ path('product') }}">{% trans %}list_stock{% endtrans%}</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-barcode "></i>
-                          <span>Vendas</span>
+                          <span>{% trans %}sales{% endtrans%}</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="{{ path('sale') }}">Vendas</a></li>
-                          <li><a  href="{{ path('sale_new') }}">PDV</a></li>
+                          <li><a  href="{{ path('sale') }}">{% trans %}last_sales{% endtrans%}</a></li>
+                          <li><a  href="{{ path('sale_new') }}">{% trans %}pos{% endtrans%}</a></li>
 
                       </ul>
                   </li>
@@ -106,38 +106,38 @@ filter='cssrewrite' %}
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-money"></i>
-                          <span>Contas</span>
+                          <span>{% trans %}bills{% endtrans%}</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="{{ path('bills') }}">Lista</a></li>
-                          <li><a  href="{{ path('bills_new') }}">Nova</a></li>
-                           <li><a  href="{{ path('bankaccount') }}">Saldos dos Bancos</a></li>
+                          <li><a  href="{{ path('bills') }}">{% trans %}last_bills{% endtrans%}</a></li>
+                          <li><a  href="{{ path('bills_new') }}">{% trans %}new_bill{% endtrans%}</a></li>
+                           <li><a  href="{{ path('bankaccount') }}">{% trans %}bank_balance{% endtrans%}</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-cogs"></i>
-                          <span>Configuração</span>
+                          <span>{% trans %}settings{% endtrans%}</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="{{path('categories')}}">Categorias</a></li>
-                          <li><a  href="{{path('subcategories')}}">Sub Categorias</a></li>
-                          <li><a  href="{{path('seller')}}">vendedor</a></li>
-                          <li><a  href="{{path('supplier')}}">fornecedor</a></li>
-                          <li><a  href="{{path('tpayment')}}">tipos de pagamentos</a></li>
-                          <li><a  href="{{path('customer')}}">clientes</a></li>
+                          <li><a  href="{{path('categories')}}">{% trans %}categories{% endtrans%}</a></li>
+                          <li><a  href="{{path('subcategories')}}">{% trans %}sub_categories{% endtrans%}</a></li>
+                          <li><a  href="{{path('seller')}}">{% trans %}seller{% endtrans%}</a></li>
+                          <li><a  href="{{path('supplier')}}">{% trans %}supplier{% endtrans%}</a></li>
+                          <li><a  href="{{path('tpayment')}}">{% trans %}pay_types{% endtrans%}</a></li>
+                          <li><a  href="{{path('customer')}}">{% trans %}customer{% endtrans%}</a></li>
                       </ul>
                   </li>
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
                           <i class="fa fa-users"></i>
-                          <span>Usuarios</span>
+                          <span>{% trans %}user{% endtrans%}</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="{{ path('fos_user_profile_show') }}">Editar</a></li>
-                          <li><a  href="{{ path('fos_user_registration_register') }}">Novo</a></li>
+                          <li><a  href="{{ path('fos_user_profile_edit') }}">{% trans %}edit_user{% endtrans%}</a></li>
+                          <li><a  href="{{ path('fos_user_registration_register') }}">{% trans %}new_user{% endtrans%}</a></li>
                       </ul>
                   </li>
 

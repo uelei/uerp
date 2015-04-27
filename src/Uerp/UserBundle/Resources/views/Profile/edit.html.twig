@@ -1,0 +1,17 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+{% block title %}{% trans %}user_edit{% endtrans%}{% endblock %}
+{% block body -%}
+
+<div class="panel panel-info" style="margin: 20px">
+<div class="panel-heading">
+{% trans %}user_edit{% endtrans%}
+</div>
+<div class="panel-body" style="">
+
+{% block fos_user_content %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+{% endblock fos_user_content %}
+</div>
+</div>
+{% endblock %}

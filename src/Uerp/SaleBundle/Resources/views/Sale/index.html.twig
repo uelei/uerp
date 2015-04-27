@@ -1,11 +1,11 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
-{% block title %} Lista das Vendas {% endblock %}
+{% block title %}{% trans %}list.sale{% endtrans%}{% endblock %}
 {% block body -%}
 
 
 <div class="panel panel-info" style="margin: 20px">
 <div class="panel-heading">
-    <h3>Lista de Vendas</h3>
+    <h3>{% trans %}list.sale{% endtrans%}</h3>
 </div>
 <div class="panel-body">
     <table class="table table-striped table-advance table-hover">
@@ -15,8 +15,8 @@
                     <th>Data</th>
                     <th>Total custo</th>
                     <th>Total venda</th>
+                    <th>discount</th>
                     <th>OBS</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,7 +30,6 @@
                     <td>{{ entity.discount }}</td>
                     <td>{{ entity.saleobs }}</td>
                     <td>
-
                     <a  class="btn btn-info btn-xs" href="{{  path('sale_show', { 'id': entity.id })  }}"><i class="fa fa-eye"></i> Detales</a>
                     <a  class="btn btn-warning btn-xs" href="{{ path('sale_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i> editar</a>
 
@@ -46,7 +45,7 @@
 
     <ul>
     <li>
-          <a  class="btn btn-success" href="{{ path('sale_new') }}"><i class="fa fa-plus"></i> Nova Venda</a>
+          <a  class="btn btn-success" href="{{ path('sale_new') }}"><i class="fa fa-plus"></i>  {% trans %}new.sale{% endtrans%}</a>
     </li>
 </ul>
 {% endblock %}

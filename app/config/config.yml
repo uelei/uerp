@@ -6,7 +6,7 @@ imports:
 framework:
     #esi:             ~
     #translator:      { fallback: "%locale%" }
-    translator: ~
+    translator: { fallbacks: [en] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -35,7 +35,7 @@ twig:
 assetic:
     debug:          "%kernel.debug%"
     use_controller: false
-    bundles:        ['UerpMainBundle','UerpSaleBundle'] 
+    bundles:        ['UerpMainBundle','UerpSaleBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
