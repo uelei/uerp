@@ -28,7 +28,7 @@ body {
     left: 0;
     background-size: cover;
     background-position: 50% 50%;
-    /*background-image: url('http://cleancanvas.herokuapp.com/img/backgrounds/color-splash.jpg');*/
+    background-image: url('http://cleancanvas.herokuapp.com/img/backgrounds/color-splash.jpg');
     background-repeat:repeat;
 }
 .form-signin {

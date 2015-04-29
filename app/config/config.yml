@@ -84,5 +84,5 @@ fos_user:
     user_class: Uerp\UserBundle\Entity\User
 
 parameters:
-    cod.billpg: 4
+    cod.billpg: 2
     cod.saleclose: 3
