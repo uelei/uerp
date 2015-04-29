@@ -1,18 +1,23 @@
-{% extends '::base.html.twig' %}
+{% extends 'UerpMainBundle::main.html.twig' %}
+{% block title %} {% trans %}incomes{% endtrans%} {% endblock %}
 
 {% block body -%}
-    <h1>incomes list</h1>
 
-    <table class="records_list">
+    <div class="panel panel-info" style="margin: 20px">
+    <div class="panel-heading">
+        <h4>{% trans %}incomes{% endtrans%}</h4>
+    </div>
+
+    <table class="records_list table table-striped table-advance table-houver">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Saleid</th>
-                <th>Valueb</th>
-                <th>Valuel</th>
-                <th>Tax</th>
-                <th>Date</th>
-                <th>Actions</th>
+                <th>{% trans %}saleid{% endtrans%}</th>
+                <th>{% trans %}valueb{% endtrans%}</th>
+                <th>{% trans %}valuel{% endtrans%}</th>
+                <th>{% trans %}tax{% endtrans%}</th>
+                <th>{% trans %}date{% endtrans%}</th>
+                <th>{% trans %}actions{% endtrans%}</th>
             </tr>
         </thead>
         <tbody>
@@ -27,10 +32,13 @@
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('incomes_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('incomes_show', { 'id': entity.id }) }}">{% trans %}show{% endtrans%}</a>
                     </li>
                     <li>
-                        <a href="{{ path('incomes_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('incomes_edit', { 'id': entity.id }) }}">{% trans %}edit{% endtrans%}</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('incomes_rec', { 'id': entity.id }) }}">{% trans %}rec{% endtrans%}</a>
                     </li>
                 </ul>
                 </td>
@@ -39,11 +47,12 @@
         </tbody>
     </table>
 
-        <ul>
+        <!-- <ul>
         <li>
             <a href="{{ path('incomes_new') }}">
                 Create a new entry
             </a>
         </li>
-    </ul>
+    </ul> -->
+  </div>
     {% endblock %}

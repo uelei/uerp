@@ -20,21 +20,213 @@ use Symfony\Component\Validator\Constraints\DateTime;
 class incomesController extends Controller
 {
 
+  public function rec($id){
+
+    $em = $this->getDoctrine()->getManager();
+    $pgcod = $this->container->getParameter('cod.billpg');
+
+    $entity = $em->getRepository('UerpIncomesBundle:incomes')->find($id);
+
+    if (!$entity) {
+        throw $this->createNotFoundException('Unable to find incomes entity.');
+    }
+
+    $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getBank()->getId());
+
+    if (!$entitya) {
+        throw $this->createNotFoundException('Unable to find bank entity.');
+    }
+
+    $income = $entity->getValuel();
+    $balance = $entitya->getBalance() + $income;
+    $status = $em->getReference('UerpStatusBundle:Status', $pgcod);
+    $entity->setStatus($status);
+    $entitya->setBalance($balance);
+    $em->flush();
+    return true;
+
+  }
+
+
+
+
+  /**
+   * Displays a form to edit an existing incomes entity.
+   *
+   * @Route("/{id}/rec", name="incomes_rec")
+   * @Method("GET")
+   * @Template()
+   */
+  public function recAction(Request $request,$id)
+  {
+
+
+
+      // dump($entity);
+    // die();
+
+      // if($entity->getAccount() == NULL ){ echo "erro";}
+      // if($entity->getStatus() == ){ echo "erro";
+      //
+      //
+      // }
+
+if($this->rec($id)){
+      // $deleteForm = $this->createDeleteForm($id);
+      return $this->redirect($this->generateUrl('incomes'));
+
+      // return array(
+      //     'entity'      => $entity,
+      //     'edit_form'   => $editForm->createView(),
+      //     'delete_form' => $deleteForm->createView(),
+      // );
+  }
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+  /**
+   * Displays a form to edit an existing incomes entity.
+   *
+   * @Route("/recselect/", name="incomes_recselect")
+   * @Method("POST")
+   * @Template()
+   */
+   public function recselectAction(Request $request)
+  {
+   $pgcod = $this->container->getParameter('cod.billpg');
+  // //  $form->handleRequest($request);
+
+  $datai=  $request->get('datai');
+  $dataf=  $request->get('dataf');
+
+  $em = $this->getDoctrine()->getManager();
+     $query = $em->createQuery(
+     'SELECT b FROM UerpIncomesBundle:incomes b WHERE
+     b.date > ?1 AND b.date < ?2 AND b.status != ?4  OR  b.date = ?3 AND b.status != ?4 ')
+     ->setParameters( array(1=> $datai,2=>$dataf,3=>$datai,4=>$pgcod));
+
+
+     $entities = $query->getResult();
+
+     foreach ($entities as $income){
+
+
+        $this->rec($income->getId());
+
+     }
+
+     return $this->redirect($this->generateUrl('incomes'));
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /**
+   * Displays a form to edit an existing incomes entity.
+   *
+   * @Route("/filterp/", name="incomes_filterp")
+   * @Method("POST")
+   * @Template()
+   */
+   public function filterpAction(Request $request)
+ {
+   $pgcod = $this->container->getParameter('cod.billpg');
+  //  $form->handleRequest($request);
+$forr=  $request->request->get('form');
+// $datai =  $this->get('request')->request->get('datai');
+// dump($datai['datai']);
+$datai= $forr["datai"];
+$dataf= $forr["dataf"];
+
+$form =  $this->createDatefilterForm($datai,$dataf);
+
+     $form->handleRequest($request);
+
+    //  if ($form->isValid()) {
+    //      // perform some action, such as saving the task to the database
+     //
+    //      // return $this->redirect($this->generateUrl('filter/',array('datai' => $form->getdatai(),'dataf' => $form->getdataf()  )  ));
+    //      return $this->forward('UerpIncomesBundle:incomes:incomes_filterp', array(
+    //          'datai'  => $form["datai"]->getData(),
+    //          'dataf' => $form["dataf"]->getData(),
+    //      ));
+    //  }
+
+     $em = $this->getDoctrine()->getManager();
+     $query = $em->createQuery(
+     'SELECT b FROM UerpIncomesBundle:incomes b WHERE
+
+     b.date > ?1 AND b.date < ?2 AND b.status != ?4  OR  b.date = ?3 AND b.status != ?4 ')
+
+     ->setParameters( array(1=> $datai,2=>$dataf,3=>$datai,4=>$pgcod));
+
+
+     $entities = $query->getResult();
+
+return $this->render('UerpIncomesBundle:incomes:filter.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
+
+ }
+
+
+
+
    /**
      * @Route("/delincome",name= "delincome")
      * @Method("POST")
      * @Template()
      * */
-
-    
 public function delincomeAction(Request $request)
-{      
+{
     $billpg = $this->container->getParameter('cod.billpg');//4
     $em = $this->getDoctrine()->getManager();
     $icomeid = $this->get('request')->request->get('id');
 
     // $income = $em->getRepository('UerpIncomesBundle:incomes')->find($id);
-    $entity = $em->getRepository('UerpIncomesBundle:incomes')->find($icomeid);  
+    $entity = $em->getRepository('UerpIncomesBundle:incomes')->find($icomeid);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find incomes entity.');
@@ -79,7 +271,7 @@ public function delincomeAction(Request $request)
 public function addincomeAction(Request $request)
 {
 
-       
+
         $billpg = $this->container->getParameter('cod.billpg');//4
 
         $em = $this->getDoctrine()->getManager();
@@ -102,6 +294,8 @@ public function addincomeAction(Request $request)
 
         $status = $tpayment->getDefaultstatus();
 
+        $idays = $tpayment->getDays();
+        $dat->modify("+".$idays." days");
 
         $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($tpayment->getBank());
 
@@ -110,7 +304,7 @@ public function addincomeAction(Request $request)
             }
         $bal = 0.0;
 
-        for ($i=0 ; $i < $parc  ; $i++ ) { 
+        for ($i=0 ; $i < $parc  ; $i++ ) {
 
         $incomes = New incomes();
         $incomes->setSaleId($saleid);
@@ -123,9 +317,9 @@ public function addincomeAction(Request $request)
         $incomes->setParc($parc);
         $incomes->setStatus($status);
         $incomes->setTpayment($tpayment);
-        
+
         $em->persist($incomes);
-        
+        $dat->modify("+".$idays." days");
         }
 
         if($status->getId() == $billpg ){
@@ -134,12 +328,12 @@ public function addincomeAction(Request $request)
 
         }
 
-        
 
 
-        $em->flush(); 
-        
-         
+
+        $em->flush();
+
+
         $response = new Response();
         $response->setContent(json_encode(array(
             'id' => $incomes->getId(),
@@ -155,7 +349,7 @@ public function addincomeAction(Request $request)
      *
      * @Route("/listsalesincomes", name="listsalesincomes")
      * @Method("POST")
-     * 
+     *
      */
     public function listsaleincomesAction(Request $request)
     {
@@ -177,8 +371,6 @@ public function addincomeAction(Request $request)
     }
 
 
-
-
     /**
      * Lists all incomes entities.
      *
@@ -188,14 +380,25 @@ public function addincomeAction(Request $request)
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('UerpIncomesBundle:incomes')->findAll();
+        $datenow = date("Y-m-d");
+        $form =  $this->createDatefilterForm($datenow,$datenow);
 
-        return array(
-            'entities' => $entities,
-        );
+           $em = $this->getDoctrine()->getManager();
+           $query = $em->createQuery('SELECT b FROM UerpIncomesBundle:incomes b WHERE b.date > ?1 AND b.date < ?2 OR b.date = ?3 ')->setParameters( array(1=> $datenow,2=>$datenow,3=>$datenow));
+           $entities = $query->getResult();
+
+     return $this->render('UerpIncomesBundle:incomes:filter.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
+        // $em = $this->getDoctrine()->getManager();
+        //
+        // $entities = $em->getRepository('UerpIncomesBundle:incomes')->findAll();
+        //
+        // return array(
+        //     'entities' => $entities,
+        // );
     }
+
+
     /**
      * Creates a new incomes entity.
      *
@@ -223,6 +426,7 @@ public function addincomeAction(Request $request)
         );
     }
 
+
     /**
      * Creates a form to create a incomes entity.
      *
@@ -242,6 +446,7 @@ public function addincomeAction(Request $request)
         return $form;
     }
 
+
     /**
      * Displays a form to create a new incomes entity.
      *
@@ -259,6 +464,7 @@ public function addincomeAction(Request $request)
             'form'   => $form->createView(),
         );
     }
+
 
     /**
      * Finds and displays a incomes entity.
@@ -284,6 +490,7 @@ public function addincomeAction(Request $request)
             'delete_form' => $deleteForm->createView(),
         );
     }
+
 
     /**
      * Displays a form to edit an existing incomes entity.
@@ -330,6 +537,8 @@ public function addincomeAction(Request $request)
 
         return $form;
     }
+
+
     /**
      * Edits an existing incomes entity.
      *
@@ -405,4 +614,25 @@ public function addincomeAction(Request $request)
             ->getForm()
         ;
     }
+
+    /**
+     * Creates a form to date filter.
+     *
+     * @param mixed $datei and $datef
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDatefilterForm($datei,$datef)
+    {
+      return  $this->createFormBuilder()
+                      ->setMethod('POST')
+                      ->setAction($this->generateUrl('incomes_filterp'))
+                      ->add('datai','date', array('input'  => 'datetime',
+                        'widget' => 'single_text','data' => new \DateTime($datei)))
+                      ->add('dataf','date', array('input'  => 'datetime',
+                         'widget' => 'single_text','data' => new \DateTime($datef)))
+                      ->add('Filter','submit')
+                      ->getForm();
+    }
+
 }

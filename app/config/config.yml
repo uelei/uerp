@@ -5,8 +5,12 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
-    translator: { fallbacks: [en] }
+    # translator:
+    #   fallback: en
+    #   enabled: true
+      # logging: true
+    # translator: ~
+    translator: ~
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -17,7 +21,7 @@ framework:
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
-    default_locale:  "%locale%"
+    default_locale:  %locale%
     trusted_hosts:   ~
     trusted_proxies: ~
     session:

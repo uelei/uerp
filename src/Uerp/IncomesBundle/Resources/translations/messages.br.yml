@@ -1,0 +1,13 @@
+# messages.br.yml
+incomes: Entradas
+saleid: Codigo da venda
+valueb: Valor bruto
+valuel: Valor Liquido
+tax: Taxa
+date: Data
+actions: Actions
+show: Exibir
+edit: Editar
+rec: Receber
+recselect: Receber todas
+new: Nova Entrada

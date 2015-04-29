@@ -36,6 +36,13 @@ class tpayment
     private $tax;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="days", type="integer")
+     */
+    private $days;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Uerp\BankBundle\Entity\BankAccount")
      * @ORM\JoinColumn(name="bankid", referencedColumnName="id")
      */
@@ -57,7 +64,7 @@ class tpayment
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -80,7 +87,7 @@ class tpayment
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -103,7 +110,7 @@ class tpayment
     /**
      * Get tax
      *
-     * @return string 
+     * @return string
      */
     public function getTax()
     {
@@ -126,7 +133,7 @@ class tpayment
     /**
      * Get defaultstatus
      *
-     * @return integer 
+     * @return integer
      */
     public function getDefaultstatus()
     {
@@ -149,10 +156,33 @@ class tpayment
     /**
      * Get bank
      *
-     * @return \Uerp\BankBundle\Entity\BankAccount 
+     * @return \Uerp\BankBundle\Entity\BankAccount
      */
     public function getBank()
     {
         return $this->bank;
+    }
+
+    /**
+     * Set days
+     *
+     * @param string $days
+     * @return tpayment
+     */
+    public function setDays($days)
+    {
+        $this->days = $days;
+
+        return $this;
+    }
+
+    /**
+     * Get days
+     *
+     * @return string
+     */
+    public function getDays()
+    {
+        return $this->days;
     }
 }

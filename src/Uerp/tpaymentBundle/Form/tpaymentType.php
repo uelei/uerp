@@ -17,11 +17,12 @@ class tpaymentType extends AbstractType
         $builder
             ->add('name')
             ->add('tax')
+            ->add('days')
             ->add('defaultstatus')
             ->add('bank')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -1,0 +1,88 @@
+{% extends 'UerpMainBundle::main.html.twig' %}
+{% block title %} {% trans %}incomes{% endtrans%} {% endblock %}
+
+{% block body -%}
+
+    <div class="panel panel-info" style="margin: 20px">
+      <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+              <a  class="btn btn-success" href="{{ path('bills_new') }}"><i class="fa fa-plus"></i> {% trans %}new{% endtrans%}</a>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
+            </div>
+
+          {{ form_start(formfilter) }}
+          {% form_theme formfilter 'bootstrap_3_horizontal_layout.html.twig' %}
+          {{ form_errors(formfilter) }}
+          {# {{ form(formfilter) }} #}
+          <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+
+          </div>
+              <div  class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="inline">
+                  {{ form_errors(formfilter.datai) }}
+                  {{ form_widget(formfilter.datai) }}
+             </div>
+              <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="inline">
+                  {{ form_errors(formfilter.dataf) }}
+                  {{ form_widget(formfilter.dataf) }}
+              </div>
+               <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
+                  {{ form_end(formfilter) }}
+              </div>
+          </div>
+      </div>
+
+    <table class="records_list table table-striped table-advance table-houver">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{% trans %}saleid{% endtrans%}</th>
+                <th>{% trans %}valueb{% endtrans%}</th>
+                <th>{% trans %}valuel{% endtrans%}</th>
+                <th>{% trans %}tax{% endtrans%}</th>
+                <th>{% trans %}date{% endtrans%}</th>
+                <th>{% trans %}actions{% endtrans%}</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% set sum = 0 %}
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('incomes_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.saleid }}</td>
+                <td>{{ entity.valueb }}</td>
+                <td>{{ entity.valuel }}</td>{% set sum = sum + entity.valuel %}
+                <td>{{ entity.tax }}</td>
+                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                  <a  class="btn btn-info btn-xs" href="{{ path('incomes_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> {% trans %}show{% endtrans%}</a>
+                  <a  class="btn btn-primary btn-xs" href="{{ path('incomes_rec', { 'id': entity.id }) }}"><i class="fa fa-money"></i> {% trans %}rec{% endtrans%}</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="panel-footer">
+      <div class="row">
+        {% if sum != 0 %}
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
+          <input type="text" id="pago" class="form-control disabled" value="{{ sum  }}">
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
+              <form class="" action="{{path('incomes_recselect') }}" method="post">
+                <input type="hidden" name="datai" value="{{formfilter.datai.vars.value}}">
+                <input type="hidden" name="dataf" value="{{formfilter.dataf.vars.value}}">
+
+                  <input type="submit" name="submit" class="btn btn-warning form-control" value="{% trans %}recselect{% endtrans%}">
+
+              </form>
+        </div>
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="inline">
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+    {% endblock %}
