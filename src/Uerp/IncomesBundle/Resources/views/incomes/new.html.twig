@@ -1,8 +1,15 @@
-{% extends '::base.html.twig' %}
+{% extends 'UerpMainBundle::main.html.twig' %}
+{% block title %} {% trans %}incomes{% endtrans%} {% endblock %}
 
 {% block body -%}
-    <h1>incomes creation</h1>
 
+    <div class="panel panel-info" style="margin: 20px">
+    <div class="panel-heading">
+        <h4>{% trans %}incomes{% endtrans%}</h4>
+    </div>
+    <div class="row">
+      <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
     {{ form(form) }}
 
         <ul class="record_actions">
@@ -12,4 +19,12 @@
         </a>
     </li>
 </ul>
+</div>
+
+  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+  </div>
+</div>
+</div>
+
+
 {% endblock %}

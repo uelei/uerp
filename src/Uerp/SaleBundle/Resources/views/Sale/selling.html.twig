@@ -9,7 +9,7 @@
 	Number: <br>
 	<span>
 	{{ entity.id }}
-	</span>	
+	</span>
 	<input type="hidden" name="saleid" id="inputSaleid" class="form-control" value="{{ entity.id }}">
 </div>
 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding-left: 8px;
@@ -49,7 +49,7 @@ font-weight: bold;">
 </div>
 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="padding-right: 0px;padding-left: 0px;">
 <div id="saleld">
-	
+
 </div>
 </div>
 	<div style="display: none ">
@@ -58,7 +58,7 @@ font-weight: bold;">
 		{{ form_widget(form.nitems,{value: '0'}) }}
 		{{ form_widget(form.discount,{value: '0'}) }}
 		{{ form_widget(form.saleobs,{value: '0'}) }}
-		{{ form_rest(form) }} 
+		{{ form_rest(form) }}
 	</div>
 {{ form_end(form) }}
 
@@ -70,54 +70,54 @@ font-weight: bold;">
 <div class="row" >
 
 	<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-		<div class="row" style="margin: 8px;">
+		<div class="row" style="padding: 0px 0px 12px 0px">
 			<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 				<div id="loading-indicator" class="spinner" >
-				
+
 				</div>
 			</div>
 			<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" id="codd">
 				<div class="input-group input-group-lg">
-<input type="text" name="inputcod" id="inputCod"  class="form-control"  required="required" aria-describedby="labelqtd" title=""> <span class="input-group-addon" id="labelqtd">Codigo:</span>
+					<input type="text" name="inputcod" id="inputCod"  class="form-control"  required="required" aria-describedby="labelqtd" title=""> <span class="input-group-addon" id="labelqtd">Codigo:</span>
 			</div>
 		</div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 input-group input-group-lg">
+			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 input-group input-group-lg">
 				<input type="text" name="qtd" id="inputQtd" placeholder="Qtd" class="form-control" value="1" min="{5"} max="" step="0.25" required="required" aria-describedby="labelqtd" title=""> <span class="input-group-addon" id="labelqtd">Qtd</span>
 			</div>
 		</div>
-		<div class="row" style="margin: 8px;">
+		<div class="row" style="padding: 0px 0px 12px 0px">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-				<input type="text" name="setcod" id="inputsetcod"  value="" required="required" pattern="" title="">
+				<input type="hidden" name="setcod" id="inputsetcod"  value="" required="required" pattern="" title="">
 			</div>
 			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 input-group input-group-lg">
 				<span class="input-group-addon">R$</span>
 				<input type="text" name="price" id="inputPrice" class="form-control" value="" min="{5"} max="" step="" required="required" title="">
 			</div>
 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-				<input type="text" name="setpc" id="inputSetpc"  value="" required="required" pattern="" title="">
+				<input type="hidden" name="setpc" id="inputSetpc"  value="" required="required" pattern="" title="">
 			</div>
 		</div>
-		<div class="row" style="margin:8px;">
+		<div class="row"  style="padding: 0px 0px 12px 20px" >
 			<textarea id="descp" class="form-control" readonly="true" style="resize: none; height: 80px;">
-				
 
-			</textarea>	
-	
+
+			</textarea>
+
 		</div>
-		<div class="row">
+		<div class="row" >
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-				
+
 			</div>
 			<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 				<button type="button" id="btnok" class="btn btn-success">OK</button>
 			</div>
 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 				<div id="addingitem">
-					
+
 				</div>
 			</div>
 		</div>
-		
+
 </div>
 
 	<div class="col-xs-7 col-sm-7 col-md-7 col-lg-7" id="listsaleitems">
@@ -128,7 +128,7 @@ font-weight: bold;">
 </div>
 	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 			<div id="saleitemsld"></div>
-		</div>	
+		</div>
 	</div>
 
 </div>
@@ -151,9 +151,9 @@ var  sale_reloadmenuurl =  "{{ path('sale_reloadmenu') }}";
 	$(document).ready(function() {
 		refreshsaleitems();
 		$(".combobox").select2();
-		
+
 	$(document).on( "click", ".deleteproduto", function() {
-	    var id = $( this ).attr('id')  ; 
+	    var id = $( this ).attr('id')  ;
     	deleteproduto(id);
     });
 
@@ -188,7 +188,7 @@ var  sale_reloadmenuurl =  "{{ path('sale_reloadmenu') }}";
 		key = e.keyCode || e.which;
     		if (key==13) {
     			$("#btnok").focus();
-    		 }		 
+    		 }
 	});
 
 

@@ -20,3 +20,5 @@ supplier: Supplier
 pay_types: Pay types
 customer: Customers
 logout: Logout
+incomes: Receives
+new_rec: New Reveice

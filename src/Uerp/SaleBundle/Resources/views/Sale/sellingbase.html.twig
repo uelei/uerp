@@ -5,8 +5,8 @@
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Uerp {% block title %}Welcome!{% endblock %}</title>
       {% stylesheets  '@UerpMainBundle/Resources/public/css/select2.min.css'
-        '@UerpMainBundle/Resources/public/css/bootstrap.min.css' 
-        '@UerpMainBundle/Resources/public/css/uerpsale.css' 
+        '@UerpMainBundle/Resources/public/css/bootstrap.min.css'
+        '@UerpMainBundle/Resources/public/css/uerpsale.css'
         '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
         filter='cssrewrite' %}
       <link rel="stylesheet" href="{{ asset_url }}" />
@@ -17,7 +17,7 @@
     <body>
 		{% block menu %}
 			<section  id="container" >
-        <header class="header black-bg" style="height:70px;">        
+        <header class="header black-bg" style="height:70px;">
           <div class="row">
             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
               <a href="{{ path('homepage') }}" class="logo"><b>Uerp</b></a>
@@ -33,12 +33,12 @@
           </div>
         </header>
       </section>
-    {% endblock %}	
+    {% endblock %}
     {% block body %}{% endblock %}
-    <!-- javascript --> 	
+    <!-- javascript -->
     {% javascripts  '@UerpMainBundle/Resources/public/js/jquery.js'
-                '@UerpMainBundle/Resources/public/js/bootstrap.min.js' 
-                '@UerpMainBundle/Resources/public/js/uerpsale.js' 
+                '@UerpMainBundle/Resources/public/js/bootstrap.min.js'
+                '@UerpMainBundle/Resources/public/js/uerpsale.js'
                 '@UerpMainBundle/Resources/public/js/select2.min.js'%}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
@@ -46,7 +46,7 @@
   {% block actions %}
       <script type="text/javascript">
         $(document).ready(function() {
-          $(".combobox").select2(); 
+          $(".combobox").select2();
       });
 </script>{% endblock %}
   </body>

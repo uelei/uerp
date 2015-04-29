@@ -20,3 +20,5 @@ supplier: Fornecedor
 pay_types: Tipos de pagamentos
 customer: Clientes
 logout: Sair
+incomes: Recebimentos
+new_rec: Novo Recebimento
