@@ -19,3 +19,4 @@ clipp_exportado.htm
 rsync.sh
 deployment-config.json
 *~
+composer.lock
