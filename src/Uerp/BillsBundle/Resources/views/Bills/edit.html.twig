@@ -1,7 +1,7 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
-{% block title %} Bills Edit{% endblock %}	
+{% block title %} Bills Edit{% endblock %}
 {% block body -%}
-   
+
 <div class="panel panel-info" style="margin: 20px" id="total">
 	<div class="panel-heading">
 		<h3>Bills edit</h3>
@@ -12,19 +12,19 @@
 		<div class="row form-group form-group-lg" >
 			{{ form_label(edit_form.date,'Data : ',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
 	        {{ form_errors(edit_form.date) }}
-	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 	        	{{ form_widget(edit_form.date,{'attr': {'class': 'form-control'}}) }}
 	    	</div>
 		</div>
 		<div class="row form-group form-group-lg" >
 			{{ form_label(edit_form.categories,'Categories :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
 	        {{ form_errors(edit_form.categories) }}
-	        
+
 	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 	        	{{ form_widget(edit_form.categories,{'attr': {'class': 'submitOnChange form-control' }}) }}
-	        </div>    
+	        </div>
 		</div>
-		<div class="row form-group form-group-lg"> 
+		<div class="row form-group form-group-lg">
 			{{ form_label(edit_form.subcategories,'Sub Categories :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
 	        {{ form_errors(edit_form.subcategories) }}
 	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
@@ -43,7 +43,7 @@
 	        {{ form_errors(edit_form.docorigin) }}
 	        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 	        	{{ form_widget(edit_form.docorigin,{'attr': {'class': 'form-control'}}) }}
-	        </div>    
+	        </div>
 		</div>
 		<div class="row form-group form-group-lg">
 			{{ form_label(edit_form.value,'Valor :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
@@ -74,17 +74,17 @@
 	    	</div>
 		</div>
 		<div class="row btn-group" style="padding-left: 10px">
-			
+
 			{% if edit_form.status.vars.value == 4 %}
-				{{ form_widget(edit_form.Pay,{'attr': {'disabled': 'disabled'}}) }}	
+				{{ form_widget(edit_form.Pay,{'attr': {'disabled': 'disabled'}}) }}
 			{% else %}
-				{{ form_widget(edit_form.Pay) }}	
+				{{ form_widget(edit_form.Pay) }}
 			{% endif %}
-				{{ form_widget(edit_form.Delete) }}	
-				{{ form_widget(edit_form.submit) }}	
+				{{ form_widget(edit_form.Delete) }}
+				{{ form_widget(edit_form.Update) }}	
 		</div>
 		{{ form_row(edit_form._token) }}
-		{{ form_end(edit_form) }}	
+		{{ form_end(edit_form) }}
 	</div>
 </div>
     {# {{ form(edit_form) }} #}
@@ -92,7 +92,7 @@
         <ul class="record_actions">
     <li>
         <a class="btn btn-lg btn-warning" href="{{ path('bills') }}"><i class="fa fa-arrow-left"></i>
-            Back 
+            Back
         </a>
     </li>
     <li></li>
