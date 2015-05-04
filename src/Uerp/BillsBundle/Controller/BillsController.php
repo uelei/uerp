@@ -140,7 +140,7 @@ public function getbycategoriesAction()
         }
 
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date > ?1 AND b.date < ?2  OR b.date = ?3 ')->setParameters( array(1=> $datai,2=>$dataf,3=>$datai));
+        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date > ?1 AND b.date < ?2  OR b.date = ?3 ORDER BY b.date')->setParameters( array(1=> $datai,2=>$dataf,3=>$datai));
         $entities = $query->getResult();
 
   return $this->render('UerpBillsBundle:Bills:index.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
