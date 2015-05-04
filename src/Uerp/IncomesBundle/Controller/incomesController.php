@@ -295,7 +295,7 @@ public function addincomeAction(Request $request)
         $status = $tpayment->getDefaultstatus();
 
         $idays = $tpayment->getDays();
-        $dat->modify("+".$idays." days");
+        // $dat->modify("+".$idays." days");
 
         $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($tpayment->getBank());
 
@@ -306,6 +306,7 @@ public function addincomeAction(Request $request)
 
         for ($i=0 ; $i < $parc  ; $i++ ) {
 
+        $dat->modify("+".$idays." days");
         $incomes = New incomes();
         $incomes->setSaleId($saleid);
         $incomes->setValueb($valueb);
@@ -319,7 +320,7 @@ public function addincomeAction(Request $request)
         $incomes->setTpayment($tpayment);
 
         $em->persist($incomes);
-        $dat->modify("+".$idays." days");
+
         }
 
         if($status->getId() == $billpg ){

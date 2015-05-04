@@ -1,7 +1,7 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
-{% block title %} Bills New {% endblock %}  
+{% block title %} Bills New {% endblock %}
 {% block body -%}
-   
+
 <div class="panel panel-info" style="margin: 20px">
   <div class="panel-heading">
     <h3>Bills New</h3>
@@ -12,23 +12,22 @@
    <div class="row form-group form-group-lg" >
       {{ form_label(form.date,'Data : ',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
           {{ form_errors(form.date) }}
-          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
             {{ form_widget(form.date,{'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
     <div class="row form-group form-group-lg" >
       {{ form_label(form.categories,'Categories :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
           {{ form_errors(form.categories) }}
-          
+
           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
             {{ form_widget(form.categories,{'attr': {'class': 'submitOnChange form-control' }}) }}
-          </div>    
+          </div>
     </div>
-    <div class="row form-group form-group-lg"> 
+    <div class="row form-group form-group-lg">
 <label class="col-md-2 control-label required" for="uerp_billsbundle_bills_subcategories">Sub Categories :</label>
           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
        <select id="uerp_billsbundle_bills_subcategories" name="uerp_billsbundle_bills[subcategories]" required="required" class="ssubcategories form-control">
-<option value="1" selected="selected">padaria café</option><option value="8">galão</option><option value="9">almoço</option><option value="10">snack</option><option value="11">lanche sabado</option>
        </select>
           </div>
     </div>
@@ -44,7 +43,7 @@
           {{ form_errors(form.docorigin) }}
           <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
             {{ form_widget(form.docorigin,{'attr': {'class': 'form-control'}}) }}
-          </div>    
+          </div>
     </div>
     <div class="row form-group form-group-lg">
       {{ form_label(form.value,'Valor :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
@@ -74,11 +73,18 @@
         {{ form_widget(form.status,{'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
+    <div class="row form-group form-group-lg">
+      {{ form_label(form.status,'Parc :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+          {{ form_errors(form.parc) }}
+          <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        {{ form_widget(form.parc,{'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
     <div class="row btn-group" style="padding-left: 10px">
-        {{ form_widget(form.submit) }} 
+        {{ form_widget(form.submit) }}
     </div>
     {{ form_row(form._token) }}
-    {{ form_end(form) }} 
+    {{ form_end(form) }}
   </div>
 </div>
     {# {{ form(form) }} #}
@@ -86,7 +92,7 @@
         <ul class="record_actions">
     <li>
         <a class="btn btn-lg btn-warning" href="{{ path('bills') }}"><i class="fa fa-arrow-left"></i>
-            Back 
+            Back
         </a>
     </li>
     <li></li>

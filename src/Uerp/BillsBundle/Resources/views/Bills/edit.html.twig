@@ -73,6 +73,13 @@
 				{{ form_widget(edit_form.status,{'attr': {'class': 'form-control'}}) }}
 	    	</div>
 		</div>
+		<div class="row form-group form-group-lg">
+			{{ form_label(edit_form.status,'Parc :',{'label_attr': {'class': 'col-md-2 control-label'}}) }}
+					{{ form_errors(edit_form.parc) }}
+					<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+				{{ form_widget(edit_form.parc,{'attr': {'class': 'form-control'}}) }}
+				</div>
+		</div>
 		<div class="row btn-group" style="padding-left: 10px">
 
 			{% if edit_form.status.vars.value == 4 %}
@@ -81,7 +88,7 @@
 				{{ form_widget(edit_form.Pay) }}
 			{% endif %}
 				{{ form_widget(edit_form.Delete) }}
-				{{ form_widget(edit_form.Update) }}	
+				{{ form_widget(edit_form.Update) }}
 		</div>
 		{{ form_row(edit_form._token) }}
 		{{ form_end(edit_form) }}

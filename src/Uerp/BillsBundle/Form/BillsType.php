@@ -19,7 +19,7 @@ class BillsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-         $factory = $builder->getFormFactory(); 
+         $factory = $builder->getFormFactory();
 
          $builder
             ->add('date','date',array(
@@ -32,7 +32,7 @@ class BillsType extends AbstractType
                 'class' => 'Uerp\CategoriesBundle\Entity\Categories',
                 'property' => 'name',))
             ->add('account')
-            ->add('status')
+            ->add('status')->add('parc')
             ->add('supplier');
 
 $refreshSubcategories = function ($form, $categories ) use( $factory)
@@ -43,7 +43,7 @@ $refreshSubcategories = function ($form, $categories ) use( $factory)
                     'query_builder' => function (EntityRepository $er) use ($categories) {
 
                         $qb = $er->createQueryBuilder('subcategories');
- 
+
                         if ($categories instanceof Categories) {
                             $qb = $qb->where('subcategories.categories = :categories')
                                 ->setParameter('categories', $categories);
@@ -55,7 +55,7 @@ $refreshSubcategories = function ($form, $categories ) use( $factory)
                         }  else {
                             $qb = $qb->where('subcategories.categories = 1 ');
                         }
-                        return $qb; 
+                        return $qb;
                     },
                     // 'empty_value' => 'Choose Subcategories',
                     'property' => 'name',
@@ -75,10 +75,10 @@ $data = $event->getData();
 
 
             $accessor = PropertyAccess::createPropertyAccessor();
- 
+
             $subcategories = $accessor->getValue($data, 'subcategories');
             $categories = ($subcategories) ? $subcategories->getCategories() : null;
- 
+
             $refreshSubcategories($form, $categories);
 
 });
@@ -88,29 +88,29 @@ $data = $event->getData();
 $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event) {
             $data = $event->getData();
             $form = $event->getForm();
- 
+
             if (null === $data)
                 return;
- 
+
             $accessor = PropertyAccess::createPropertyAccessor();
- 
+
             $subcategories = $accessor->getValue($data, 'subcategories');
             $categories = ($subcategories) ? $subcategories->getCategories() : null;
- 
+
             if ($categories)
                 $form->get('categories')->setData($categories);
- 
+
         });
- 
+
         $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($refreshSubcategories) {
             $form = $event->getForm();
             $data = $event->getData();
- 
+
             if (array_key_exists('categories', $data)) {
                 $refreshSubcategories($form, $data['categories']);
             }
         });
- 
+
 
 
 
@@ -121,8 +121,8 @@ $builder->addEventListener(FormEvents::POST_SET_DATA, function(FormEvent $event)
 
 
 
-   
-    
+
+
     /**
      * @param OptionsResolverInterface $resolver
      */

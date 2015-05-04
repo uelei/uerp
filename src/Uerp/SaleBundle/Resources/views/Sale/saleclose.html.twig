@@ -4,11 +4,11 @@
       <meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>{% block title %}Fecnahdo venda n {{ entity.id }}{% endblock %}</title>
-      {% stylesheets 
-        '@UerpMainBundle/Resources/public/css/base.css' 
-        '@UerpMainBundle/Resources/public/css/loader.css' 
-        '@UerpMainBundle/Resources/public/css/select2.min.css' 
-        '@UerpMainBundle/Resources/public/css/bootstrap.css' 
+      {% stylesheets
+        '@UerpMainBundle/Resources/public/css/base.css'
+        '@UerpMainBundle/Resources/public/css/loader.css'
+        '@UerpMainBundle/Resources/public/css/select2.min.css'
+        '@UerpMainBundle/Resources/public/css/bootstrap.css'
         filter='cssrewrite' %}
       <link rel="stylesheet" href="{{ asset_url }}" />
       {% endstylesheets %}
@@ -22,7 +22,7 @@
 
 <div class="panel panel-default">
 	<div class="panel-body">
-	  
+
 	<div class="row">
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 			<div id="info">
@@ -34,7 +34,7 @@
 						<label for="inputId" >Venda Numero : </label>
 						<input type="text" name="id" id="inputId" class="di" value="{{ entity.id }}" required="required" pattern="" title="" disabled >
 					</div>
-					
+
 					<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 						<label for="inputdate">Data: </label>
 						{{ form_widget(formsale.date,{'attr': {'class': 'base '}}) }}
@@ -71,7 +71,7 @@
 									{{ formsale.totalcost.vars.value }}
 								</div>
 
-								
+
 							</div>
 							<div class="row">
 
@@ -85,10 +85,10 @@
 									<input type="text" name="tax" id="inputtax" class="clear" value="{{ formsale.tax.vars.value }}" required="required" pattern="" style="width: 100px;"  title="" disabled >
 									{# 	{{ form_widget(formsale.tax,{'attr': {'class': 'clear'}}) }} #}
 								</div>
-								
-								
+
+
 							</div>
-						
+
 						</div>
 
 				</div>
@@ -104,17 +104,17 @@
 			{{ form_widget(formsale.nitems) }}
 			{{ form_widget(formsale.discount) }}
 			{{ form_widget(formsale.tax) }}
-			{{ form_rest(formsale) }} 
-		
+			{{ form_rest(formsale) }}
+
 			</div>
 			{{ form_end(formsale) }}
 		</div>
 
-		</div> 
+		</div>
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 			<div class="row">
 				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-				
+
 				</div>
 				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 					<label >Total : </label>
@@ -142,7 +142,7 @@
 				</div>
 
 				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-			
+
 				</div>
 				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 					<label>Valor: </label>
@@ -156,24 +156,24 @@
 
 			<div class="row">
 				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-					
+
 				</div>
 				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 					<label>Parcelas:</label>
 					{{ form_widget(form.parc,{'value':'1','attr':{'class': 'base','style': 'width: 50px;' }}) }}
 				</div>
 				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-					
+
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="padding-top: 20px;">
 						{{ form_widget(form.Add,{'attr': {'class': 'btn btn-default btn-lg'}}) }}
 				</div>
 
 				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-					
+
 				</div>
 
-				{{ form_rest(form) }} 
+				{{ form_rest(form) }}
 				{{ form_end(form) }}
 			</div>
 			<div class="row">
@@ -193,15 +193,15 @@
 </div>
 
 </div>
-<div class="modal" style="display:none;"> 
-	
+<div class="modal" style="display:none;">
+
 <div id="nextsale"></div>
 <div id="modal">	</div>
 
 </div>
 
 
- {% javascripts  
+ {% javascripts
  				'@UerpMainBundle/Resources/public/js/jquery.js'
  				'@UerpMainBundle/Resources/public/js/select2.min.js'
                 '@UerpMainBundle/Resources/public/js/bootstrap.min.js'%}
@@ -220,7 +220,7 @@ var  newsale =  "{{ path('closs')}}";
 
 // $(document).on({
 //     ajaxStart: function() {     },
-//      ajaxStop: function() {  }    
+//      ajaxStop: function() {  }
 // });
 
 function delincome(id) {
@@ -248,7 +248,7 @@ function delincome(id) {
 
 
 function pgcompleto() {
-	
+
 
 
 		var tot = parseFloat($('#inputtotal').val().replace(",","."));
@@ -256,15 +256,16 @@ function pgcompleto() {
 
 var resto = (tot - pago ).toFixed(2) ;
 
-if(resto == 0.00 || resto == 0.01 ){ 
-
-		$("#pag").append('<a class="btn btn-success" id="closesaleend" href="#"><i class="fa fa-plus"></i> Close</a>');
-	$("#form_value").val(resto);
+if(resto > -0.03 && resto < 0.03 ){
+  console.log(resto);
+	$("#pag").append('<a class="btn btn-success" id="closesaleend" href="#"><i class="fa fa-plus"></i> Close</a>');
+	$("#form_value").val("0");
 	$("#form_parc").val("1");
 
 }else{
 			$("#pag").append('<a class="btn btn-warning disabled" id="closesaleend" href="#"><i class="fa fa-plus"></i> Close</a>');
-
+      $("#form_value").val(resto);
+    	$("#form_parc").val("1");
 }
 
 
@@ -272,7 +273,7 @@ if(resto == 0.00 || resto == 0.01 ){
 }
 function listapg () {
 	// body...
-	// 
+	//
 	// $("#pag").html(d)
 	var crandon = Math.floor((Math.random() * 100) + 1);
 		$('#ttt').append('<div id="'+crandon+'" class="loader"></div>');
@@ -307,7 +308,7 @@ var date = $("#uerp_salebundle_sale_date").val();
 		$('#ttt').append('<div id="'+crandon+'" class="loader"></div>');
 
 
-	
+
 		var jqxhr = $.post( addincomeurl  ,{ saleid : saleid ,value : value , parc : parc,tpay:tpay , date : date } , function(r) { })
 	  		.done(function(d) {
 
@@ -321,7 +322,7 @@ var date = $("#uerp_salebundle_sale_date").val();
 				$( "#"+crandon).remove();
 				delete element;
 				});
-	
+
 }
 
 
@@ -334,7 +335,7 @@ var saleid = $("#inputId").val();
 		$('#ttt').append('<div id="'+crandon+'" class="loader"></div>');
 
 
-	
+
 		var jqxhr = $.post( closeencurl  ,{ saleid : saleid } , function(r) { })
 	  		.done(function(d) {
 		var dat = $("#uerp_salebundle_sale_date").val();
@@ -354,7 +355,7 @@ var saleid = $("#inputId").val();
 				$( "#"+crandon).remove();
 				delete element;
 				});
-	
+
 }
 
 
@@ -365,7 +366,7 @@ function savetotal(){
 var crandon = Math.floor((Math.random() * 100) + 1);
 
 
-				  var saleid = $("#inputId").val(); 
+				  var saleid = $("#inputId").val();
 
 // 	$.post( listsaleitemsurl,  { id : saleid }, function( data ) {
 // $( "#tableitems" ).html( data );
@@ -396,11 +397,11 @@ var crandon = Math.floor((Math.random() * 100) + 1);
 // css( "", "red" )
 
 // body.loading {
-//     overflow: hidden;   
+//     overflow: hidden;
 // }
 
 //  Anytime the body has the loading class, our
-//    modal element will be visible 
+//    modal element will be visible
 // body.loading .modal {
 //     display: block;
 // }
@@ -424,14 +425,15 @@ var crandon = Math.floor((Math.random() * 100) + 1);
 
 
     $(document).ready(function() {
-        $(".combobox").select2(); 
+        $(".combobox").select2();
         $('#form_parc').prop('disabled',true);
 
        listapg();
 
 
         $(document).on('change','#form_tpay',function(){
-        	if($('#form_tpay').val() == 3 ) {
+          //release field parc
+        	if($('#form_tpay').val() == 2 ) {
         		 $('#form_parc').prop('disabled',false);
         	}else{ $('#form_parc').prop('disabled',true);
  				$('#form_parc').val('1');
@@ -444,7 +446,7 @@ addincome();
 
 
 });
-	
+
 
 	$(document).on('click','.deletepg',function(a){
 		delincome(this.id);
@@ -484,8 +486,3 @@ addincome();
 </script>
 
 </body></html
-
-
-
-
-
