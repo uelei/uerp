@@ -381,12 +381,12 @@ public function addincomeAction(Request $request)
      */
     public function indexAction()
     {
-
+        $pgcod = $this->container->getParameter('cod.billpg');
         $datenow = date("Y-m-d");
         $form =  $this->createDatefilterForm($datenow,$datenow);
 
            $em = $this->getDoctrine()->getManager();
-           $query = $em->createQuery('SELECT b FROM UerpIncomesBundle:incomes b WHERE b.date > ?1 AND b.date < ?2 OR b.date = ?3 ')->setParameters( array(1=> $datenow,2=>$datenow,3=>$datenow));
+           $query = $em->createQuery('SELECT b FROM UerpIncomesBundle:incomes b WHERE b.date > ?1 AND b.date < ?2 OR b.date = ?3  AND b.status != ?4  ')->setParameters( array(1=> $datenow,2=>$datenow,3=>$datenow,4=>$pgcod));
            $entities = $query->getResult();
 
      return $this->render('UerpIncomesBundle:incomes:filter.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
