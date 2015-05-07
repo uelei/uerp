@@ -74,11 +74,6 @@
                                 <a  class="btn btn-info btn-xs" href="{{ path('bills_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> show</a>
                                 <a  class="btn btn-warning btn-xs" href="{{ path('bills_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i> edit</a>
                                 <a  class="btn btn-danger btn-xs" href="{{ path('bills_del', { 'id': entity.id }) }}"><i class="fa fa-trash-o"></i> delete</a>
-{#
-
-                                <a href="{{ path('my_delete_route_name',{'id': some_entity.id}) }}" class="as-form" >{{ 'delete'|trans({}, 'button') }}</a>
-
- #}
                         </td>
                     </tr>
                 {% endfor %}
@@ -93,7 +88,7 @@
                 </div>
                 <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
 
-                    
+
                 </div>
                 <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="inline">
                 </div>
