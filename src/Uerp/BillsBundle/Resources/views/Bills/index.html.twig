@@ -65,6 +65,7 @@
                                     R$ {{ entity.value|number_format(2, ',', '.') }}
                                 </span>
                             {% else %}
+                                {% set sum = sum + entity.value %}
                                 R$ {{ entity.value|number_format(2, ',', '.') }}
                             {% endif %}
                             {% set sum = sum + entity.value %}
