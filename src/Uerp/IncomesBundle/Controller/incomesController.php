@@ -296,7 +296,6 @@ public function addincomeAction(Request $request)
 
         $idays = $tpayment->getDays();
         // $dat->modify("+".$idays." days");
-
         $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($tpayment->getBank());
 
             if (!$entitya) {
@@ -306,20 +305,32 @@ public function addincomeAction(Request $request)
 
         for ($i=0 ; $i < $parc  ; $i++ ) {
 
-        $dat->modify("+".$idays." days");
-        $incomes = New incomes();
-        $incomes->setSaleId($saleid);
-        $incomes->setValueb($valueb);
-        $incomes->setValuel($valuel);
-        $bal = $bal + $valuel;
-        $incomes->setTax($tax);
-        $incomes->setBank($entitya);
-        $incomes->setDate($dat);
-        $incomes->setParc($parc);
-        $incomes->setStatus($status);
-        $incomes->setTpayment($tpayment);
+          $datd = new \DateTime($date);
+          $datd->setTime(date("H"),date("i"));
 
-        $em->persist($incomes);
+
+          $p = $i+1;
+
+          $addday = $idays*$p;
+          $datd->modify("+".$addday." days");
+
+// dump($da); die;
+
+
+
+          $incomes = New incomes();
+          $incomes->setSaleId($saleid);
+          $incomes->setValueb($valueb);
+          $incomes->setValuel($valuel);
+          $bal = $bal + $valuel;
+          $incomes->setTax($tax);
+          $incomes->setBank($entitya);
+          $incomes->setDate($datd);
+          $incomes->setParc($p."/".$parc);
+          $incomes->setStatus($status);
+          $incomes->setTpayment($tpayment);
+
+          $em->persist($incomes);
 
         }
 
