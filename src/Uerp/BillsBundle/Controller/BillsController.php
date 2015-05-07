@@ -51,20 +51,16 @@ class BillsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
-                 return $this->redirect($this->generateUrl('filter', array(
-                    'datai'  => $form["datai"]->getData()->format("Y-m-d"),
-                    'dataf' => $form["dataf"]->getData()->format("Y-m-d"),
-
-
-                    )));
+         return $this->redirect($this->generateUrl('filter', array(
+            'datai'  => $form["datai"]->getData()->format("Y-m-d"),
+            'dataf' => $form["dataf"]->getData()->format("Y-m-d"),
+              )));
         }
 
-
-        $datai = new \Datetime('now');
+        $d = $datea->format('Y-m-d');
 
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b ')->setMaxResults(10);
+        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date >= ?1 AND b.date <= ?2  OR b.date = ?3 ORDER BY b.date')->setParameters( array(1=> $d,2=>$d,3=>$d));
         $entities = $query->getResult();
 
         return $this->render('UerpBillsBundle:Bills:index.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
@@ -127,17 +123,17 @@ public function getbycategoriesAction()
                 ->add('Filter','submit')
                 ->getForm();
 
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            // perform some action, such as saving the task to the database
-
-            // return $this->redirect($this->generateUrl('filter/',array('datai' => $form->getdatai(),'dataf' => $form->getdataf()  )  ));
-            return $this->forward('UerpBillsBundle:Bills:filter', array(
-                'datai'  => $form["datai"]->getData(),
-                'dataf' => $form["dataf"]->getData(),
-            ));
-        }
+        // $form->handleRequest($request);
+        //
+        // if ($form->isValid()) {
+        //     // perform some action, such as saving the task to the database
+        //
+        //     // return $this->redirect($this->generateUrl('filter/',array('datai' => $form->getdatai(),'dataf' => $form->getdataf()  )  ));
+        //     return $this->forward('UerpBillsBundle:Bills:filter', array(
+        //         'datai'  => $form["datai"]->getData(),
+        //         'dataf' => $form["dataf"]->getData(),
+        //     ));
+        // }
 
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date > ?1 AND b.date < ?2  OR b.date = ?3 ORDER BY b.date')->setParameters( array(1=> $datai,2=>$dataf,3=>$datai));
