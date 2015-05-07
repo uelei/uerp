@@ -13,13 +13,13 @@
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
                             <a  class="btn btn-success btn-lg" href="{{ path('bills_new') }}"><i class="fa fa-plus"></i> New</a>
                 </div>
-  
+
                 {{ form_start(formfilter) }}
                 {% form_theme formfilter 'bootstrap_3_horizontal_layout.html.twig' %}
                 {{ form_errors(formfilter) }}
                 {# {{ form(formfilter) }} #}
                 <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                    
+
                 </div>
                     <div  class="col-xs-3 col-sm-3 col-md-3 col-lg-3" style="inline">
                         {{ form_errors(formfilter.datai) }}
@@ -30,14 +30,14 @@
                         {{ form_widget(formfilter.dataf) }}
                     </div>
                     <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-                        
+
                     </div>
                      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
-                        {{ form_end(formfilter) }} 
+                        {{ form_end(formfilter) }}
                     </div>
                 </div>
             </div>
-   
+
             <table class="table table-striped table-advance table-hover ">
                 <thead>
                     <tr>
@@ -52,6 +52,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                  {% set sum = 0 %}
                 {% for entity in entities %}
                     <tr>
                         <td><a href="{{ path('bills_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
@@ -61,30 +62,47 @@
                         <td>{{ entity.supplier }}</td>
                         <td>{% if entity.value < 0  %}
                                 <span style="color:red">
-                                    R$ {{ entity.value|number_format(2, ',', '.') }} 
+                                    R$ {{ entity.value|number_format(2, ',', '.') }}
                                 </span>
                             {% else %}
                                 R$ {{ entity.value|number_format(2, ',', '.') }}
                             {% endif %}
+                            {% set sum = sum + entity.value %}
                         </td>
                         <td> {{ entity.status }} </td>
                         <td>
                                 <a  class="btn btn-info btn-xs" href="{{ path('bills_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> show</a>
                                 <a  class="btn btn-warning btn-xs" href="{{ path('bills_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i> edit</a>
                                 <a  class="btn btn-danger btn-xs" href="{{ path('bills_del', { 'id': entity.id }) }}"><i class="fa fa-trash-o"></i> delete</a>
-{# 
+{#
 
                                 <a href="{{ path('my_delete_route_name',{'id': some_entity.id}) }}" class="as-form" >{{ 'delete'|trans({}, 'button') }}</a>
-                                
+
  #}
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
-        </div> 
-    </div> 
-</div> 
+            <div class="panel-footer">
+              <div class="row">
+                {% if sum != 0 %}
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
+                  Total =
+                  <input type="text" id="pago" class="form-control disabled" value="{{ sum  }}">
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="inline">
+
+                    
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" style="inline">
+                </div>
+                {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
