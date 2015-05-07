@@ -48,7 +48,7 @@ criar as tableas
 
 para criar um usuario
 
-> **fos:user:cretate**
+> **app/console fos:user:create**
 
 pronto tudo deve funcionar.
 
