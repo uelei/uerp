@@ -62,6 +62,20 @@ class Product
      * @ORM\Column(name="aux", type="string", length=200)
      */
     private $aux;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ncm", type="string", length=8)
+     */
+    private $ncm;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="notes", type="string", length=255)
+     */
+    private $notes;
 
 
 
@@ -227,5 +241,77 @@ class Product
     public function getAux()
     {
         return $this->aux;
+    }
+
+    /**
+     * Set ncm
+     *
+     * @param string $ncm
+     *
+     * @return Product
+     */
+    public function setNcm($ncm)
+    {
+        $this->ncm = $ncm;
+
+        return $this;
+    }
+
+    /**
+     * Get ncm
+     *
+     * @return string
+     */
+    public function getNcm()
+    {
+        return $this->ncm;
+    }
+
+    /**
+     * Set supplier
+     *
+     * @param \Uerp\SupplierBundle\Entity\Supplier $supplier
+     *
+     * @return Product
+     */
+    public function setSupplier(\Uerp\SupplierBundle\Entity\Supplier $supplier = null)
+    {
+        $this->supplier = $supplier;
+
+        return $this;
+    }
+
+    /**
+     * Get supplier
+     *
+     * @return \Uerp\SupplierBundle\Entity\Supplier
+     */
+    public function getSupplier()
+    {
+        return $this->supplier;
+    }
+
+    /**
+     * Set notes
+     *
+     * @param string $notes
+     *
+     * @return Product
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }
