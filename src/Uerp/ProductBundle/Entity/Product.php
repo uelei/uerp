@@ -59,25 +59,16 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="aux", type="string", length=200)
-     */
-    private $aux;
-    
-    /**
-     * @var string
-     *
      * @ORM\Column(name="ncm", type="string", length=8)
      */
     private $ncm;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="notes", type="string", length=255)
      */
     private $notes;
-
-
 
 
     /**
@@ -88,7 +79,7 @@ class Product
 
 
 
-    
+
     public function __toString()
     {
         return $this->name;
@@ -98,7 +89,7 @@ class Product
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -121,7 +112,7 @@ class Product
     /**
      * Get barcode
      *
-     * @return string 
+     * @return string
      */
     public function getBarcode()
     {
@@ -144,7 +135,7 @@ class Product
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -167,7 +158,7 @@ class Product
     /**
      * Get cost
      *
-     * @return string 
+     * @return string
      */
     public function getCost()
     {
@@ -190,7 +181,7 @@ class Product
     /**
      * Get price
      *
-     * @return string 
+     * @return string
      */
     public function getPrice()
     {
@@ -213,35 +204,13 @@ class Product
     /**
      * Get sku
      *
-     * @return string 
+     * @return string
      */
     public function getSku()
     {
         return $this->sku;
     }
 
-    /**
-     * Set aux
-     *
-     * @param string $aux
-     * @return Product
-     */
-    public function setAux($aux)
-    {
-        $this->aux = $aux;
-
-        return $this;
-    }
-
-    /**
-     * Get aux
-     *
-     * @return string 
-     */
-    public function getAux()
-    {
-        return $this->aux;
-    }
 
     /**
      * Set ncm

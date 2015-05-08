@@ -20,12 +20,11 @@ class ProductType extends AbstractType
             ->add('cost')
             ->add('price')
             ->add('sku')
-            ->add('aux')
             ->add('ncm')
             ->add('notes')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
