@@ -1,0 +1,30 @@
+product_unit:
+    path:     /
+    defaults: { _controller: "UerpProductBundle:ProductUnit:index" }
+
+product_unit_show:
+    path:     /{id}/show
+    defaults: { _controller: "UerpProductBundle:ProductUnit:show" }
+
+product_unit_new:
+    path:     /new
+    defaults: { _controller: "UerpProductBundle:ProductUnit:new" }
+
+product_unit_create:
+    path:     /create
+    defaults: { _controller: "UerpProductBundle:ProductUnit:create" }
+    methods:  POST
+
+product_unit_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UerpProductBundle:ProductUnit:edit" }
+
+product_unit_update:
+    path:     /{id}/update
+    defaults: { _controller: "UerpProductBundle:ProductUnit:update" }
+    methods:  [POST, PUT]
+
+product_unit_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UerpProductBundle:ProductUnit:delete" }
+    methods:  [POST, DELETE]
