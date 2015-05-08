@@ -21,6 +21,8 @@ class ProductType extends AbstractType
             ->add('price')
             ->add('sku')
             ->add('aux')
+            ->add('ncm')
+            ->add('notes')
         ;
     }
     
