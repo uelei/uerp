@@ -78,6 +78,11 @@ class Product
     protected $supplier;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Uerp\ProductBundle\Entity\ProductUnit")
+     * @ORM\JoinColumn(name="productunit_id", referencedColumnName="id")
+     */
+    protected $unit;
 
 
     public function __toString()
@@ -282,5 +287,29 @@ class Product
     public function getNotes()
     {
         return $this->notes;
+    }
+
+    /**
+     * Set unit
+     *
+     * @param \Uerp\ProductBundle\Entity\ProductUnit $unit
+     *
+     * @return Product
+     */
+    public function setUnit(\Uerp\ProductBundle\Entity\ProductUnit $unit = null)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return \Uerp\ProductBundle\Entity\ProductUnit
+     */
+    public function getUnit()
+    {
+        return $this->unit;
     }
 }

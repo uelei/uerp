@@ -20,6 +20,9 @@ class ProductType extends AbstractType
             ->add('cost')
             ->add('price')
             ->add('sku')
+            ->add('unit','entity',array(
+                'class' => 'Uerp\ProductBundle\Entity\ProductUnit',
+                'property' => 'name',))
             ->add('ncm')
             ->add('notes')
         ;
