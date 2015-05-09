@@ -23,6 +23,11 @@ uerp_product:
     type:     annotation
     prefix:   /
 
+UerpProductBundle_product_unit:
+        resource: "@UerpProductBundle/Resources/config/routing/productunit.yml"
+        prefix:   /product_unit
+
+
 uerp_supplier:
     resource: "@UerpSupplierBundle/Controller/"
     type:     annotation
