@@ -20,12 +20,14 @@ class ProductType extends AbstractType
             ->add('cost')
             ->add('price')
             ->add('sku')
-            ->add('aux')
+            ->add('unit','entity',array(
+                'class' => 'Uerp\ProductBundle\Entity\ProductUnit',
+                'property' => 'description',))
             ->add('ncm')
             ->add('notes')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */
