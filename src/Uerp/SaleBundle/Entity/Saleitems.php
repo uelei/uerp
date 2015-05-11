@@ -34,12 +34,6 @@ class Saleitems
      */
     protected $product;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $productid;
-
-
 
     /**
      * @ORM\Column(type="integer")
@@ -84,7 +78,7 @@ class Saleitems
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -107,7 +101,7 @@ class Saleitems
     /**
      * Get prod_id
      *
-     * @return integer 
+     * @return integer
      */
     public function getProdId()
     {
@@ -130,7 +124,7 @@ class Saleitems
     /**
      * Get qtd
      *
-     * @return integer 
+     * @return integer
      */
     public function getQtd()
     {
@@ -153,7 +147,7 @@ class Saleitems
     /**
      * Get prodcost
      *
-     * @return string 
+     * @return string
      */
     public function getProdcost()
     {
@@ -176,7 +170,7 @@ class Saleitems
     /**
      * Get prodprice
      *
-     * @return string 
+     * @return string
      */
     public function getProdprice()
     {
@@ -199,7 +193,7 @@ class Saleitems
     /**
      * Get subtotalcost
      *
-     * @return string 
+     * @return string
      */
     public function getSubtotalcost()
     {
@@ -222,7 +216,7 @@ class Saleitems
     /**
      * Get subtotalsale
      *
-     * @return string 
+     * @return string
      */
     public function getSubtotalsale()
     {
@@ -245,7 +239,7 @@ class Saleitems
     /**
      * Get itenaux
      *
-     * @return string 
+     * @return string
      */
     public function getItenaux()
     {
@@ -268,7 +262,7 @@ class Saleitems
     /**
      * Get saleid
      *
-     * @return integer 
+     * @return integer
      */
     public function getSaleid()
     {
@@ -291,11 +285,11 @@ class Saleitems
     /**
      * Get productid
      *
-     * @return integer 
+     * @return integer
      */
     public function getProductid()
     {
-        return $this->productid;
+        return $this->product->getId();
     }
 
     /**
@@ -314,7 +308,7 @@ class Saleitems
     /**
      * Get product
      *
-     * @return \Uerp\ProductBundle\Entity\Product 
+     * @return \Uerp\ProductBundle\Entity\Product
      */
     public function getProduct()
     {

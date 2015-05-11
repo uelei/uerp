@@ -31,7 +31,7 @@ class Sale
 
     /**
      * @ORM\ManyToOne(targetEntity="Uerp\SellerBundle\Entity\Seller")
-     * @ORM\JoinColumn(name="seller_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="seller_id", referencedColumnName="id",nullable=false )
      */
     protected $seller;
 
@@ -79,8 +79,8 @@ class Sale
     protected $saleobs;
 
     /**
-     *@ORM\Column(type="decimal", scale=2, options={"default":0}) 
-     * 
+     *@ORM\Column(type="decimal", scale=2, options={"default":0})
+     *
      */
      protected $nitems;
 
@@ -89,7 +89,7 @@ class Sale
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -112,7 +112,7 @@ class Sale
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -135,7 +135,7 @@ class Sale
     /**
      * Get totalcost
      *
-     * @return string 
+     * @return string
      */
     public function getTotalcost()
     {
@@ -158,7 +158,7 @@ class Sale
     /**
      * Get totalsale
      *
-     * @return string 
+     * @return string
      */
     public function getTotalsale()
     {
@@ -181,7 +181,7 @@ class Sale
     /**
      * Get discount
      *
-     * @return string 
+     * @return string
      */
     public function getDiscount()
     {
@@ -204,7 +204,7 @@ class Sale
     /**
      * Get saleobs
      *
-     * @return string 
+     * @return string
      */
     public function getSaleobs()
     {
@@ -227,7 +227,7 @@ class Sale
     /**
      * Get seller
      *
-     * @return \Uerp\SellerBundle\Entity\Seller 
+     * @return \Uerp\SellerBundle\Entity\Seller
      */
     public function getSeller()
     {
@@ -250,7 +250,7 @@ class Sale
     /**
      * Get status
      *
-     * @return \Uerp\StatusBundle\Entity\Status 
+     * @return \Uerp\StatusBundle\Entity\Status
      */
     public function getStatus()
     {
@@ -273,7 +273,7 @@ class Sale
     /**
      * Get customer
      *
-     * @return \Uerp\CustomerBundle\Entity\Customer 
+     * @return \Uerp\CustomerBundle\Entity\Customer
      */
     public function getCustomer()
     {
@@ -296,7 +296,7 @@ class Sale
     /**
      * Get nitems
      *
-     * @return integer 
+     * @return integer
      */
     public function getNitems()
     {
@@ -319,7 +319,7 @@ class Sale
     /**
      * Get tax
      *
-     * @return string 
+     * @return string
      */
     public function getTax()
     {

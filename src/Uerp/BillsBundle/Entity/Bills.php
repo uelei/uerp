@@ -77,7 +77,11 @@ class Bills {
      */
     protected $supplier;
 
-
+    /**
+     * @ORM\Column(type="string",length=10, nullable=true)
+     *
+     */
+    protected $parc;
 
 
 public function __construct() {
@@ -178,7 +182,7 @@ public function __construct() {
     /**
      * Get account
      *
-     * @return \Uerp\BankBundle\Entity\BankAccount 
+     * @return \Uerp\BankBundle\Entity\BankAccount
      */
     public function getAccount()
     {
@@ -201,7 +205,7 @@ public function __construct() {
     /**
      * Get docorigin
      *
-     * @return string 
+     * @return string
      */
     public function getDocorigin()
     {
@@ -224,7 +228,7 @@ public function __construct() {
     /**
      * Get dataaux
      *
-     * @return string 
+     * @return string
      */
     public function getDataaux()
     {
@@ -247,7 +251,7 @@ public function __construct() {
     /**
      * Get status
      *
-     * @return \Uerp\StatusBundle\Entity\Status 
+     * @return \Uerp\StatusBundle\Entity\Status
      */
     public function getStatus()
     {
@@ -270,7 +274,7 @@ public function __construct() {
     /**
      * Get supplier
      *
-     * @return \Uerp\SupplierBundle\Entity\Supplier 
+     * @return \Uerp\SupplierBundle\Entity\Supplier
      */
     public function getSupplier()
     {
@@ -293,10 +297,34 @@ public function __construct() {
     /**
      * Get subcategories
      *
-     * @return \Uerp\SubcategoriesBundle\Entity\Subcategories 
+     * @return \Uerp\SubcategoriesBundle\Entity\Subcategories
      */
     public function getSubcategories()
     {
         return $this->subcategories;
+    }
+
+    /**
+     * Set parc
+     *
+     * @param string $parc
+     *
+     * @return Bills
+     */
+    public function setParc($parc)
+    {
+        $this->parc = $parc;
+
+        return $this;
+    }
+
+    /**
+     * Get parc
+     *
+     * @return string
+     */
+    public function getParc()
+    {
+        return $this->parc;
     }
 }

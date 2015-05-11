@@ -295,8 +295,7 @@ public function addincomeAction(Request $request)
         $status = $tpayment->getDefaultstatus();
 
         $idays = $tpayment->getDays();
-        $dat->modify("+".$idays." days");
-
+        // $dat->modify("+".$idays." days");
         $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($tpayment->getBank());
 
             if (!$entitya) {
@@ -306,20 +305,33 @@ public function addincomeAction(Request $request)
 
         for ($i=0 ; $i < $parc  ; $i++ ) {
 
-        $incomes = New incomes();
-        $incomes->setSaleId($saleid);
-        $incomes->setValueb($valueb);
-        $incomes->setValuel($valuel);
-        $bal = $bal + $valuel;
-        $incomes->setTax($tax);
-        $incomes->setBank($entitya);
-        $incomes->setDate($dat);
-        $incomes->setParc($parc);
-        $incomes->setStatus($status);
-        $incomes->setTpayment($tpayment);
+          $datd = new \DateTime($date);
+          $datd->setTime(date("H"),date("i"));
 
-        $em->persist($incomes);
-        $dat->modify("+".$idays." days");
+
+          $p = $i+1;
+
+          $addday = $idays*$p;
+          $datd->modify("+".$addday." days");
+
+// dump($da); die;
+
+
+
+          $incomes = New incomes();
+          $incomes->setSaleId($saleid);
+          $incomes->setValueb($valueb);
+          $incomes->setValuel($valuel);
+          $bal = $bal + $valuel;
+          $incomes->setTax($tax);
+          $incomes->setBank($entitya);
+          $incomes->setDate($datd);
+          $incomes->setParc($p."/".$parc);
+          $incomes->setStatus($status);
+          $incomes->setTpayment($tpayment);
+
+          $em->persist($incomes);
+
         }
 
         if($status->getId() == $billpg ){
@@ -380,12 +392,12 @@ public function addincomeAction(Request $request)
      */
     public function indexAction()
     {
-
+        $pgcod = $this->container->getParameter('cod.billpg');
         $datenow = date("Y-m-d");
         $form =  $this->createDatefilterForm($datenow,$datenow);
 
            $em = $this->getDoctrine()->getManager();
-           $query = $em->createQuery('SELECT b FROM UerpIncomesBundle:incomes b WHERE b.date > ?1 AND b.date < ?2 OR b.date = ?3 ')->setParameters( array(1=> $datenow,2=>$datenow,3=>$datenow));
+           $query = $em->createQuery('SELECT b FROM UerpIncomesBundle:incomes b WHERE b.date > ?1 AND b.date < ?2 OR b.date = ?3  AND b.status != ?4  ')->setParameters( array(1=> $datenow,2=>$datenow,3=>$datenow,4=>$pgcod));
            $entities = $query->getResult();
 
      return $this->render('UerpIncomesBundle:incomes:filter.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));

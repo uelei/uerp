@@ -12,7 +12,7 @@ use Uerp\tpaymentBundle\Entity\tpayment;
 use Uerp\SaleBundle\Form\SaleType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
-
+use Ob\HighchartsBundle\Highcharts\Highchart;
 
 /**
  * Sale controller.
@@ -21,6 +21,50 @@ use Symfony\Component\Validator\Constraints\DateTime;
  */
 class SaleController extends Controller
 {
+
+
+  /**
+   * Displays a form to edit an existing incomes entity.
+   *
+   * @Route("/filtersales/", name="sales_filter")
+   * @Method("POST")
+   * @Template()
+   */
+   public function filtersalesAction(Request $request)
+  {
+  //  $pgcod = $this->container->getParameter('cod.billpg');
+  //  $form->handleRequest($request);
+  $forr=  $request->request->get('form');
+  // $datai =  $this->get('request')->request->get('datai');
+  // dump($datai['datai']);
+  $data= $forr["data"];
+  // $dataf= $forr["dataf"];
+
+  $form =  $this->createDatesalesfilterForm($data);
+
+     $form->handleRequest($request);
+
+    //  if ($form->isValid()) {
+    //      // perform some action, such as saving the task to the database
+     //
+    //      // return $this->redirect($this->generateUrl('filter/',array('datai' => $form->getdatai(),'dataf' => $form->getdataf()  )  ));
+    //      return $this->forward('UerpIncomesBundle:incomes:incomes_filterp', array(
+    //          'datai'  => $form["datai"]->getData(),
+    //          'dataf' => $form["dataf"]->getData(),
+    //      ));
+    //  }
+
+     $em = $this->getDoctrine()->getManager();
+    //  $em = $this->getDoctrine()->getManager();
+     $chart = $this->daychart($data);
+     $query = $em->createQuery('SELECT b FROM UerpSaleBundle:Sale b WHERE b.date = ?1')->setParameters( array(1=> $data));
+     $entities = $query->getResult();
+
+
+  return $this->render('UerpSaleBundle:Sale:index.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,'chart'=> $chart,));
+
+  }
+
 
     /**
      * Lists all Sale entities.
@@ -31,12 +75,22 @@ class SaleController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+      $datenow = date("Y-m-d");
+      $form =  $this->createDatesalesfilterForm($datenow);
 
-        $entities = $em->getRepository('UerpSaleBundle:Sale')->findAll();
+      // createDatesalesfilterForm($date)
 
+      $em = $this->getDoctrine()->getManager();
+      $query = $em->createQuery('SELECT b FROM UerpSaleBundle:Sale b WHERE b.date = ?1')->setParameters( array(1=> $datenow));
+      $entities = $query->getResult();
+
+        // $em = $this->getDoctrine()->getManager();
+        $chart = $this->daychart($datenow);
+        // $entities = $em->getRepository('UerpSaleBundle:Sale')->findAll()->setMaxResults(10);
+// dump($form->createView());die;
         return array(
-            'entities' => $entities,
+          'formfilter' => $form->createView(),
+            'entities' => $entities,'chart'=> $chart,
         );
     }
 
@@ -47,7 +101,7 @@ class SaleController extends Controller
      *
      * @Route("/closeendsale", name="closeendsale")
      * @Method("POST")
-     * 
+     *
      */
     public function closeendsaleAction(Request $request)
     {
@@ -132,7 +186,7 @@ class SaleController extends Controller
         }
 
         $editForm = $this->createCloseForm($entity);
- 
+
         return array(
             'entity'      => $entity,
             'formsale'   => $editForm->createView(),
@@ -151,7 +205,7 @@ class SaleController extends Controller
      *
      * @Route("/reloadcloseinfo", name="sale_reloadcloseinfo")
      * @Method("POST")
-     * 
+     *
      */
     public function reloadcloseinfoAction(Request $request)
     {
@@ -189,7 +243,7 @@ return $this->render(
      *
      * @Route("/reloadmenu", name="sale_reloadmenu")
      * @Method("POST")
-     * 
+     *
      */
     public function reloadmenuAction(Request $request)
     {
@@ -341,11 +395,11 @@ return $this->render(
      */
     public function newAction()
     {
-      
+
         $dat = date('Y-m-d');
-        
+
         return $this->redirect($this->generateUrl('sale_newd', array('date' => $dat)));
-        
+
     }
 
 
@@ -355,14 +409,14 @@ return $this->render(
      *
      * @Route("/closs", name="closs")
      * @Method("POST")
-     * 
+     *
      */
     public function clossAction(Request $request)
     {
         $date = $this->get('request')->request->get('date');
-  
 
-        
+
+
         return $this->redirect($this->generateUrl('sale_newd', array('date' => $date)));
 
 
@@ -530,7 +584,7 @@ return $this->render(
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UerpSaleBundle:Sale')->find($id);
-        dump($entity);
+        // dump($entity);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Sale entity.');
@@ -548,7 +602,7 @@ return $this->render(
         // return array(
         //     'entity'      => $entity,
         //     'edit_form'   => $editForm->createView(),
-            
+
         // );
     }
     /**
@@ -593,4 +647,70 @@ return $this->render(
             ->getForm()
         ;
     }
+
+
+    private function daychart($date)
+    {
+
+      $pgcod = $this->container->getParameter('cod.saleclose');
+      $repository = $this->getDoctrine()->getRepository('UerpSaleBundle:Sale');
+      $query = $repository->createQueryBuilder('b')
+        ->addselect('SUM(b.totalsale) as sumtotal' )
+        ->where('b.date >= :datei AND b.date <= :datef AND b.status = :codpg ')
+        ->setParameters(array('datei'=> $date,'datef'=>$date,'codpg'=> $pgcod))
+        ->groupBy('b.seller')
+        ->getQuery();
+        $ob = new Highchart();
+        $ob->chart->renderTo('piechart');
+        $ob->plotOptions->pie(array(
+            'allowPointSelect'  => true,
+            'cursor'    => 'pointer',
+            'dataLabels'    => array('enabled' => true),
+            'showInLegend'  => true
+        ));
+      $data = Array();
+      $em = $this->getDoctrine()->getManager();
+      $t = 0.0;
+      $entities = $query->getResult();
+        foreach ($entities as $sale){
+          $entitya = $em->getRepository('UerpSellerBundle:Seller')->find($sale[0]->getseller()->getId());
+          $sellername = $entitya->getName();
+          $t+=floatval($sale['sumtotal']);
+          $data[] = array($sellername,floatval($sale['sumtotal']));
+        }
+        $ob->title->text('Total das vendas do dia  R$ '.number_format($t,2,',',''));
+        $ob->series(array(array('type' => 'pie','name' => 'Day sales', 'data' => $data)));
+      return $ob;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * Creates a form to date filter.
+     *
+     * @param mixed $datei and $datef
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDatesalesfilterForm($date)
+    {
+      return  $this->createFormBuilder()
+                      ->setMethod('POST')
+                      ->setAction($this->generateUrl('sales_filter'))
+                      ->add('data','date', array('input'  => 'datetime',
+                        'widget' => 'single_text','data' => new \DateTime($date)))
+                      ->add('Filter','submit')
+                      ->getForm();
+    }
+
+
 }

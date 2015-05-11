@@ -1,29 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>{% block title %}Uerp !{% endblock %}</title>
-
-
-{% stylesheets  '@UerpMainBundle/Resources/public/css/bootstrap.min.css'
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Uerp !{% endblock %}</title>
+    {% stylesheets  '@UerpMainBundle/Resources/public/css/bootstrap.min.css'
                 '@UerpMainBundle/Resources/public/css/style.css'
                 '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'
-filter='cssrewrite' %}
+                filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
-
-        {% block stylesheets %}{% endblock %}
-
-
+{% block stylesheets %}{% endblock %}
     </head>
     <body>
 		{% block menu %}
 			<section  id="container" >
-      <!-- **********************************************************************************************************************************************************
-      TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
       <!--header start-->
       <header class="header black-bg">
               <div class="sidebar-toggle-box">
@@ -35,7 +26,6 @@ filter='cssrewrite' %}
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
                 <ul class="nav top-menu">
-
                 </ul>
                 <!--  notification end -->
             </div>
@@ -49,10 +39,6 @@ filter='cssrewrite' %}
             </div>
         </header>
       <!--header end-->
-
-      <!-- **********************************************************************************************************************************************************
-      MAIN SIDEBAR MENU
-      *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
       <aside>
           <div id="sidebar"  class="nav-collapse" >
@@ -99,7 +85,7 @@ filter='cssrewrite' %}
                       <ul class="sub">
                           <li><a  href="{{ path('sale') }}">{% trans %}last_sales{% endtrans%}</a></li>
                           <li><a  href="{{ path('sale_new') }}">{% trans %}pos{% endtrans%}</a></li>
-
+                          <li><a  href="{{ path('report') }}">{% trans %}report{% endtrans%}</a></li>
                       </ul>
                   </li>
 
@@ -128,6 +114,8 @@ filter='cssrewrite' %}
                           <li><a  href="{{path('supplier')}}">{% trans %}supplier{% endtrans%}</a></li>
                           <li><a  href="{{path('tpayment')}}">{% trans %}pay_types{% endtrans%}</a></li>
                           <li><a  href="{{path('customer')}}">{% trans %}customer{% endtrans%}</a></li>
+                          <li><a  href="{{path('status')}}">{% trans %}status{% endtrans%}</a></li>
+                          <li><a  href="{{path('product_unit')}}">{% trans %}product_unit{% endtrans%}</a></li>
                       </ul>
                   </li>
 
@@ -141,33 +129,29 @@ filter='cssrewrite' %}
                           <li><a  href="{{ path('fos_user_registration_register') }}">{% trans %}new_user{% endtrans%}</a></li>
                       </ul>
                   </li>
-
-
               </ul>
               <!-- sidebar menu end-->
           </div>
       </aside>
       <!--sidebar end-->
-
-   <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
 
               <div class="row">
 		{% endblock %}
+
         {% block body %}
 
         Dashboard
 
         {% endblock %}
 
+
 {% block footer %}
                 </div>
       <!--main content end-->
-  </section>
+  </section>  </section>
 {% endblock %}
 		<!-- javascript -->
 {% javascripts  '@UerpMainBundle/Resources/public/js/jquery.js'

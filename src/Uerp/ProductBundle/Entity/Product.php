@@ -59,25 +59,16 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="aux", type="string", length=200)
-     */
-    private $aux;
-    
-    /**
-     * @var string
-     *
      * @ORM\Column(name="ncm", type="string", length=8)
      */
     private $ncm;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="notes", type="string", length=255)
      */
     private $notes;
-
-
 
 
     /**
@@ -87,8 +78,13 @@ class Product
     protected $supplier;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Uerp\ProductBundle\Entity\ProductUnit")
+     * @ORM\JoinColumn(name="productunit_id", referencedColumnName="id")
+     */
+    protected $unit;
 
-    
+
     public function __toString()
     {
         return $this->name;
@@ -98,7 +94,7 @@ class Product
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -121,7 +117,7 @@ class Product
     /**
      * Get barcode
      *
-     * @return string 
+     * @return string
      */
     public function getBarcode()
     {
@@ -144,7 +140,7 @@ class Product
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -167,7 +163,7 @@ class Product
     /**
      * Get cost
      *
-     * @return string 
+     * @return string
      */
     public function getCost()
     {
@@ -190,7 +186,7 @@ class Product
     /**
      * Get price
      *
-     * @return string 
+     * @return string
      */
     public function getPrice()
     {
@@ -213,35 +209,13 @@ class Product
     /**
      * Get sku
      *
-     * @return string 
+     * @return string
      */
     public function getSku()
     {
         return $this->sku;
     }
 
-    /**
-     * Set aux
-     *
-     * @param string $aux
-     * @return Product
-     */
-    public function setAux($aux)
-    {
-        $this->aux = $aux;
-
-        return $this;
-    }
-
-    /**
-     * Get aux
-     *
-     * @return string 
-     */
-    public function getAux()
-    {
-        return $this->aux;
-    }
 
     /**
      * Set ncm
@@ -313,5 +287,29 @@ class Product
     public function getNotes()
     {
         return $this->notes;
+    }
+
+    /**
+     * Set unit
+     *
+     * @param \Uerp\ProductBundle\Entity\ProductUnit $unit
+     *
+     * @return Product
+     */
+    public function setUnit(\Uerp\ProductBundle\Entity\ProductUnit $unit = null)
+    {
+        $this->unit = $unit;
+
+        return $this;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return \Uerp\ProductBundle\Entity\ProductUnit
+     */
+    public function getUnit()
+    {
+        return $this->unit;
     }
 }

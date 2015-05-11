@@ -26,14 +26,12 @@ class ProductController extends Controller
      *
      * @Route("/findproduct", name="findproduct")
      * @Method("POST")
-     * 
+     *
      */
     public function findproductAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $post = $this->get('request')->request->get('cod');
-
-
 
         $entity = $em->getRepository('UerpProductBundle:Product')->find($post);
 
@@ -41,50 +39,18 @@ class ProductController extends Controller
             throw $this->createNotFoundException('Unable to find Product entity.');
         }
 
-        // $deleteForm = $this->createDeleteForm($id);
- 
 
-$response = new Response();
-$response->setContent(json_encode(array(
-    'cod' => $entity->getId(),
-    'desc' => $entity->getName(),
-    'cprice' => $entity->getCost(),
-    'price' => $entity->getPrice(),
-)));
-$response->headers->set('Content-Type', 'application/json');
+        $response = new Response();
+        $response->setContent(json_encode(array(
+            'cod' => $entity->getId(),
+            'desc' => $entity->getName(),
+            'cprice' => $entity->getCost(),
+            'price' => $entity->getPrice(),
+        )));
+        $response->headers->set('Content-Type', 'application/json');
 
-
-
- // $html = '';
- //    $html = $html . sprintf("<option value=\"%d\">%s</option>",Null, 'Selecione');
- //    foreach($subcategories as $locality)
- //    {
- //        $html = $html . sprintf("<option value=\"%d\">%s</option>",$locality->getId(), $locality->getName());
- //    }
- 
- //    return new Response($html);
-
-
-
- //        return array(
- //            'entity'      => $entity,
- //            'dado' => 's',
- //            // 'delete_form' => $deleteForm->createView(),
- //        );
- //        
- return $response;
+        return $response;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

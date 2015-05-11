@@ -39,11 +39,11 @@ class BillsController extends Controller
                     'widget' => 'single_text',
                     'data' => $datea
                     ))
-                ->add('dataf','date', array(    
+                ->add('dataf','date', array(
                     'input'  => 'datetime',
                    'widget' => 'single_text',
                     'data' => $datea
-                  
+
                     ))
                 ->add('Filter','submit')
                 ->getForm();
@@ -51,26 +51,22 @@ class BillsController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
-                 return $this->redirect($this->generateUrl('filter', array(
-                    'datai'  => $form["datai"]->getData()->format("Y-m-d"),
-                    'dataf' => $form["dataf"]->getData()->format("Y-m-d"),
-
-
-                    )));
+         return $this->redirect($this->generateUrl('filter', array(
+            'datai'  => $form["datai"]->getData()->format("Y-m-d"),
+            'dataf' => $form["dataf"]->getData()->format("Y-m-d"),
+              )));
         }
 
-
-        $datai = new \Datetime('now');
+        $d = $datea->format('Y-m-d');
 
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b ')->setMaxResults(10);
+        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date >= ?1 AND b.date <= ?2  OR b.date = ?3 ORDER BY b.date')->setParameters( array(1=> $d,2=>$d,3=>$d));
         $entities = $query->getResult();
 
         return $this->render('UerpBillsBundle:Bills:index.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
 
     }
-    
+
 /**
  * @Route("/listsubcategories", name="_listsubcategories")
  * @Method("GET")
@@ -82,18 +78,18 @@ public function getbycategoriesAction()
 
     $this->em = $this->getDoctrine()->getEntityManager();
     $this->repository = $this->em->getRepository('UerpSubcategoriesBundle:Subcategories');
- 
+
     $categories = $this->get('request')->query->get('data');
- 
+
     $subcategories = $this->repository->findByCategories($categories);
- 
+
     $html = '';
     $html = $html . sprintf("<option value=\"%d\">%s</option>",Null, 'Selecione');
     foreach($subcategories as $locality)
     {
         $html = $html . sprintf("<option value=\"%d\">%s</option>",$locality->getId(), $locality->getName());
     }
- 
+
     return new Response($html);
 }
 
@@ -108,7 +104,7 @@ public function getbycategoriesAction()
      */
     public function filterAction($datai,$dataf,Request $request)
     {
-        
+
    $form = $this->createFormBuilder()
                 ->setMethod('GET')
                 ->setAction($this->generateUrl('bills'))
@@ -127,24 +123,24 @@ public function getbycategoriesAction()
                 ->add('Filter','submit')
                 ->getForm();
 
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            // perform some action, such as saving the task to the database
-
-            // return $this->redirect($this->generateUrl('filter/',array('datai' => $form->getdatai(),'dataf' => $form->getdataf()  )  ));
-            return $this->forward('UerpBillsBundle:Bills:filter', array(
-                'datai'  => $form["datai"]->getData(),
-                'dataf' => $form["dataf"]->getData(),
-            ));
-        }
+        // $form->handleRequest($request);
+        //
+        // if ($form->isValid()) {
+        //     // perform some action, such as saving the task to the database
+        //
+        //     // return $this->redirect($this->generateUrl('filter/',array('datai' => $form->getdatai(),'dataf' => $form->getdataf()  )  ));
+        //     return $this->forward('UerpBillsBundle:Bills:filter', array(
+        //         'datai'  => $form["datai"]->getData(),
+        //         'dataf' => $form["dataf"]->getData(),
+        //     ));
+        // }
 
         $em = $this->getDoctrine()->getManager();
-        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date > ?1 AND b.date < ?2  OR b.date = ?3 ')->setParameters( array(1=> $datai,2=>$dataf,3=>$datai))->setMaxResults(10);
+        $query = $em->createQuery('SELECT b FROM UerpBillsBundle:Bills b WHERE b.date > ?1 AND b.date < ?2  OR b.date = ?3 ORDER BY b.date')->setParameters( array(1=> $datai,2=>$dataf,3=>$datai));
         $entities = $query->getResult();
 
   return $this->render('UerpBillsBundle:Bills:index.html.twig',array ('formfilter' => $form->createView(),'entities' => $entities,));
-  
+
     }
 
 
@@ -274,12 +270,12 @@ public function getbycategoriesAction()
         }
 
         $editForm = $this->createEditForm($entity);
-        
+
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            
+
         );
     }
 
@@ -306,7 +302,7 @@ public function getbycategoriesAction()
 
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-       
+
 
 
         // $content = $request->getContent();
@@ -315,13 +311,13 @@ public function getbycategoriesAction()
 
 // $f["datai"]->getData()->format("Y-m-d");
 
-    // print_r($x); die();  
+    // print_r($x); die();
 
 
 
 
 
-        
+
 
 if($entity->getAccount() == NULL ){
 echo "erro ";
@@ -343,10 +339,10 @@ echo "erro ";
 
 
 
-       
+
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
-    
+
 
         if ($editForm->isValid()) {
             $em->flush();
@@ -357,7 +353,7 @@ echo "erro ";
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-           
+
         );
 
 
@@ -376,7 +372,7 @@ echo "erro ";
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            
+
         );
     }
 
@@ -398,7 +394,7 @@ echo "erro ";
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update','attr' => array('class'=>'btn btn-lg btn-success')))->add('Pay','submit',array('attr' => array('class'=>'btn btn-lg btn-primary')))
+        $form->add('Update', 'submit', array('label' => 'Update','attr' => array('class'=>'btn btn-lg btn-success')))->add('Pay','submit',array('attr' => array('class'=>'btn btn-lg btn-primary')))
             ->add('Delete','submit',array('attr' => array('class'=>'btn btn-lg btn-danger')));
         return $form;
     }
@@ -415,7 +411,7 @@ echo "erro ";
     {
         //set defaul value for status
         $pgcod = $this->container->getParameter('cod.billpg');
-        // $pgcod = 4; 
+        // $pgcod = 4;
 
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('UerpBillsBundle:Bills')->find($id);
@@ -430,21 +426,23 @@ echo "erro ";
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+          // dump($editForm); die;
            // print_r($editForm['categories']->getData()->getId()); die();
-           
+
             if($editForm->get('Pay')->isClicked()){//pay
-                
+
                 if($editForm['account']->getData() == NULL){
-                    
+
                     $editForm->get('account')->addError(new FormError('Não Selecionado !! '));
                     return array(
                         'entity'      => $entity,
                         'edit_form'   => $editForm->createView(),
-                
+
                     );
 
                 }else{
-                    
+
                     $entitya = $em->getRepository('UerpBankBundle:BankAccount')->find($entity->getAccount()->getId());
 
                     if (!$entitya) {
@@ -457,14 +455,14 @@ echo "erro ";
                     $entity->setStatus($status);
                     $entity->setValue($duppg);
                     $entitya->setBalance($balance);
-                    
+
                     $em->flush();
-                    
+
                     return $this->redirect($this->generateUrl('bills_edit', array('id' => $id)));
 
                 }
-            
-            }//pay-end 
+
+            }//pay-end
             if($editForm->get('Delete')->isClicked()){//delete
                 // echo "detete";
                  $pgcod = $this->container->getParameter('cod.billpg');//4
@@ -479,21 +477,28 @@ echo "erro ";
                     $duppg = $entity->getValue() * -1;
                     $balance = $entitya->getBalance() + $duppg;
                     $entitya->setBalance($balance);
-                    
+
                 }
-                
+
                 $em->remove($entity);
                 $em->flush();
 
                 return $this->redirect($this->generateUrl('bills'));
 
             }//delete
+            if($editForm->get('Update')->isClicked()){
+              $em->flush();
+              return $this->redirect($this->generateUrl('bills', array('id' => $id)));
+
+            }
+
+
         }
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            
+
         );
     }
 
@@ -523,11 +528,11 @@ echo "erro ";
 
                     $duppg = $entity->getValue() * -1;
                     $balance = $entitya->getBalance() + $duppg;
-                    $entitya->setBalance($balance);   
+                    $entitya->setBalance($balance);
                 }
             $em->remove($entity);
             $em->flush();
-        
+
 
         return $this->redirect($this->generateUrl('bills'));
     }
@@ -562,7 +567,7 @@ echo "erro ";
 
                     $duppg = $entity->getValue() * -1;
                     $balance = $entitya->getBalance() + $duppg;
-                    $entitya->setBalance($balance);   
+                    $entitya->setBalance($balance);
                 }
             $em->remove($entity);
             $em->flush();

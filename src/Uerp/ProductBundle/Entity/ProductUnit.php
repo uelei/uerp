@@ -7,7 +7,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ProductUnit
- * 
  * @ORM\Table(name="product_unit" )
  * @ORM\Entity
  */
@@ -15,7 +14,6 @@ class ProductUnit
 {
     /**
      * @var integer
-     * 
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -32,11 +30,16 @@ class ProductUnit
 
     /**
      * @var boolean
-     * 
-     * @ORM\Column(name="allow_fraction", type="boolean")
-     * @Assert\NotBlank
+     * @ORM\Column(name="allow_fraction", type="boolean",nullable=true )
+     *
      */
     private $allowFraction;
+
+
+    public function __toString()
+    {
+        return $this->description;
+    }
 
 
     /**
@@ -97,4 +100,3 @@ class ProductUnit
         return $this->allowFraction;
     }
 }
-

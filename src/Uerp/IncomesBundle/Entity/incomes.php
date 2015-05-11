@@ -64,7 +64,7 @@ class incomes
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="date", type="date")
      */
     private $date;
 
@@ -84,7 +84,7 @@ class incomes
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -107,7 +107,7 @@ class incomes
     /**
      * Get saleid
      *
-     * @return integer 
+     * @return integer
      */
     public function getSaleid()
     {
@@ -130,7 +130,7 @@ class incomes
     /**
      * Get valueb
      *
-     * @return string 
+     * @return string
      */
     public function getValueb()
     {
@@ -153,7 +153,7 @@ class incomes
     /**
      * Get valuel
      *
-     * @return string 
+     * @return string
      */
     public function getValuel()
     {
@@ -176,7 +176,7 @@ class incomes
     /**
      * Get tax
      *
-     * @return string 
+     * @return string
      */
     public function getTax()
     {
@@ -199,7 +199,7 @@ class incomes
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDate()
     {
@@ -222,7 +222,7 @@ class incomes
     /**
      * Get status
      *
-     * @return \Uerp\StatusBundle\Entity\Status 
+     * @return \Uerp\StatusBundle\Entity\Status
      */
     public function getStatus()
     {
@@ -245,7 +245,7 @@ class incomes
     /**
      * Get tpayment
      *
-     * @return \Uerp\tpaymentBundle\Entity\tpayment 
+     * @return \Uerp\tpaymentBundle\Entity\tpayment
      */
     public function getTpayment()
     {
@@ -268,7 +268,7 @@ class incomes
     /**
      * Get parc
      *
-     * @return string 
+     * @return string
      */
     public function getParc()
     {
@@ -291,7 +291,7 @@ class incomes
     /**
      * Get bank
      *
-     * @return \Uerp\BankBundle\Entity\BankAccount 
+     * @return \Uerp\BankBundle\Entity\BankAccount
      */
     public function getBank()
     {
