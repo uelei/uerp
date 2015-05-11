@@ -76,7 +76,7 @@ class DefaultController extends Controller
           $data[] = array($sellername,floatval($sale['sumtotal']));
 
         }
-        $ob->title->text('Total das vendas do dia  R$ '.number_format($t,2,',',''));
+        $ob->title->text($this->get('translator')->trans('day_sales'));
         $ob->series(
         array(array('type' => 'pie','name' => 'Day sales', 'data' => $data)));
       return $ob;

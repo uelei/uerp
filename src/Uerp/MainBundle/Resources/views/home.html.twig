@@ -18,13 +18,12 @@
 						<div class="col-md-8 col-lg-8 mb">
                       		<div class="darkblue-panel pn">
                       			<div class="darkblue-header">
-						  			<h5>SALES STATICS</h5>
+						  			<h5>{% trans %}sales_statics{% endtrans%} {{"now"|date('Y-m-d')}}</h5>
                       			</div>
                             <div id="piechart">
 
                             </div>
-								<p>{{"now"|date('Y-m-d')}}</p>
-                      		</div>
+                    		</div>
 						</div><!-- /col-md-4 -->
 
 						<div class="col-md-4 col-sm-4 mb">
@@ -48,7 +47,7 @@
 
                   <div class="col-lg-3 col-md-3 col-sm-3 ds">
 
-						<h3>OPEN BILLS</h3>
+						<h3>{% trans %}open_bills{% endtrans%}</h3>
           {% for entity in bills %}
                       <div class="desc">
                       	<div class="thumb">
