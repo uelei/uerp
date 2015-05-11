@@ -22,7 +22,7 @@ class ProductType extends AbstractType
             ->add('sku')
             ->add('unit','entity',array(
                 'class' => 'Uerp\ProductBundle\Entity\ProductUnit',
-                'property' => 'name',))
+                'property' => 'description',))
             ->add('ncm')
             ->add('notes')
         ;
