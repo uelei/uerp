@@ -20,3 +20,4 @@ rsync.sh
 deployment-config.json
 *~
 composer.lock
+.project
