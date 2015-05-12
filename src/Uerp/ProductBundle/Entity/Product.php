@@ -83,16 +83,12 @@ class Product
      * @ORM\JoinColumn(name="productunit_id", referencedColumnName="id")
      */
     protected $unit;
-<<<<<<< HEAD
-=======
-    
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Uerp\ProductBundle\Entity\ProductIcms")
      * @ORM\JoinColumn(name="producticms_id", referencedColumnName="id")
      */
     protected $icms;
->>>>>>> 4a607ab47e3436de09d00ce9ac1b88dfbd6f2c07
 
 
     public function __toString()
@@ -322,8 +318,6 @@ class Product
     {
         return $this->unit;
     }
-<<<<<<< HEAD
-=======
 
 
 
@@ -350,6 +344,5 @@ class Product
 	{
 		return $this->icms;
 	}
->>>>>>> 4a607ab47e3436de09d00ce9ac1b88dfbd6f2c07
-}
 
+}
