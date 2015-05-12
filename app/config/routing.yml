@@ -24,9 +24,12 @@ uerp_product:
     prefix:   /
 
 UerpProductBundle_product_unit:
-        resource: "@UerpProductBundle/Resources/config/routing/productunit.yml"
-        prefix:   /product_unit
+    resource: "@UerpProductBundle/Resources/config/routing/productunit.yml"
+    prefix:   /product_unit
 
+uerp_product_product_icms:
+    resource: "@UerpProductBundle/Resources/config/routing/producticms.yml"
+    prefix:   /product_icms
 
 uerp_supplier:
     resource: "@UerpSupplierBundle/Controller/"

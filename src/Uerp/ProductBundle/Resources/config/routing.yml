@@ -1,0 +1,4 @@
+uerp_product_product_icms:
+    resource: "@UerpProductBundle/Resources/config/routing/producticms.yml"
+    prefix:   /product_icms
+

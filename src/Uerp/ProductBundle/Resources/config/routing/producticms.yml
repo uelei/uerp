@@ -1,0 +1,30 @@
+product_icms:
+    path:     /
+    defaults: { _controller: "UerpProductBundle:ProductIcms:index" }
+
+product_icms_show:
+    path:     /{id}/show
+    defaults: { _controller: "UerpProductBundle:ProductIcms:show" }
+
+product_icms_new:
+    path:     /new
+    defaults: { _controller: "UerpProductBundle:ProductIcms:new" }
+
+product_icms_create:
+    path:     /create
+    defaults: { _controller: "UerpProductBundle:ProductIcms:create" }
+    methods:  POST
+
+product_icms_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UerpProductBundle:ProductIcms:edit" }
+
+product_icms_update:
+    path:     /{id}/update
+    defaults: { _controller: "UerpProductBundle:ProductIcms:update" }
+    methods:  [POST, PUT]
+
+product_icms_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UerpProductBundle:ProductIcms:delete" }
+    methods:  [POST, DELETE]

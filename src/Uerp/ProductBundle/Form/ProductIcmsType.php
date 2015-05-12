@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProductType extends AbstractType
+class ProductIcmsType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,29 +15,18 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('barcode')
-            ->add('name')
-            ->add('cost')
-            ->add('price')
-            ->add('sku')
-            ->add('unit','entity',array(
-                'class' => 'Uerp\ProductBundle\Entity\ProductUnit',
-                'property' => 'description',))
-            ->add('ncm')
-            ->add('icms','entity',array(
-            		'class' => 'Uerp\ProductBundle\Entity\ProductIcms',
-            		'property' => 'description',))
-            ->add('notes')
+            ->add('cson')
+            ->add('description')
         ;
     }
-
+    
     /**
      * @param OptionsResolverInterface $resolver
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Uerp\ProductBundle\Entity\Product'
+            'data_class' => 'Uerp\ProductBundle\Entity\ProductIcms'
         ));
     }
 
@@ -46,6 +35,6 @@ class ProductType extends AbstractType
      */
     public function getName()
     {
-        return 'uerp_productbundle_product';
+        return 'uerp_productbundle_producticms';
     }
 }
