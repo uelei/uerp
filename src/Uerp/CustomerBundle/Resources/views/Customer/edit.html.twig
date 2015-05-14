@@ -1,14 +1,14 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
 
 {% block body -%}
-    <h1>Customer edit</h1>
+    <h1>{% trans %}Client edit{% endtrans %}</h1>
 
     {{ form(edit_form) }}
 
         <ul class="record_actions">
     <li>
         <a href="{{ path('customer') }}">
-            Back to the list
+           {% trans %} Back to Clients{% endtrans %}
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>

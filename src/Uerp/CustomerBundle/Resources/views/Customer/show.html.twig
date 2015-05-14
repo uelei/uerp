@@ -10,51 +10,51 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>{% trans %}Name{% endtrans %}</th>
                 <td>{{ entity.name }}</td>
             </tr>
             <tr>
-                <th>Phone_number</th>
+                <th>{% trans %}Phone number{% endtrans %}</th>
                 <td>{{ entity.phonenumber }}</td>
             </tr>
             <tr>
-                <th>Mobile_number</th>
+                <th>{% trans %}Mobile number{% endtrans %}</th>
                 <td>{{ entity.mobilenumber }}</td>
             </tr>
             <tr>
-                <th>Email</th>
+                <th>{% trans %}Email{% endtrans %}</th>
                 <td>{{ entity.email }}</td>
             </tr>
             <tr>
-                <th>Birth_date</th>
+                <th>{% trans %}Birth date{% endtrans %}</th>
                 <td>{{ entity.birthdate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
-                <th>Street</th>
+                <th>{% trans %}Street{% endtrans %}</th>
                 <td>{{ entity.street }}</td>
             </tr>
             <tr>
-                <th>Street_number</th>
+                <th>{% trans %}Street number{% endtrans %}</th>
                 <td>{{ entity.streetnumber }}</td>
             </tr>
             <tr>
-                <th>Complement</th>
+                <th>{% trans %}Complement{% endtrans %}</th>
                 <td>{{ entity.complement }}</td>
             </tr>
             <tr>
-                <th>District</th>
+                <th>{% trans %}District{% endtrans %}</th>
                 <td>{{ entity.district }}</td>
             </tr>
             <tr>
-                <th>Postal_code</th>
+                <th>{% trans %}Postal code{% endtrans %}</th>
                 <td>{{ entity.postalcode }}</td>
             </tr>
             <tr>
-                <th>City</th>
+                <th>{% trans %}City{% endtrans %}</th>
                 <td>{{ entity.city }}</td>
             </tr>
             <tr>
-                <th>Notes</th>
+                <th>{% trans %}Notes{% endtrans %}</th>
                 <td>{{ entity.notes }}</td>
             </tr>
         </tbody>
@@ -63,12 +63,12 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('customer') }}">
-            Back to the list
+           {% trans %} Back to Clients{% endtrans %}
         </a>
     </li>
     <li>
         <a href="{{ path('customer_edit', { 'id': entity.id }) }}">
-            Edit
+           {% trans %} edit{% endtrans %}
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
