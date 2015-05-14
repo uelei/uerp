@@ -1,0 +1,4 @@
+uerp_customer_customer:
+    resource: "@UerpCustomerBundle/Resources/config/routing/customer.yml"
+    prefix:   /customer
+

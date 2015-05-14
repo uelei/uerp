@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'UerpMainBundle::main.html.twig' %}
 
 {% block body -%}
     <h1>Customer</h1>
@@ -14,20 +14,48 @@
                 <td>{{ entity.name }}</td>
             </tr>
             <tr>
+                <th>Phone_number</th>
+                <td>{{ entity.phonenumber }}</td>
+            </tr>
+            <tr>
+                <th>Mobile_number</th>
+                <td>{{ entity.mobilenumber }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entity.email }}</td>
+            </tr>
+            <tr>
+                <th>Birth_date</th>
+                <td>{{ entity.birthdate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
                 <th>Street</th>
                 <td>{{ entity.street }}</td>
             </tr>
             <tr>
-                <th>Number</th>
-                <td>{{ entity.number }}</td>
+                <th>Street_number</th>
+                <td>{{ entity.streetnumber }}</td>
+            </tr>
+            <tr>
+                <th>Complement</th>
+                <td>{{ entity.complement }}</td>
+            </tr>
+            <tr>
+                <th>District</th>
+                <td>{{ entity.district }}</td>
+            </tr>
+            <tr>
+                <th>Postal_code</th>
+                <td>{{ entity.postalcode }}</td>
             </tr>
             <tr>
                 <th>City</th>
                 <td>{{ entity.city }}</td>
             </tr>
             <tr>
-                <th>Obs</th>
-                <td>{{ entity.obs }}</td>
+                <th>Notes</th>
+                <td>{{ entity.notes }}</td>
             </tr>
         </tbody>
     </table>

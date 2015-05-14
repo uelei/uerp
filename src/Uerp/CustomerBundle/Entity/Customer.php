@@ -30,6 +30,26 @@ class Customer {
      */
     protected $name;
 
+    /**
+     * @ORM\Column(type="string",length=11, nullable=true)
+     */
+    protected $phone_number;
+    
+    /**
+     * @ORM\Column(type="string",length=11)
+     */
+    protected $mobile_number;
+    
+    /**
+     * @ORM\Column(type="string",length=50)
+     */
+    protected $email;
+    
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    protected $birth_date;
+    
 
     /**
      * @ORM\Column(type="string",length=200)
@@ -40,7 +60,22 @@ class Customer {
     /**
      * @ORM\Column(type="string",length=10)
      */
-    protected $number;
+    protected $street_number;
+    
+    /**
+     * @ORM\Column(type="string",length=40, nullable=true)
+     */
+    protected $complement;
+    
+    /**
+     * @ORM\Column(type="string",length=10)
+     */
+    protected $district;
+    
+    /**
+     * @ORM\Column(type="string",length=10)
+     */
+    protected $postal_code;
 
 
     /**
@@ -50,9 +85,9 @@ class Customer {
 
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
-    protected $obs;
+    protected $notes;
 
 
 
@@ -121,28 +156,7 @@ class Customer {
         return $this->street;
     }
 
-    /**
-     * Set number
-     *
-     * @param string $number
-     * @return Customer
-     */
-    public function setNumber($number)
-    {
-        $this->number = $number;
 
-        return $this;
-    }
-
-    /**
-     * Get number
-     *
-     * @return string 
-     */
-    public function getNumber()
-    {
-        return $this->number;
-    }
 
     /**
      * Set city
@@ -167,26 +181,221 @@ class Customer {
         return $this->city;
     }
 
+
+
     /**
-     * Set obs
+     * Set phoneNumber
      *
-     * @param string $obs
+     * @param string $phoneNumber
+     *
      * @return Customer
      */
-    public function setObs($obs)
+    public function setPhoneNumber($phoneNumber)
     {
-        $this->obs = $obs;
+        $this->phone_number = $phoneNumber;
 
         return $this;
     }
 
     /**
-     * Get obs
+     * Get phoneNumber
      *
-     * @return string 
+     * @return string
      */
-    public function getObs()
+    public function getPhoneNumber()
     {
-        return $this->obs;
+        return $this->phone_number;
+    }
+
+    /**
+     * Set mobileNumber
+     *
+     * @param string $mobileNumber
+     *
+     * @return Customer
+     */
+    public function setMobileNumber($mobileNumber)
+    {
+        $this->mobile_number = $mobileNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get mobileNumber
+     *
+     * @return string
+     */
+    public function getMobileNumber()
+    {
+        return $this->mobile_number;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Customer
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set birthDate
+     *
+     * @param \DateTime $birthDate
+     *
+     * @return Customer
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birth_date = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get birthDate
+     *
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birth_date;
+    }
+
+    /**
+     * Set streetNumber
+     *
+     * @param string $streetNumber
+     *
+     * @return Customer
+     */
+    public function setStreetNumber($streetNumber)
+    {
+        $this->street_number = $streetNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get streetNumber
+     *
+     * @return string
+     */
+    public function getStreetNumber()
+    {
+        return $this->street_number;
+    }
+
+    /**
+     * Set complement
+     *
+     * @param string $complement
+     *
+     * @return Customer
+     */
+    public function setComplement($complement)
+    {
+        $this->complement = $complement;
+
+        return $this;
+    }
+
+    /**
+     * Get complement
+     *
+     * @return string
+     */
+    public function getComplement()
+    {
+        return $this->complement;
+    }
+
+    /**
+     * Set district
+     *
+     * @param string $district
+     *
+     * @return Customer
+     */
+    public function setDistrict($district)
+    {
+        $this->district = $district;
+
+        return $this;
+    }
+
+    /**
+     * Get district
+     *
+     * @return string
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * Set postalCode
+     *
+     * @param string $postalCode
+     *
+     * @return Customer
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postal_code = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * Get postalCode
+     *
+     * @return string
+     */
+    public function getPostalCode()
+    {
+        return $this->postal_code;
+    }
+
+    /**
+     * Set notes
+     *
+     * @param string $notes
+     *
+     * @return Customer
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
+
+        return $this;
+    }
+
+    /**
+     * Get notes
+     *
+     * @return string
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }

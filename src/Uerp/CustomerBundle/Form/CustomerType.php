@@ -16,10 +16,17 @@ class CustomerType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('phone_number')
+            ->add('mobile_number')
+            ->add('email')
+            ->add('birth_date')
             ->add('street')
-            ->add('number')
+            ->add('street_number')
+            ->add('complement')
+            ->add('district')
+            ->add('postal_code')
             ->add('city')
-            ->add('obs')
+            ->add('notes')
         ;
     }
     

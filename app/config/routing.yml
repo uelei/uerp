@@ -51,10 +51,9 @@ uerp_sale:
     type:     annotation
     prefix:   /
 
-uerp_customer:
-    resource: "@UerpCustomerBundle/Controller/"
-    type:     annotation
-    prefix:   /
+uerp_customer_customer:
+    resource: "@UerpCustomerBundle/Resources/config/routing/customer.yml"
+    prefix:   /customer
 
 uerp_seller:
     resource: "@UerpSellerBundle/Controller/"
