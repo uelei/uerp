@@ -8,6 +8,15 @@ Projeto em fase : alpha
 Projeto Opensource de ERP em php usando o framework [Symfony2](http://symfony.com/).
 
 
+Demo
+-----------------------------------------
+
+visite o site demo
+
+[Demo](http://uerp-uelei.c9.io/web/)
+
+
+
 Modo de teste sem desenvolvimento (windows)
 ----------------------------------------
 

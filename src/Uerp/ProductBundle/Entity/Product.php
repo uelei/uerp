@@ -83,8 +83,7 @@ class Product
      * @ORM\JoinColumn(name="productunit_id", referencedColumnName="id")
      */
     protected $unit;
-    
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Uerp\ProductBundle\Entity\ProductIcms")
      * @ORM\JoinColumn(name="producticms_id", referencedColumnName="id")
@@ -345,5 +344,5 @@ class Product
 	{
 		return $this->icms;
 	}
-}
 
+}
