@@ -1,0 +1,30 @@
+customer:
+    path:     /
+    defaults: { _controller: "UerpCustomerBundle:Customer:index" }
+
+customer_show:
+    path:     /{id}/show
+    defaults: { _controller: "UerpCustomerBundle:Customer:show" }
+
+customer_new:
+    path:     /new
+    defaults: { _controller: "UerpCustomerBundle:Customer:new" }
+
+customer_create:
+    path:     /create
+    defaults: { _controller: "UerpCustomerBundle:Customer:create" }
+    methods:  POST
+
+customer_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UerpCustomerBundle:Customer:edit" }
+
+customer_update:
+    path:     /{id}/update
+    defaults: { _controller: "UerpCustomerBundle:Customer:update" }
+    methods:  [POST, PUT]
+
+customer_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UerpCustomerBundle:Customer:delete" }
+    methods:  [POST, DELETE]

@@ -4,16 +4,13 @@ namespace Uerp\CustomerBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
 use Uerp\CustomerBundle\Entity\Customer;
 use Uerp\CustomerBundle\Form\CustomerType;
 
 /**
  * Customer controller.
  *
- * @Route("/customer")
  */
 class CustomerController extends Controller
 {
@@ -21,9 +18,6 @@ class CustomerController extends Controller
     /**
      * Lists all Customer entities.
      *
-     * @Route("/", name="customer")
-     * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -31,16 +25,13 @@ class CustomerController extends Controller
 
         $entities = $em->getRepository('UerpCustomerBundle:Customer')->findAll();
 
-        return array(
+        return $this->render('UerpCustomerBundle:Customer:index.html.twig', array(
             'entities' => $entities,
-        );
+        ));
     }
     /**
      * Creates a new Customer entity.
      *
-     * @Route("/", name="customer_create")
-     * @Method("POST")
-     * @Template("UerpCustomerBundle:Customer:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -56,10 +47,10 @@ class CustomerController extends Controller
             return $this->redirect($this->generateUrl('customer_show', array('id' => $entity->getId())));
         }
 
-        return array(
+        return $this->render('UerpCustomerBundle:Customer:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
@@ -84,27 +75,21 @@ class CustomerController extends Controller
     /**
      * Displays a form to create a new Customer entity.
      *
-     * @Route("/new", name="customer_new")
-     * @Method("GET")
-     * @Template()
      */
     public function newAction()
     {
         $entity = new Customer();
         $form   = $this->createCreateForm($entity);
 
-        return array(
+        return $this->render('UerpCustomerBundle:Customer:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
      * Finds and displays a Customer entity.
      *
-     * @Route("/{id}", name="customer_show")
-     * @Method("GET")
-     * @Template()
      */
     public function showAction($id)
     {
@@ -118,18 +103,15 @@ class CustomerController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('UerpCustomerBundle:Customer:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
      * Displays a form to edit an existing Customer entity.
      *
-     * @Route("/{id}/edit", name="customer_edit")
-     * @Method("GET")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -144,11 +126,11 @@ class CustomerController extends Controller
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return array(
+        return $this->render('UerpCustomerBundle:Customer:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
 
     /**
@@ -172,9 +154,6 @@ class CustomerController extends Controller
     /**
      * Edits an existing Customer entity.
      *
-     * @Route("/{id}", name="customer_update")
-     * @Method("PUT")
-     * @Template("UerpCustomerBundle:Customer:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -196,17 +175,15 @@ class CustomerController extends Controller
             return $this->redirect($this->generateUrl('customer_edit', array('id' => $id)));
         }
 
-        return array(
+        return $this->render('UerpCustomerBundle:Customer:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        );
+        ));
     }
     /**
      * Deletes a Customer entity.
      *
-     * @Route("/{id}", name="customer_delete")
-     * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
