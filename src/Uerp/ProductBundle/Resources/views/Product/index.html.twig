@@ -10,12 +10,12 @@
         <table class="table table-striped table-advance table-hover">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Cod de Barras</th>
-                        <th>Descrição</th>
-                        <th>Custo</th>
-                        <th>Preço</th>
-                        <th>Referencia</th>
+                        <th>{% trans %}Id{% endtrans %}</th>
+                        <th>{% trans %}Barcode{% endtrans %}</th>
+                        <th>{% trans %}Nome{% endtrans %}</th>
+                        <th>{% trans %}Cost{% endtrans %}</th>
+                        <th>{% trans %}Price{% endtrans %}</th>
+                        <th>{% trans %}Sku{% endtrans %}</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -32,8 +32,8 @@
                         <td>{{ entity.sku }}</td>
                         <td>
 
-                        <a  class="btn btn-info btn-xs" href="{{ path('product_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> Detalhes</a>
-                        <a  class="btn btn-warning btn-xs" href="{{ path('product_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i> Editar</a>
+                        <a  class="btn btn-info btn-xs" href="{{ path('product_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i> {% trans %}view{% endtrans %}</a>
+                        <a  class="btn btn-warning btn-xs" href="{{ path('product_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i>{% trans %} edit {% endtrans %}</a>
 
                         </td>
                     </tr>
@@ -46,7 +46,7 @@
 
         <ul>
         <li>
-              <a  class="btn btn-success" href="{{ path('product_new')  }}"><i class="fa fa-plus"></i> Novo Produto</a>
+              <a  class="btn btn-success" href="{{ path('product_new')  }}"><i class="fa fa-plus"></i>{% trans %}New Product{% endtrans %}</a>
         </li>
     </ul>
     {% endblock %}
