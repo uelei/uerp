@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: uelei
- * Date: 21/01/15
- * Time: 1:20 PM
- */
 
 namespace Uerp\CustomerBundle\Entity;
 
@@ -88,7 +82,6 @@ class Customer {
      * @ORM\Column(type="text", nullable=true)
      */
     protected $notes;
-
 
 
 

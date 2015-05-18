@@ -1,14 +1,17 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
 {% block body -%}
-    <h1>Product creation</h1>
 
-    {{ form(form) }}
+<div class="panel panel-info" style="margin: 20px">
+	<div class="panel-heading">
+    	<h3>Product creation</h3>
+    </div>
+	<div class="panel-body">
+	
+		{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('product') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    	{{ form(form) }}
+
+        <a class="btn btn-info btn-sm" href="{{ path('product') }}">Back to the list</a>
+	</div>
+</div>
 {% endblock %}
