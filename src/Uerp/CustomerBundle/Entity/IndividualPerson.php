@@ -2,68 +2,99 @@
 
 namespace Uerp\CustomerBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * IndividualPerson
+ * 
+ * @ORM\Table(name="individual_person" )
+ * @ORM\Entity
  */
+ 
 class IndividualPerson
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(name="cpf", type="string", length=14)
      */
     private $cpf;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="rg_number", type="string", length=14, nullable=true)
      */
     private $rgNumber;
 
     /**
      * @var \DateTime
+     * 
+     * @ORM\Column(name="rg_expedition_date", type="date", nullable=true)
      */
     private $rgExpeditionDate;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="rg_expedition_local", type="string", length=30, nullable=true)
      */
     private $rgExpeditionLocal;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="occupation", type="string", length=50, nullable=true)
      */
     private $occupation;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="workplace", type="string", length=50, nullable=true)
      */
     private $workplace;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="salary", type="decimal", nullable=true)
      */
     private $salary;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="spouse_name", type="string", length=50, nullable=true)
      */
     private $spouseName;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="father_name", type="string", length=50, nullable=true)
      */
     private $fatherName;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="mother_name", type="string", length=50, nullable=true)
      */
     private $motherName;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="gender", type="string", length=1)
      */
     private $gender;
 

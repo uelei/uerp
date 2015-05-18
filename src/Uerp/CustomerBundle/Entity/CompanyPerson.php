@@ -2,48 +2,72 @@
 
 namespace Uerp\CustomerBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * CompanyPerson
+ * 
+ * @ORM\Table(name="company_person" )
+ * @ORM\Entity
  */
+ 
 class CompanyPerson
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="fancy_name", type="string", length=50, nullable=true)
      */
     private $fancyName;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="cnpj", type="string", length=18)
      */
     private $cnpj;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="state_registry", type="string", length=20 )
      */
     private $stateRegistry;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="city_registry", type="string", length=20, nullable=true)
      */
     private $cityRegistry;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="contact", type="string", length=50, nullable=true)
      */
     private $contact;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="contact_phone", type="string", length=30, nullable=true)
      */
     private $contactPhone;
 
     /**
      * @var string
+     * 
+     * @ORM\Column(name="contact_email", type="string", length=50, nullable=true)
      */
     private $contactEmail;
 
