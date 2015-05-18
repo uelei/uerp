@@ -1,20 +1,16 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
-
 {% block body -%}
+
 <div class="panel panel-info" style="margin: 20px">
-<div class="panel-heading">
-    <h3>Sub Categorias Novo </h3>
-</div>
-<div class="panel-body">
+	<div class="panel-heading">
+    	<h3>Sub Categorias Novo </h3>
+	</div>
+	<div class="panel-body">
 
-  {{ form(form) }}
+		{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+		{{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('subcategories') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+        <a class="btn btn-info btn-sm" href="{{ path('subcategories') }}">Back to the list</a>
+	</div>
 </div>
 {% endblock %}

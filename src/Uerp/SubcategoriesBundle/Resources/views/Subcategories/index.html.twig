@@ -1,4 +1,5 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
+{% block title %} Sub Categories{% endblock %}
 
 {% block body -%}
 <div class="panel panel-info" style="margin: 20px">
@@ -7,7 +8,7 @@
 </div>
 <div class="panel-body">
 
-    <table class="records_list">
+    <table class="table table-striped table-advance table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -21,14 +22,8 @@
                 <td><a href="{{ path('subcategories_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.description }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('subcategories_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('subcategories_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                     <a  class="btn btn-info btn-xs" href="{{ path('subcategories_show', { 'id': entity.id }) }}"><i class="fa fa-eye"></i>show</a>
+                     <a  class="btn btn-warning btn-xs" href="{{ path('subcategories_edit', { 'id': entity.id }) }}"><i class="fa fa-pencil"></i>edit</a>
                 </td>
             </tr>
         {% endfor %}
@@ -37,9 +32,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('subcategories_new') }}">
-                Create a new entry
-            </a>
+            <a class="btn btn-success" href="{{ path('subcategories_new') }}">Create a new entry </a>
         </li>
     </ul>
     </div>

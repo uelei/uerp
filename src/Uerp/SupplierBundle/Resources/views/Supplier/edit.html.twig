@@ -1,16 +1,19 @@
-{% extends '::base.html.twig' %}
-
+{% extends 'UerpMainBundle::main.html.twig' %}
 {% block body -%}
-    <h1>Supplier edit</h1>
 
-    {{ form(edit_form) }}
+<div class="panel panel-info" style="margin: 20px">
+	<div class="panel-heading">
+    	<h3>Supplier edit</h3>
+    </div>
+    <div class="panel-body">
+	
+		{% form_theme edit_form 'bootstrap_3_horizontal_layout.html.twig' %}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('supplier') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    	{{ form(edit_form) }}
+
+        <a class="btn btn-info btn-sm"  href="{{ path('supplier') }}">Back to the list</a>
+
+		{{ form(delete_form) }}
+	</div>
+</div>	
 {% endblock %}
