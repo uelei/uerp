@@ -40,9 +40,9 @@ class ProductIcms
 
     public function __toString()
     {
-        return $this->cson;
+        return (string) $this->cson;
     }
-    
+
     /**
      * Get id
      *
