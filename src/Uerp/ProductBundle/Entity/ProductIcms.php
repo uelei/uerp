@@ -14,7 +14,7 @@ class ProductIcms
 {
     /**
      * @var integer
-     * 
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -23,7 +23,7 @@ class ProductIcms
 
     /**
      * @var integer
-     * 
+     *
      * @ORM\Column(name="cson", type="integer")
      * @Assert\NotBlank
      */
@@ -31,13 +31,18 @@ class ProductIcms
 
     /**
      * @var string
-     * 
+     *
      * @ORM\Column(name="description", type="string", length=45)
      * @Assert\NotBlank
      */
     private $description;
 
 
+    public function __toString()
+    {
+        return $this->cson;
+    }
+    
     /**
      * Get id
      *
@@ -96,4 +101,3 @@ class ProductIcms
         return $this->description;
     }
 }
-
