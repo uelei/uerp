@@ -1,3 +1,11 @@
+uerp_customer_companyperson:
+    resource: "@UerpCustomerBundle/Resources/config/routing/companyperson.yml"
+    prefix:   /companyperson
+
+uerp_customer_individualperson:
+    resource: "@UerpCustomerBundle/Resources/config/routing/individualperson.yml"
+    prefix:   /individualperson
+
 uerp_customer_customer:
     resource: "@UerpCustomerBundle/Resources/config/routing/customer.yml"
     prefix:   /customer

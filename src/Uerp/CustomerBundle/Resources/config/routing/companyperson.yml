@@ -1,0 +1,30 @@
+companyperson:
+    path:     /
+    defaults: { _controller: "UerpCustomerBundle:CompanyPerson:index" }
+
+companyperson_show:
+    path:     /{id}/show
+    defaults: { _controller: "UerpCustomerBundle:CompanyPerson:show" }
+
+companyperson_new:
+    path:     /new
+    defaults: { _controller: "UerpCustomerBundle:CompanyPerson:new" }
+
+companyperson_create:
+    path:     /create
+    defaults: { _controller: "UerpCustomerBundle:CompanyPerson:create" }
+    methods:  POST
+
+companyperson_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UerpCustomerBundle:CompanyPerson:edit" }
+
+companyperson_update:
+    path:     /{id}/update
+    defaults: { _controller: "UerpCustomerBundle:CompanyPerson:update" }
+    methods:  [POST, PUT]
+
+companyperson_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UerpCustomerBundle:CompanyPerson:delete" }
+    methods:  [POST, DELETE]

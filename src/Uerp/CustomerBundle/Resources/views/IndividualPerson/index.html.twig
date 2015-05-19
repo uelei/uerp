@@ -1,11 +1,22 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Customer list</h1>
+    <h1>IndividualPerson list</h1>
 
     <table class="records_list">
         <thead>
             <tr>
+                <th>Cpf</th>
+                <th>Rgnumber</th>
+                <th>Rgexpeditiondate</th>
+                <th>Rgexpeditionlocal</th>
+                <th>Occupation</th>
+                <th>Workplace</th>
+                <th>Salary</th>
+                <th>Spousename</th>
+                <th>Fathername</th>
+                <th>Mothername</th>
+                <th>Gender</th>
                 <th>Id</th>
                 <th>Name</th>
                 <th>Phone_number</th>
@@ -25,7 +36,18 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('customer_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('individualperson_show', { 'id': entity.id }) }}">{{ entity.cpf }}</a></td>
+                <td>{{ entity.rgNumber }}</td>
+                <td>{% if entity.rgExpeditionDate %}{{ entity.rgExpeditionDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.rgExpeditionLocal }}</td>
+                <td>{{ entity.occupation }}</td>
+                <td>{{ entity.workplace }}</td>
+                <td>{{ entity.salary }}</td>
+                <td>{{ entity.spouseName }}</td>
+                <td>{{ entity.fatherName }}</td>
+                <td>{{ entity.motherName }}</td>
+                <td>{{ entity.gender }}</td>
+                <td>{{ entity.id }}</td>
                 <td>{{ entity.name }}</td>
                 <td>{{ entity.phonenumber }}</td>
                 <td>{{ entity.mobilenumber }}</td>
@@ -41,10 +63,10 @@
                 <td>
                 <ul>
                     <li>
-                        <a href="{{ path('customer_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('individualperson_show', { 'id': entity.id }) }}">show</a>
                     </li>
                     <li>
-                        <a href="{{ path('customer_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('individualperson_edit', { 'id': entity.id }) }}">edit</a>
                     </li>
                 </ul>
                 </td>
@@ -55,7 +77,7 @@
 
         <ul>
         <li>
-            <a href="{{ path('customer_new') }}">
+            <a href="{{ path('individualperson_new') }}">
                 Create a new entry
             </a>
         </li>

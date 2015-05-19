@@ -1,0 +1,30 @@
+individualperson:
+    path:     /
+    defaults: { _controller: "UerpCustomerBundle:IndividualPerson:index" }
+
+individualperson_show:
+    path:     /{id}/show
+    defaults: { _controller: "UerpCustomerBundle:IndividualPerson:show" }
+
+individualperson_new:
+    path:     /new
+    defaults: { _controller: "UerpCustomerBundle:IndividualPerson:new" }
+
+individualperson_create:
+    path:     /create
+    defaults: { _controller: "UerpCustomerBundle:IndividualPerson:create" }
+    methods:  POST
+
+individualperson_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UerpCustomerBundle:IndividualPerson:edit" }
+
+individualperson_update:
+    path:     /{id}/update
+    defaults: { _controller: "UerpCustomerBundle:IndividualPerson:update" }
+    methods:  [POST, PUT]
+
+individualperson_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UerpCustomerBundle:IndividualPerson:delete" }
+    methods:  [POST, DELETE]
