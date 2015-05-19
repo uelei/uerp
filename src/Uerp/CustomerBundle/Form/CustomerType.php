@@ -27,6 +27,13 @@ class CustomerType extends AbstractType
             ->add('postal_code')
             ->add('city')
             ->add('notes')
+            ->add('company','entity',array(
+                'class' => 'Uerp\CustomerBundle\Entity\CompanyPerson',
+                'property' => 'company',))
+            ->add('individual','entity',array(
+               	'class' => 'Uerp\CustomerBundle\Entity\IndividualPerson',
+                'property' => 'individual',))            
+            
         ;
     }
     

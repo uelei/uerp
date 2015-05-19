@@ -82,6 +82,18 @@ class Customer {
      * @ORM\Column(type="text", nullable=true)
      */
     protected $notes;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="CompanyPerson")
+     * @ORM\JoinColumn(name="companyperson_id", referencedColumnName="id")
+     */
+    private $company;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="IndividualPerson")
+     * @ORM\JoinColumn(name="individualperson_id", referencedColumnName="id")
+     */
+    private $individual;
 
 
 
@@ -391,4 +403,53 @@ class Customer {
     {
         return $this->notes;
     }
+    
+    /**
+     * Set company
+     *
+     * @param \Uerp\CustomerBundle\Entity\CompanyPerson $company
+     *
+     * @return CompanyPerson
+     */
+    public function setCompany(\Uerp\CustomerBundle\Entity\CompanyPerson $company = null)
+    {
+    	$this->company = $company;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get company
+     *
+     * @return \Uerp\CustomerBundle\Entity\CompanyPerson
+     */
+    public function getCompany()
+    {
+    	return $this->company;
+    }
+    
+    /**
+     * Set individual
+     *
+     * @param \Uerp\CustomerBundle\Entity\IndividualPerson $individual
+     *
+     * @return IndividualPerson
+     */
+    public function setIndividual(\Uerp\CustomerBundle\Entity\IndividualPerson $individual = null)
+    {
+    	$this->individual = $individual;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get individual
+     *
+     * @return \Uerp\CustomerBundle\Entity\IndividualPerson
+     */
+    public function getIndividual()
+    {
+    	return $this->individual;
+    }
+    
 }
