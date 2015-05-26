@@ -9,6 +9,7 @@
 <script src="//code.highcharts.com/4.0.1/modules/exporting.js"></script>
 <script type="text/javascript">
     {{ chart(chart) }}
+    {{ chart(barchart) }}
 </script>
 
 <div class="panel panel-info" style="margin: 20px" id="total">
@@ -20,8 +21,11 @@
       {% form_theme formfilter 'bootstrap_3_horizontal_layout.html.twig' %}
       {{ form(formfilter)}}
     </div>
+        <div id="piechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+        <br><br>
+        <div id="barcha" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
 
-<div id="piechart" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
 </div>
 
 

@@ -1,15 +1,16 @@
-{% extends '::base.html.twig' %}
+{% extends 'UerpMainBundle::main.html.twig' %}
+{% block title %} Customer {% endblock %}
 
 {% block body -%}
-    <h1>Customer creation</h1>
 
-    {{ form(form) }}
-
-        <ul class="record_actions">
     <li>
-        <a href="{{ path('customer') }}">
-            Back to the list
-        </a>
+        <ul>
+            <a href="{{ path('companyperson') }}"> company</a>
+        </ul>
+        <ul>
+            <a href="{{ path('individualperson') }}"> individual</a>
+        </ul>
     </li>
-</ul>
+
+
 {% endblock %}
