@@ -23,7 +23,7 @@ class CompanyPersonController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('UerpCustomerBundle:CompanyPerson')->findAll();
+        $entities = $em->getRepository('UerpCustomerBundle:Customer')->findAll();
 
         return $this->render('UerpCustomerBundle:CompanyPerson:index.html.twig', array(
             'entities' => $entities,

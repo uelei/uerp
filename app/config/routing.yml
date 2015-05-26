@@ -52,8 +52,8 @@ uerp_sale:
     prefix:   /
 
 uerp_customer_customer:
-    resource: "@UerpCustomerBundle/Resources/config/routing/customer.yml"
-    prefix:   /customer
+    resource: "@UerpCustomerBundle/Resources/config/routing.yml"
+    prefix:   /
 
 uerp_seller:
     resource: "@UerpSellerBundle/Controller/"

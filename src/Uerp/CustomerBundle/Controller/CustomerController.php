@@ -21,13 +21,14 @@ class CustomerController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('UerpCustomerBundle:Customer')->findAll();
-
-        return $this->render('UerpCustomerBundle:Customer:index.html.twig', array(
-            'entities' => $entities,
-        ));
+        return $this->render('UerpCustomerBundle:Customer:new.html.twig');
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $entities = $em->getRepository('UerpCustomerBundle:Customer')->findAll();
+//
+//        return $this->render('UerpCustomerBundle:Customer:index.html.twig', array(
+//            'entities' => $entities,
+//        ));
     }
     /**
      * Creates a new Customer entity.
@@ -78,13 +79,7 @@ class CustomerController extends Controller
      */
     public function newAction()
     {
-        $entity = new Customer();
-        $form   = $this->createCreateForm($entity);
-
-        return $this->render('UerpCustomerBundle:Customer:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        ));
+        return $this->render('UerpCustomerBundle:Customer:new.html.twig');
     }
 
     /**

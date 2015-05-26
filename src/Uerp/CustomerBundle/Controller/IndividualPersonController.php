@@ -23,7 +23,7 @@ class IndividualPersonController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('UerpCustomerBundle:IndividualPerson')->findAll();
+        $entities = $em->getRepository('UerpCustomerBundle:Customer')->findAll();
 
         return $this->render('UerpCustomerBundle:IndividualPerson:index.html.twig', array(
             'entities' => $entities,
