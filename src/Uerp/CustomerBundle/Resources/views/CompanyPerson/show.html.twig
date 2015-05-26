@@ -1,10 +1,38 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Customer</h1>
+    <h1>CompanyPerson</h1>
 
     <table class="record_properties">
         <tbody>
+            <tr>
+                <th>Fancyname</th>
+                <td>{{ entity.fancyName }}</td>
+            </tr>
+            <tr>
+                <th>Cnpj</th>
+                <td>{{ entity.cnpj }}</td>
+            </tr>
+            <tr>
+                <th>Stateregistry</th>
+                <td>{{ entity.stateRegistry }}</td>
+            </tr>
+            <tr>
+                <th>Cityregistry</th>
+                <td>{{ entity.cityRegistry }}</td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>{{ entity.contact }}</td>
+            </tr>
+            <tr>
+                <th>Contactphone</th>
+                <td>{{ entity.contactPhone }}</td>
+            </tr>
+            <tr>
+                <th>Contactemail</th>
+                <td>{{ entity.contactEmail }}</td>
+            </tr>
             <tr>
                 <th>Id</th>
                 <td>{{ entity.id }}</td>
@@ -62,12 +90,12 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('customer') }}">
+        <a href="{{ path('companyperson') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('customer_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('companyperson_edit', { 'id': entity.id }) }}">
             Edit
         </a>
     </li>
