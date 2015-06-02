@@ -1,0 +1,33 @@
+
+        .black-bg {
+        /*background: ;*/
+        border-bottom: 1px solid #9191C3;}
+        a.logo {
+            font-size: 20px;
+            color: #9191C3;
+            float: left;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+        a.logo:hover, a.logo:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+#totaldavenda {
+
+color: red;
+text-align: center;
+border: 3px;
+border-color: #32D334;
+border-style: solid;
+border-radius: 10px;
+
+font: bold 40px sans-serif;
+padding-top: 10px;
+
+}
+
+ul li {
+    list-style: none;
+}

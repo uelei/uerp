@@ -19,7 +19,10 @@
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "ob/highcharts-bundle": "~1.2"
+        "ob/highcharts-bundle": "1.2.*@dev",
+        "nfephp-org/nfephp": "4.0.*@dev",
+        "mpdf/mpdf":"dev-master"
+
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

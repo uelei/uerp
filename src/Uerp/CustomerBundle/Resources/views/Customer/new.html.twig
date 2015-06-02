@@ -1,17 +1,16 @@
 {% extends 'UerpMainBundle::main.html.twig' %}
+{% block title %} Customer {% endblock %}
+
 {% block body -%}
 
-<div class="panel panel-info" style="margin: 20px">
-	<div class="panel-heading">
-    	<h3>{% trans %}New Client{% endtrans %}</h3>
-    </div>
-	<div class="panel-body">
-	
-		{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+    <li>
+        <ul>
+            <a href="{{ path('companyperson') }}"> company</a>
+        </ul>
+        <ul>
+            <a href="{{ path('individualperson') }}"> individual</a>
+        </ul>
 
-    	{{ form(form) }}
 
-        <a href="{{ path('customer') }}"> {% trans %}Back to Clients{% endtrans %}</a>
-	</div>
-</div>
+    </li>
 {% endblock %}

@@ -5,38 +5,37 @@ namespace Uerp\CustomerBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use Uerp\CustomerBundle\Entity\Customer;
-use Uerp\CustomerBundle\Form\CustomerType;
+use Uerp\CustomerBundle\Entity\CompanyPerson;
+use Uerp\CustomerBundle\Form\CompanyPersonType;
 
 /**
- * Customer controller.
+ * CompanyPerson controller.
  *
  */
-class CustomerController extends Controller
+class CompanyPersonController extends Controller
 {
 
     /**
-     * Lists all Customer entities.
+     * Lists all CompanyPerson entities.
      *
      */
     public function indexAction()
     {
-        return $this->render('UerpCustomerBundle:Customer:new.html.twig');
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $entities = $em->getRepository('UerpCustomerBundle:Customer')->findAll();
-//
-//        return $this->render('UerpCustomerBundle:Customer:index.html.twig', array(
-//            'entities' => $entities,
-//        ));
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('UerpCustomerBundle:Customer')->findAll();
+
+        return $this->render('UerpCustomerBundle:CompanyPerson:index.html.twig', array(
+            'entities' => $entities,
+        ));
     }
     /**
-     * Creates a new Customer entity.
+     * Creates a new CompanyPerson entity.
      *
      */
     public function createAction(Request $request)
     {
-        $entity = new Customer();
+        $entity = new CompanyPerson();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -45,26 +44,26 @@ class CustomerController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('customer_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('companyperson_show', array('id' => $entity->getId())));
         }
 
-        return $this->render('UerpCustomerBundle:Customer:new.html.twig', array(
+        return $this->render('UerpCustomerBundle:CompanyPerson:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
         ));
     }
 
     /**
-     * Creates a form to create a Customer entity.
+     * Creates a form to create a CompanyPerson entity.
      *
-     * @param Customer $entity The entity
+     * @param CompanyPerson $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Customer $entity)
+    private function createCreateForm(CompanyPerson $entity)
     {
-        $form = $this->createForm(new CustomerType(), $entity, array(
-            'action' => $this->generateUrl('customer_create'),
+        $form = $this->createForm(new CompanyPersonType(), $entity, array(
+            'action' => $this->generateUrl('companyperson_create'),
             'method' => 'POST',
         ));
 
@@ -74,54 +73,60 @@ class CustomerController extends Controller
     }
 
     /**
-     * Displays a form to create a new Customer entity.
+     * Displays a form to create a new CompanyPerson entity.
      *
      */
     public function newAction()
     {
-        return $this->render('UerpCustomerBundle:Customer:new.html.twig');
+        $entity = new CompanyPerson();
+        $form   = $this->createCreateForm($entity);
+
+        return $this->render('UerpCustomerBundle:CompanyPerson:new.html.twig', array(
+            'entity' => $entity,
+            'form'   => $form->createView(),
+        ));
     }
 
     /**
-     * Finds and displays a Customer entity.
+     * Finds and displays a CompanyPerson entity.
      *
      */
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UerpCustomerBundle:Customer')->find($id);
+        $entity = $em->getRepository('UerpCustomerBundle:CompanyPerson')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Customer entity.');
+            throw $this->createNotFoundException('Unable to find CompanyPerson entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UerpCustomerBundle:Customer:show.html.twig', array(
+        return $this->render('UerpCustomerBundle:CompanyPerson:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Customer entity.
+     * Displays a form to edit an existing CompanyPerson entity.
      *
      */
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UerpCustomerBundle:Customer')->find($id);
+        $entity = $em->getRepository('UerpCustomerBundle:CompanyPerson')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Customer entity.');
+            throw $this->createNotFoundException('Unable to find CompanyPerson entity.');
         }
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('UerpCustomerBundle:Customer:edit.html.twig', array(
+        return $this->render('UerpCustomerBundle:CompanyPerson:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -129,16 +134,16 @@ class CustomerController extends Controller
     }
 
     /**
-    * Creates a form to edit a Customer entity.
+    * Creates a form to edit a CompanyPerson entity.
     *
-    * @param Customer $entity The entity
+    * @param CompanyPerson $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Customer $entity)
+    private function createEditForm(CompanyPerson $entity)
     {
-        $form = $this->createForm(new CustomerType(), $entity, array(
-            'action' => $this->generateUrl('customer_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new CompanyPersonType(), $entity, array(
+            'action' => $this->generateUrl('companyperson_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -147,17 +152,17 @@ class CustomerController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Customer entity.
+     * Edits an existing CompanyPerson entity.
      *
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UerpCustomerBundle:Customer')->find($id);
+        $entity = $em->getRepository('UerpCustomerBundle:CompanyPerson')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Customer entity.');
+            throw $this->createNotFoundException('Unable to find CompanyPerson entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -167,17 +172,17 @@ class CustomerController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('customer_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('companyperson_edit', array('id' => $id)));
         }
 
-        return $this->render('UerpCustomerBundle:Customer:edit.html.twig', array(
+        return $this->render('UerpCustomerBundle:CompanyPerson:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
     /**
-     * Deletes a Customer entity.
+     * Deletes a CompanyPerson entity.
      *
      */
     public function deleteAction(Request $request, $id)
@@ -187,21 +192,21 @@ class CustomerController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('UerpCustomerBundle:Customer')->find($id);
+            $entity = $em->getRepository('UerpCustomerBundle:CompanyPerson')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Customer entity.');
+                throw $this->createNotFoundException('Unable to find CompanyPerson entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('customer'));
+        return $this->redirect($this->generateUrl('companyperson'));
     }
 
     /**
-     * Creates a form to delete a Customer entity by id.
+     * Creates a form to delete a CompanyPerson entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -210,7 +215,7 @@ class CustomerController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('customer_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('companyperson_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

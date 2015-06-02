@@ -1,6 +1,6 @@
 <?php
 
-namespace Uerp\CustomerBundle\Tests\Controller;
+namespace Uerp\nfBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -35,9 +35,12 @@ class SalesreportController extends Controller
 
 
     $chart = $this->daychart($datenow);
+      $bar = $this->monthdaychart($datenow);
 
       return $this->render('UerpReportBundle:Salesreport:Salesreport.html.twig', array(
-            'chart' => $chart,'formfilter'=> $form->createView(),
+            'chart' => $chart,
+          'barchart' => $bar,
+          'formfilter'=> $form->createView(),
         ));
 
   }
@@ -99,7 +102,7 @@ class SalesreportController extends Controller
       ->getQuery();
 
       $ob = new Highchart();
-      $ob->chart->renderTo('piechart');
+      $ob->chart->renderTo('barcha');
       $ob->plotOptions->column(array(
           'dataLabels'    => array('enabled' => true,'rotation'=> -90 )
       ));
