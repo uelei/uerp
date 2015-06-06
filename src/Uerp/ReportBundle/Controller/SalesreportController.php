@@ -60,9 +60,11 @@ class SalesreportController extends Controller
 
     $form =$this->createDatereportfilterForm($datenow);
 
-    $chart = $this->monthdaychart($datenow);
+      $chart = $this->daychart($datenow);
+      $bar = $this->monthdaychart($datenow);
+
       return $this->render('UerpReportBundle:Salesreport:Salesreport.html.twig', array(
-            'chart' => $chart,'formfilter'=> $form->createView(),
+            'chart' => $chart,'barchart' => $bar,'formfilter'=> $form->createView(),
         ));
 
   }

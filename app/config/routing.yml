@@ -1,3 +1,7 @@
+uerpnf:
+    resource: "@UerpnfBundle/Resources/config/routing.yml"
+    prefix:   /
+
 uerp_report:
     resource: "@UerpReportBundle/Controller/"
     type:     annotation

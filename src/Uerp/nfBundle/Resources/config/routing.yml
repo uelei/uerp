@@ -1,0 +1,3 @@
+uerpnf_homepage:
+    path:     /nf
+    defaults: { _controller: UerpnfBundle:Default:index }
