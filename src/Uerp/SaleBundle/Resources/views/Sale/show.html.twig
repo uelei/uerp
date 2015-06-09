@@ -45,4 +45,33 @@
     </li>
     <li>{{ form(delete_form) }}</li>
 </ul>
+
+
+<table class="table" style="margin : 10px;" >
+    <thead>
+    <tr>
+        <th  colspan="5">Itens Vendidos</th>
+    </tr>
+    <tr>
+        <td>Cod</td>
+        <td>desc</td>
+        <td>qtd</td>
+        <td>price</td>
+        <td>sub</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for ent in entityitems %}
+        <tr>
+            <td>{{ ent.productid }} </td>
+            <td>{{ ent.product }} </td>
+            <td>{{ ent.qtd }} </td>
+            <td>{{ ent.prodprice }} </td>
+            <td>{{ ent.subtotalsale }} </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
 {% endblock %}

@@ -467,8 +467,12 @@ return $this->render(
 
         $deleteForm = $this->createDeleteForm($id);
 
+        $entityitems = $em->getRepository('UerpSaleBundle:Saleitems')->findBySaleid($id);
+
+
         return array(
             'entity'      => $entity,
+            'entityitems' => $entityitems,
             'delete_form' => $deleteForm->createView(),
         );
     }

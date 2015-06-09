@@ -178,10 +178,6 @@ class SaleitemsController extends Controller
     }
 
 
-
-
-
-
     /**
      * Creates a new Saleitems entity.
      *
